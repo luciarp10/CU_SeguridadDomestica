@@ -8,35 +8,35 @@ import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
 import logic.Log;
 
-public class MQTTPublisher
-{
-    /**
-     *
-     * @param broker
-     * @param topic
-     * @param content
-     */
-    public static void publish(MQTTBroker broker, String topic, String content)
-    {
-        MemoryPersistence persistence = new MemoryPersistence();
-        try {
-            MqttClient sampleClient = new MqttClient(MQTTBroker.getBroker(), MQTTBroker.getClientId(), persistence);
-            MqttConnectOptions connOpts = new MqttConnectOptions();
-            connOpts.setCleanSession(true);
-            Log.logmqtt.info("Connecting to broker: " + MQTTBroker.getBroker());
-            sampleClient.connect(connOpts);
-            Log.logmqtt.info("Connected");
-            MqttMessage message = new MqttMessage(content.getBytes());
-            message.setQos(MQTTBroker.getQos());
-            sampleClient.publish(topic, message);
-            Log.logmqtt.info("Message published");
-            sampleClient.disconnect();
-            Log.logmqtt.info("Disconnected");
-
-        } catch(MqttException me) {
-            Log.logmqtt.error("Error on publishing value: {}" ,  me);
-        } catch(Exception e) {
-            Log.logmqtt.error("Error on publishing value: {}" ,  e);
-        }
-    }
+public class MQTTPublisher 
+{	 	
+	/**
+	 * 
+	 * @param broker
+	 * @param topic
+	 * @param content
+	 */
+	public static void publish(MQTTBroker broker, String topic, String content)
+	{
+		MemoryPersistence persistence = new MemoryPersistence();		
+		try {
+		    MqttClient sampleClient = new MqttClient(MQTTBroker.getBroker(), MQTTBroker.getClientId(), persistence);
+		    MqttConnectOptions connOpts = new MqttConnectOptions();
+		    connOpts.setCleanSession(true);
+		    Log.logmqtt.info("Connecting to broker: " + MQTTBroker.getBroker());
+		    sampleClient.connect(connOpts);
+		    Log.logmqtt.info("Connected");
+		    MqttMessage message = new MqttMessage(content.getBytes());
+		    message.setQos(MQTTBroker.getQos());
+		    sampleClient.publish(topic, message);
+		    Log.logmqtt.info("Message published");
+		    sampleClient.disconnect();
+		    Log.logmqtt.info("Disconnected");
+		    
+		} catch(MqttException me) {
+			Log.logmqtt.error("Error on publishing value: {}" ,  me);
+		} catch(Exception e) {
+			Log.logmqtt.error("Error on publishing value: {}" ,  e);
+		}	
+	}
 }
