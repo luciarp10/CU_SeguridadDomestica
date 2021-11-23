@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+         Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel pgmodeler-ver="0.9.3-beta1" use-changelog="false" last-position="0,54" last-zoom="1" max-obj-count="9"
+	 default-schema="public" default-owner="postgres">
+<database name="new_database" is-template="false" allow-conns="true">
+</database>
+
+<schema name="public" layer="0" fill-color="#e1e1e1" sql-disabled="true">
+</schema>
+
+<table name="USUARIO" layer="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="598" y="34"/>
+	<column name="DNI" not-null="true">
+		<type name="varchar" length="9"/>
+	</column>
+	<column name="ID_Cliente" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="Direcccion" not-null="true">
+		<type name="character" length="100"/>
+	</column>
+	<column name="Telefono">
+		<type name="smallint" length="0"/>
+	</column>
+	<constraint name="USUARIO_pk" type="pk-constr" table="public.&quot;USUARIO&quot;">
+		<columns names="ID_Cliente" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="IDENTIFICACION" layer="0" collapse-mode="2" max-obj-count="3" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1021" y="18"/>
+	<column name="Codigo_QR" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="Password" not-null="true">
+		<type name="smallint" length="0"/>
+	</column>
+</table>
+
+<relationship name="USUARIO_has_many_IDENTIFICACION" type="rel1n" layer="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#66d7dc"
+	 src-table="public.&quot;USUARIO&quot;"
+	 dst-table="public.&quot;IDENTIFICACION&quot;"
+	 src-required="false" dst-required="false">
+	<label ref-type="name-label">
+		<position x="-3.12081" y="-78.1734"/>
+	</label>
+</relationship>
+
+<table name="Registro_Temperatura" layer="0" collapse-mode="2" max-obj-count="8" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="100" y="102"/>
+	<column name="Fecha_Estadistico">
+		<type name="date" length="0"/>
+	</column>
+	<column name="Valor_Estadistico">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="Hora_Estadistico">
+		<type name="float" length="0"/>
+	</column>
+	<column name="Fecha_User">
+		<type name="date" length="0"/>
+	</column>
+	<column name="Valor_User">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="Hora_User">
+		<type name="float" length="0"/>
+	</column>
+</table>
+
+<relationship name="Registro_Temperatura_has_one_USUARIO" type="rel11" layer="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#6acc04"
+	 src-table="public.&quot;USUARIO&quot;"
+	 dst-table="public.&quot;Registro_Temperatura&quot;"
+	 src-required="false" dst-required="false"/>
+
+<table name="Registro_Luminosidad" layer="0" collapse-mode="2" max-obj-count="8" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="104" y="351"/>
+	<column name="Fecha_Estadistico">
+		<type name="date" length="0"/>
+	</column>
+	<column name="Valor_Estadistico">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="Hora_Estadistico">
+		<type name="float" length="0"/>
+	</column>
+	<column name="Fecha_User">
+		<type name="date" length="0"/>
+	</column>
+	<column name="Valor_User">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="Hora_User">
+		<type name="float" length="0"/>
+	</column>
+</table>
+
+<relationship name="Registro_Luminosidad_has_one_USUARIO" type="rel11" layer="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#92030d"
+	 src-table="public.&quot;USUARIO&quot;"
+	 dst-table="public.&quot;Registro_Luminosidad&quot;"
+	 src-required="false" dst-required="false"/>
+
+<table name="Registro_Presion" layer="0" collapse-mode="2" max-obj-count="6" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="344" y="504"/>
+	<column name="Valor_Normal">
+		<type name="float" length="0"/>
+	</column>
+	<column name="Fecha_User">
+		<type name="date" length="0"/>
+	</column>
+	<column name="Valor_User">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="Hora_User">
+		<type name="float" length="0"/>
+	</column>
+</table>
+
+<relationship name="Registro_Presion_has_one_USUARIO" type="rel11" layer="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#310afc"
+	 src-table="public.&quot;USUARIO&quot;"
+	 dst-table="public.&quot;Registro_Presion&quot;"
+	 src-required="false" dst-required="false">
+	<label ref-type="name-label">
+		<position x="37.4925" y="-44.9073"/>
+	</label>
+</relationship>
+
+<table name="Registro_Humo" layer="0" collapse-mode="2" max-obj-count="6" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="951" y="411"/>
+	<column name="Valor_Normal">
+		<type name="float" length="0"/>
+	</column>
+	<column name="Fecha_User">
+		<type name="date" length="0"/>
+	</column>
+	<column name="Valor_User">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="Hora_User">
+		<type name="float" length="0"/>
+	</column>
+</table>
+
+<table name="Registro_Camara" layer="0" collapse-mode="2" max-obj-count="4" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="967" y="212"/>
+	<column name="Fecha_User">
+		<type name="date" length="0"/>
+	</column>
+	<column name="Foto_User">
+		<type name="bit" length="0"/>
+	</column>
+	<column name="Hora_User">
+		<type name="float" length="0"/>
+	</column>
+</table>
+
+<table name="Registro_Movimiento" layer="0" collapse-mode="2" max-obj-count="6" z-value="0">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="636" y="457"/>
+	<column name="Valor_Normal">
+		<type name="float" length="0"/>
+	</column>
+	<column name="Fecha_User">
+		<type name="date" length="0"/>
+	</column>
+	<column name="Valor_User">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="Hora_User">
+		<type name="float" length="0"/>
+	</column>
+</table>
+
+<relationship name="Registro_Humo_has_one_USUARIO" type="rel11" layer="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#b49fb1"
+	 src-table="public.&quot;USUARIO&quot;"
+	 dst-table="public.&quot;Registro_Humo&quot;"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="Registro_Movimiento_has_one_USUARIO" type="rel11" layer="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#1f8c09"
+	 src-table="public.&quot;USUARIO&quot;"
+	 dst-table="public.&quot;Registro_Movimiento&quot;"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="Registro_Camara_has_one_USUARIO" type="rel11" layer="0"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#1383cf"
+	 src-table="public.&quot;USUARIO&quot;"
+	 dst-table="public.&quot;Registro_Camara&quot;"
+	 src-required="false" dst-required="false"/>
+
+</dbmodel>
