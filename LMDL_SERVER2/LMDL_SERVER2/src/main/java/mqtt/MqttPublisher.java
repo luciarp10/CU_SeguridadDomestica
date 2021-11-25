@@ -1,0 +1,37 @@
+package mqtt;
+
+import org.eclipse.paho.client.mqttv3.MqttClient;
+import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
+import org.eclipse.paho.client.mqttv3.MqttException;
+import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
+
+public class MqttPublisher {
+    /**
+     * @param broker
+     * @param topic
+     * @param content
+     */
+    public static void publish(MqttBroker broker, String topic, String content) {
+        MemoryPersistence persistence = new MemoryPersistence();
+        try {
+            MqttClient sampleClient = new MqttClient(MqttBroker.getBroker(), MqttBroker.getClientId(), persistence);
+            MqttConnectOptions connOpts = new MqttConnectOptions();
+            connOpts.setCleanSession(true);
+            //Log.logmqtt.info("Connecting to broker: " + MqttBroker.getBroker());
+            sampleClient.connect(connOpts);
+            //Log.logmqtt.info("Connected");
+            MqttMessage message = new MqttMessage(content.getBytes());
+            message.setQos(MqttBroker.getQos());
+            sampleClient.publish(topic, message);
+            //Log.logmqtt.info("Message published");
+            sampleClient.disconnect();
+            //Log.logmqtt.info("Disconnected");
+
+        } catch (MqttException me) {
+            //Log.logmqtt.error("Error on publishing value: {}", me);
+        } catch (Exception e) {
+            //Log.logmqtt.error("Error on publishing value: {}", e);
+        }
+    }
+}
