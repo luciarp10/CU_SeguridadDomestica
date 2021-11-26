@@ -71,7 +71,7 @@ void loop() {
 
 
 
-//A parte, en otra pestaña de arduino, hay que tener oitches.h, que es el siguiente código definiendo las notas:
+//A parte, en otra pestaña de arduino, hay que tener pitches.h, que es el siguiente código definiendo las notas:
 
 /*************************************************
 
