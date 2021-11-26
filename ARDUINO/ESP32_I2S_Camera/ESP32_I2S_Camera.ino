@@ -31,8 +31,8 @@ const int TFT_CS = 5;
 //DIN <- MOSI 23
 //CLK <- SCK 18
 
-#define ssid1        "TRISKEL64"
-#define password1    "VOLVORETAjali2016"
+#define ssid1        "nombrewifi"
+#define password1    "contraseña"
 //#define ssid2        ""
 //#define password2    ""
 
