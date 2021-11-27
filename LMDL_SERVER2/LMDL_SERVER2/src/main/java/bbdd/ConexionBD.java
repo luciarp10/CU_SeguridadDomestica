@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Calendar;
+import logic.Log;
 
 
 public class ConexionBD {
@@ -17,7 +18,7 @@ public class ConexionBD {
         Connection con = null;
         int intentos = 5;
         for (int i = 0; i < intentos; i++) {
-            //Log.logdb.info("Intento {} de conectar con la base de datos", i);
+            Log.logdb.info("Intento {} de conectar con la base de datos", i);
             try {
                 Context ctx = new InitialContext();
                 // Get the connection factory configured in Tomcat
@@ -44,34 +45,34 @@ public class ConexionBD {
     public void closeTransaction(Connection con) {
         try {
             con.commit();
-            //Log.logdb.debug("Transacción cerrada");
+            Log.logdb.debug("Transacción cerrada");
         } catch (SQLException ex) {
-            //Log.logdb.error("Error cerrando la transacción: {}", ex);
+            Log.logdb.error("Error cerrando la transacción: {}", ex);
         }
     }
 
     public void cancelTransaction(Connection con) {
         try {
             con.rollback();
-            //Log.logdb.debug("Transaction cancelada");
+            Log.logdb.debug("Transaction cancelada");
         } catch (SQLException ex) {
-            //Log.logdb.error("ERROR sql cancelando la transacción: {}", ex);
+            Log.logdb.error("ERROR sql cancelando la transacción: {}", ex);
         }
     }
 
     public void closeConnection(Connection con) {
         try {
-            //Log.logdb.info("Closing the connection");
+            Log.logdb.info("Closing the connection");
             if (null != con) {
                 Calendar calendar = Calendar.getInstance();
                 java.sql.Date date = new java.sql.Date(calendar.getTime().getTime());
-                //Log.logdb.debug("Connection closed. Bd connection identifier: {} obtained in {}", con.toString(), date.toString());
+                Log.logdb.debug("Connection closed. Bd connection identifier: {} obtained in {}", con.toString(), date.toString());
                 con.close();
             }
 
-            //Log.logdb.info("The connection has been closed");
+            Log.logdb.info("The connection has been closed");
         } catch (SQLException e) {
-            //Log.logdb.error("ERROR sql closing the connection: {}", e);
+            Log.logdb.error("ERROR sql closing the connection: {}", e);
             e.printStackTrace();
         }
     }
@@ -84,7 +85,7 @@ public class ConexionBD {
 
             }
         } catch (SQLException ex) {
-            //Log.logdb.warn("ERROR sql creating PreparedStatement:{} ", ex);
+            Log.logdb.warn("ERROR sql creating PreparedStatement:{} ", ex);
         }
 
         return ps;

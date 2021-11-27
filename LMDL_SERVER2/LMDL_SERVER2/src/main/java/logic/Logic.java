@@ -40,9 +40,10 @@ public class Logic
 			while (rs.next())
 			{
 				Sistema_seguridad sistema = new Sistema_seguridad();
-				sistema.setNombre(rs.getString("NAME"));
-				sistema.setCod_sistema(Integer.parseInt(rs.getString("COD_SISTEMA")));
-                                sistema.setDireccion(rs.getString("DIRECCION"));
+				sistema.setNombre(rs.getString("nombre"));
+				sistema.setCod_sistema(Integer.parseInt(rs.getString("cod_sistema")));
+                                sistema.setDireccion(rs.getString("direccion"));
+                                sistema.setId_cliente_cliente(Integer.parseInt(rs.getString("id_cliente_cliente")));
 				sistemas.add(sistema);
 			}	
 		} catch (SQLException e)
