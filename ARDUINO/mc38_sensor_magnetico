@@ -1,0 +1,22 @@
+#define mc 14     //Sensor magnético en pin 14
+#define ledPin 16 //Led en pin 16
+
+void setup() {
+pinMode (mc, INPUT);
+pinMode (ledPin, OUTPUT);
+digitalWrite (mc, HIGH);
+Serial.begin(9600);
+}
+
+void loop() {
+  int valor;
+  if(digitalRead(mc) == LOW) {     //Si la puerta está abierta, se enciende el led e imprime 0
+    digitalWrite (ledPin, HIGH);
+    valor=0;
+  }else{
+    digitalWrite (ledPin, LOW);   //Si la puerta está cerrada, led apagado y se imprime 1
+    valor=1;
+  }
+   Serial.println(valor);
+   delay(1000);
+}
