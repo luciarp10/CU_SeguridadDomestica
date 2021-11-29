@@ -5,16 +5,14 @@ public class Topic {
     private String id_topic; 
     private int id_sistema; 
     private int id_habitacion; 
-    private int id_sensor; 
-    private int id_registro; 
+    private int id_sensor_actuador;
     private float valor; 
 
-    public Topic(String id_topic, int id_sistema, int id_habitacion, int id_sensor, int id_registro, float valor) {
+    public Topic(String id_topic, int id_sistema, int id_habitacion, int id_sensor_actuador,float valor) {
         this.id_topic = id_topic;
         this.id_sistema = id_sistema;
         this.id_habitacion = id_habitacion;
-        this.id_sensor = id_sensor;
-        this.id_registro = id_registro;
+        this.id_sensor_actuador = id_sensor_actuador;
         this.valor = valor;
     }
     
@@ -24,8 +22,7 @@ public class Topic {
         this.id_topic="";
         this.id_sistema=0;
         this.id_habitacion=0;
-        this.id_sensor=0;
-        this.id_registro=0;
+        this.id_sensor_actuador=0;
         this.setValor(0);
     }
     
@@ -47,12 +44,12 @@ public class Topic {
         this.valor = valor;
     }
 
-    public int getId_sensor() {
-        return id_sensor;
+    public int getId_sensor_actuador() {
+        return id_sensor_actuador;
     }
 
-    public void setId_sensor(int id_sensor) {
-        this.id_sensor = id_sensor;
+    public void setId_sensor_actuador(int id_sensor) {
+        this.id_sensor_actuador= id_sensor;
     }
 
     public int getId_habitacion() {

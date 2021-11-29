@@ -18,24 +18,24 @@ public class ConexionBD {
         Connection con = null;
         int intentos = 5;
         for (int i = 0; i < intentos; i++) {
-            Log.logdb.info("Intento {} de conectar con la base de datos", i);
+            Log.logbd.info("Intento {} de conectar con la base de datos", i);
             try {
                 Context ctx = new InitialContext();
                 // Get the connection factory configured in Tomcat
-                DataSource ds = (DataSource) ctx.lookup("java:/comp/env/jdbc/LMDL_BD");
+                DataSource ds = (DataSource) ctx.lookup("java:/comp/env/jdbc/ubicomp");
 
                 // Obtiene una conexion
                 con = ds.getConnection();
                 Calendar calendar = Calendar.getInstance();
                 java.sql.Date date = new java.sql.Date(calendar.getTime().getTime());
-                //Log.logdb.debug("Conexión creada. Identificación de la base de datos: {} obtenida en {}", con.toString(), date.toString());
+                Log.logbd.info("Conexión creada. Identificación de la base de datos: {} obtenida en {}", con.toString(), date.toString());
                 con.setAutoCommit(autoCommit);
-                //Log.logdb.info("Conexión obtenida en el intento: " + i);
+                Log.logbd.info("Conexión obtenida en el intento: " + i);
                 i = intentos;
             } catch (NamingException ex) {
-                //Log.logdb.error("Error realizando la conexión en: {} = {}", i, ex);
+                Log.logbd.error("Error realizando la conexión en: {} = {}", i, ex);
             } catch (SQLException ex) {
-                //Log.logdb.error("ERROR sql adquiriendo la conexión en el intento:{ }= {}", i, ex);
+                Log.logbd.error("ERROR sql adquiriendo la conexión en el intento:{ }= {}", i, ex);
                 throw (new NullPointerException("SQL connection is null"));
             }
         }
@@ -45,34 +45,34 @@ public class ConexionBD {
     public void closeTransaction(Connection con) {
         try {
             con.commit();
-            Log.logdb.debug("Transacción cerrada");
+            Log.logbd.debug("Transacción cerrada");
         } catch (SQLException ex) {
-            Log.logdb.error("Error cerrando la transacción: {}", ex);
+            Log.logbd.error("Error cerrando la transacción: {}", ex);
         }
     }
 
     public void cancelTransaction(Connection con) {
         try {
             con.rollback();
-            Log.logdb.debug("Transaction cancelada");
+            Log.logbd.debug("Transaction cancelada");
         } catch (SQLException ex) {
-            Log.logdb.error("ERROR sql cancelando la transacción: {}", ex);
+            Log.logbd.error("ERROR sql cancelando la transacción: {}", ex);
         }
     }
 
     public void closeConnection(Connection con) {
         try {
-            Log.logdb.info("Closing the connection");
+            Log.logbd.info("Closing the connection");
             if (null != con) {
                 Calendar calendar = Calendar.getInstance();
                 java.sql.Date date = new java.sql.Date(calendar.getTime().getTime());
-                Log.logdb.debug("Connection closed. Bd connection identifier: {} obtained in {}", con.toString(), date.toString());
+                Log.logbd.debug("Connection closed. Bd connection identifier: {} obtained in {}", con.toString(), date.toString());
                 con.close();
             }
 
-            Log.logdb.info("The connection has been closed");
+            Log.logbd.info("The connection has been closed");
         } catch (SQLException e) {
-            Log.logdb.error("ERROR sql closing the connection: {}", e);
+            Log.logbd.error("ERROR sql closing the connection: {}", e);
             e.printStackTrace();
         }
     }
@@ -85,7 +85,7 @@ public class ConexionBD {
 
             }
         } catch (SQLException ex) {
-            Log.logdb.warn("ERROR sql creating PreparedStatement:{} ", ex);
+            Log.logbd.warn("ERROR sql creating PreparedStatement:{} ", ex);
         }
 
         return ps;
@@ -94,37 +94,40 @@ public class ConexionBD {
     //************** LLAMADAS A LA BASE DE DATOS ***************************//
     
     public static PreparedStatement GetSistemas(Connection con){
-        return getStatement(con, "SELECT * FROM LMDL_BD.SISTEMA_SEGURIDAD");
+        return getStatement(con, "SELECT * FROM LMDL_BD.sistema_seguridad");
     }
     
     public static PreparedStatement GetActuadores(Connection con){
-        return getStatement(con, "SELECT * FROM LMDL_BD.ACTUADOR");
+        return getStatement(con, "SELECT * FROM LMDL_BD.actuador");
     }
     
     public static PreparedStatement GetClientes(Connection con){
-        return getStatement(con, "SELECT * FROM LMDL_BD.CLIENTE");
+        return getStatement(con, "SELECT * FROM LMDL_BD.cliente");
     }
     public static PreparedStatement GetHabitaciones(Connection con){
-        return getStatement(con, "SELECT * FROM LMDL_BD.HABITACION");
+        return getStatement(con, "SELECT * FROM LMDL_BD.habitacion");
     }
     
     public static PreparedStatement GetIdentificaciones (Connection con){
-        return getStatement(con, "SELECT * FROM LMDL_BD.IDENTIFICACION");
+        return getStatement(con, "SELECT * FROM LMDL_BD.identificacion");
     }
     
     public static PreparedStatement GetRegistrosActuadores(Connection con){
-        return getStatement(con, "SELECT * FROM LMDL_BD.REGISTRO");
+        return getStatement(con, "SELECT * FROM LMDL_BD.registro");
     }
     
     public static PreparedStatement GetRegistrosCamaras(Connection con){
-        return getStatement(con, "SELECT * FROM LMDL_BD.REGISTRO_CAMARA");
+        return getStatement(con, "SELECT * FROM LMDL_BD.registro_camara");
     }
     
     public static PreparedStatement GetSensores(Connection con){
-        return getStatement(con, "SELECT * FROM LMDL_BD.SENSOR");
+        return getStatement(con, "SELECT * FROM LMDL_BD.sensor");
     }
     
-
+    
+    public static PreparedStatement InsertarRegistro(Connection con) {
+        return getStatement(con, "INSERT INTO registro_estadistico (fecha_user, valor_user, hora_user, id_sensor_sensor) VALUES (?,?,?,?) ON duplicate key update fecha_user=?, valor_user=?, hora_user=?, id_sensor_sensor=?;");
+    }
     /*
     
     public static PreparedStatement GetStations(Connection con) {

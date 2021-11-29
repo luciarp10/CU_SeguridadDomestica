@@ -2,8 +2,9 @@
 <Configuration status="info">
 	<Appenders>				
 	    <!-- LOG -->
-		<RollingFile name="LogFile" fileName="${env:CATALINA_HOME}/webapps/LMDL_SERVER2/log.log"
-			filePattern="${env:CATALINA_HOME}/webapps/LMDL_SERVER2/logs/Ubicomp-%d{yyyy}-%i.log.gz">
+		<RollingFile name="LogFile" fileName="/opt/tomcat/apache-tomcat/logs/log.log"
+                        filePattern="/opt/tomcat/apache-tomcat/logs/Ubicomp-%d{yyyy}-%i.log.gz">
+
 			<PatternLayout
 				pattern="%n%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %-30l %logger{36} ### %msg"
 				header="-- LOG LMDL --" />
@@ -14,20 +15,21 @@
 			<DefaultRolloverStrategy max="20"/>
 		</RollingFile>		
 	    <!-- LOGDB -->
-		<RollingFile name="LogFileDB" fileName="${env:CATALINA_HOME}/webapps/LMDL_SERVER2/logdb.log"
-			filePattern="${env:CATALINA_HOME}/webapps/LMDL_SERVER2/logs/Ubicomp-%d{yyyy}-%i.logdb.gz">
+		<RollingFile name="LogFileBD" fileName="/opt/tomcat/apache-tomcat/logs/logbd.log"
+                        filePattern="/opt/tomcat/apache-tomcat/logs/Ubicomp-%d{yyyy}-%i.log.gz">
+
 			<PatternLayout
 				pattern="%n%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %-30l %logger{36} ### %msg"
-				header="-- LOG BD LMDL --" />
+				header="-- LOG LMDL BD--" />
 			<Policies>
 				<TimeBasedTriggeringPolicy />
 				<SizeBasedTriggeringPolicy size="10 MB" />
 			</Policies>
-			<DefaultRolloverStrategy max="20"/>
-		</RollingFile>		
+			<DefaultRolloverStrategy max="20"/>	
+                </RollingFile>
 	    <!-- LOGMQTT -->
-		<RollingFile name="LogFileMQTT" fileName="${env:CATALINA_HOME}/webapps/LMDL_SERVER2/logmqtt.log"
-			filePattern="${env:CATALINA_HOME}/webapps/LMDL_SERVER2/logs/Ubicomp-%d{yyyy}-%i.logmqtt.gz">
+		<RollingFile name="LogFileMQTT" fileName="/opt/tomcat/apache-tomcat/logs/logmqtt.log"
+                        filePattern="/opt/tomcat/apache-tomcat/logs/Ubicomp-%d{yyyy}-%i.log.gz">
 			<PatternLayout
 				pattern="%n%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %-30l %logger{36} ### %msg"
 				header="-- LOG MQTT LMDL --" />
@@ -44,8 +46,8 @@
             <AppenderRef ref="LogFile" level="INFO" />
         </Logger>
 	    <!-- LOGDB -->
-		<Logger name="logdb" additivity="FALSE" level="INFO">
-            <AppenderRef ref="LogFileDB" level="INFO" />
+		<Logger name="logbd" additivity="FALSE" level="INFO">
+            <AppenderRef ref="LogFileBD" level="INFO" />
         </Logger>
 	    <!-- LOGMQTT -->
 		<Logger name="logmqtt" additivity="FALSE" level="INFO">

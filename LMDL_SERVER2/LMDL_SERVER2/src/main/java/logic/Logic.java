@@ -5,6 +5,7 @@ import bbdd.Sistema_seguridad;
 import bbdd.Actuador;
 import bbdd.Cliente;
 import bbdd.ConexionBD;
+import bbdd.Topic;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -12,7 +13,10 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.Instant;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 public class Logic 
@@ -64,6 +68,36 @@ public class Logic
 		}
 		return sistemas;
 	}
+
+    public static void guardarRegistroSensor(Topic newTopic) {
+        ConexionBD conector = new ConexionBD();
+	Connection con = null;
+        try
+	{
+            con = conector.obtainConnection(true);
+            Log.log.debug("Database Connected");
+            PreparedStatement ps = ConexionBD.InsertarRegistro(con);
+            ps.setDate(0, java.sql.Date.valueOf(LocalDate.now()));
+            ps.setFloat(1, newTopic.getValor());
+	    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+            ps.setString(2, sdf.format(timestamp));
+            ps.setInt(3, newTopic.getId_sensor_actuador());
+            Log.log.info("Query=> {}", ps.toString());
+            ps.executeUpdate();            	
+	} catch (SQLException e)
+	{
+            Log.log.error("Error: {}", e);
+	} catch (NullPointerException e)
+	{
+            Log.log.error("Error: {}", e);
+	} catch (Exception e)
+	{
+            Log.log.error("Error:{}", e);
+        } finally
+        {
+            conector.closeConnection(con);
+	}	
+    }
 	
 	/**
 	 * 
@@ -103,13 +137,6 @@ public class Logic
 	 */
 
 	
-	/**
-	 * 	
-	 * @param newTopic
-	 * @return Almacenar un nuevo registro de algún sensor o actuador en la base de datos
-	 */
 
-	
-	
 	
 }
