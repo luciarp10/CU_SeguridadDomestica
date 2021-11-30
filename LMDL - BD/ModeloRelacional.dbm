@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.3-beta1" use-changelog="false" last-position="62,0" last-zoom="1" max-obj-count="10"
+<dbmodel pgmodeler-ver="0.9.3-beta1" use-changelog="false" last-position="61,0" last-zoom="1" max-obj-count="10"
 	 default-schema="public" default-owner="postgres">
 <database name="new_database" is-template="false" allow-conns="true">
 </database>
@@ -14,7 +14,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="habitacion" layer="0" collapse-mode="2" max-obj-count="6" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="703.949" y="251.846"/>
+	<position x="700" y="260"/>
 	<column name="id_habitacion" not-null="true">
 		<type name="integer" length="0"/>
 	</column>
@@ -43,12 +43,12 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="identificacion" layer="0" collapse-mode="2" max-obj-count="4" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="985.93" y="9.94737"/>
+	<position x="980" y="0"/>
 	<column name="codigo_qr" not-null="true">
 		<type name="integer" length="0"/>
 	</column>
 	<column name="password" not-null="true">
-		<type name="integer" length="0"/>
+		<type name="char" length="20"/>
 	</column>
 	<column name="nombre" not-null="true">
 		<type name="text" length="0"/>
@@ -56,19 +56,27 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<constraint name="identificacion_pk" type="pk-constr" table="public.identificacion">
 		<columns names="nombre" ref-type="src-columns"/>
 	</constraint>
+
+	<customidxs object-type="column">
+		<object name="cod_sistema_sistema_seguridad" index="3"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="sistema_seguridad_fk" index="1"/>
+	</customidxs>
 </table>
 
 <table name="registro_estadistico" layer="0" collapse-mode="2" max-obj-count="4" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="132.158" y="435"/>
-	<column name="fecha_user">
+	<position x="100" y="440"/>
+	<column name="fecha_user" not-null="true">
 		<type name="date" length="0"/>
 	</column>
-	<column name="valor_user">
+	<column name="valor_user" not-null="true">
 		<type name="float" length="0"/>
 	</column>
-	<column name="hora_user">
+	<column name="hora_user" not-null="true">
 		<type name="float" length="0"/>
 	</column>
 
@@ -85,7 +93,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="registro_camara" layer="0" collapse-mode="2" max-obj-count="4" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="423.058" y="440.854"/>
+	<position x="420" y="440"/>
 	<column name="fecha">
 		<type name="date" length="0"/>
 	</column>
@@ -100,7 +108,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="cliente" layer="0" collapse-mode="2" max-obj-count="6" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="225.111" y="7.1111"/>
+	<position x="220" y="0"/>
 	<column name="dni" not-null="true">
 		<type name="text" length="9"/>
 	</column>
@@ -124,7 +132,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="registro" layer="0" collapse-mode="2" max-obj-count="4" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="1096.47" y="466.456"/>
+	<position x="1100" y="460"/>
 	<column name="hora_on">
 		<type name="float" length="0"/>
 	</column>
@@ -139,7 +147,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="sistema_seguridad" layer="0" collapse-mode="2" max-obj-count="4" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="536.949" y="14.846"/>
+	<position x="540" y="20"/>
 	<column name="cod_sistema" not-null="true">
 		<type name="integer" length="0"/>
 	</column>
@@ -188,7 +196,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="sensor" layer="0" collapse-mode="2" max-obj-count="3" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="247" y="224"/>
+	<position x="240" y="220"/>
 	<column name="id_sensor" not-null="true">
 		<type name="integer" length="0"/>
 	</column>
@@ -203,7 +211,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="actuador" layer="0" collapse-mode="2" max-obj-count="3" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="1082" y="202"/>
+	<position x="1080" y="200"/>
 	<column name="id_actuador" not-null="true">
 		<type name="integer" length="0"/>
 	</column>
