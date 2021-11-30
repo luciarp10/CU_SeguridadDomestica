@@ -1,15 +1,8 @@
--- Database generated with pgModeler (PostgreSQL Database Modeler).
--- pgModeler  version: 0.9.3-beta1
--- PostgreSQL version: 13.0
--- Project Site: pgmodeler.io
--- Model Author: ---
-
--- Database creation must be performed outside a multi lined SQL file. 
--- These commands were put in this file only as a convenience.
+ -- These commands were put in this file only as a convenience.
 -- 
 -- object: new_database | type: DATABASE --
--- DROP DATABASE IF EXISTS new_database;
-CREATE DATABASE new_database;
+-- DROP DATABASE IF EXISTS LMDL_BD;
+CREATE DATABASE LMDL_BD;
 -- ddl-end --
 
 
@@ -58,7 +51,7 @@ ALTER TABLE registro_estadistico OWNER TO postgres;
 -- DROP TABLE IF EXISTS registro_camara CASCADE;
 CREATE TABLE registro_camara (
 	fecha date NOT NULL,
-	foto character(256) NOT NULL,
+	foto character(255) NOT NULL,
 	hora time NOT NULL,
 	id_sensor_sensor integer
 );

@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.3-beta1" use-changelog="false" last-position="61,0" last-zoom="1" max-obj-count="10"
+<dbmodel pgmodeler-ver="0.9.3-beta1" use-changelog="false" last-position="61,87" last-zoom="1" max-obj-count="10"
 	 default-schema="public" default-owner="postgres">
 <database name="new_database" is-template="false" allow-conns="true">
 </database>
@@ -14,7 +14,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="habitacion" layer="0" collapse-mode="2" max-obj-count="6" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="700" y="260"/>
+	<position x="680" y="400"/>
 	<column name="id_habitacion" not-null="true">
 		<type name="integer" length="0"/>
 	</column>
@@ -43,7 +43,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="identificacion" layer="0" collapse-mode="2" max-obj-count="4" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="980" y="0"/>
+	<position x="1220" y="60"/>
 	<column name="codigo_qr" not-null="true">
 		<type name="integer" length="0"/>
 	</column>
@@ -51,7 +51,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<type name="char" length="20"/>
 	</column>
 	<column name="nombre" not-null="true">
-		<type name="text" length="0"/>
+		<type name="char" length="50"/>
 	</column>
 	<constraint name="identificacion_pk" type="pk-constr" table="public.identificacion">
 		<columns names="nombre" ref-type="src-columns"/>
@@ -69,15 +69,15 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="registro_estadistico" layer="0" collapse-mode="2" max-obj-count="4" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="100" y="440"/>
-	<column name="fecha_user" not-null="true">
+	<position x="60" y="640"/>
+	<column name="fecha" not-null="true">
 		<type name="date" length="0"/>
 	</column>
-	<column name="valor_user" not-null="true">
+	<column name="valor" not-null="true">
 		<type name="float" length="0"/>
 	</column>
-	<column name="hora_user" not-null="true">
-		<type name="float" length="0"/>
+	<column name="hora" not-null="true">
+		<type name="time" length="0"/>
 	</column>
 
 	<customidxs object-type="column">
@@ -93,16 +93,25 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="registro_camara" layer="0" collapse-mode="2" max-obj-count="4" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="420" y="440"/>
-	<column name="fecha">
+	<position x="500" y="640"/>
+	<column name="fecha" not-null="true">
 		<type name="date" length="0"/>
 	</column>
-	<column name="foto">
-		<type name="bit" length="0"/>
+	<column name="foto" not-null="true">
+		<type name="character" length="256"/>
 	</column>
-	<column name="hora">
-		<type name="float" length="0"/>
+	<column name="hora" not-null="true">
+		<type name="time" length="0"/>
 	</column>
+
+	<customidxs object-type="column">
+		<object name="id_sensor_sensor" index="3"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="registro_camara_uq" index="1"/>
+		<object name="sensor_fk" index="0"/>
+	</customidxs>
 </table>
 
 <table name="cliente" layer="0" collapse-mode="2" max-obj-count="6" z-value="0">
@@ -110,19 +119,19 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<role name="postgres"/>
 	<position x="220" y="0"/>
 	<column name="dni" not-null="true">
-		<type name="text" length="9"/>
+		<type name="char" length="9"/>
 	</column>
 	<column name="id_cliente" not-null="true">
 		<type name="integer" length="0"/>
 	</column>
 	<column name="direccion" not-null="true">
-		<type name="character" length="50"/>
+		<type name="char" length="50"/>
 	</column>
-	<column name="telefono">
-		<type name="integer" length="0"/>
+	<column name="telefono" not-null="true">
+		<type name="char" length="9"/>
 	</column>
 	<column name="nombre" not-null="true">
-		<type name="text" length="0"/>
+		<type name="char" length="50"/>
 	</column>
 	<constraint name="id_cliente" type="pk-constr" table="public.cliente">
 		<columns names="id_cliente" ref-type="src-columns"/>
@@ -132,34 +141,54 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="registro" layer="0" collapse-mode="2" max-obj-count="4" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="1100" y="460"/>
-	<column name="hora_on">
-		<type name="float" length="0"/>
+	<position x="1280" y="660"/>
+	<column name="hora_on" not-null="true">
+		<type name="time" length="0"/>
 	</column>
-	<column name="fecha_on">
+	<column name="fecha_on" not-null="true">
 		<type name="date" length="0"/>
 	</column>
-	<column name="duracion">
+	<column name="duracion" not-null="true">
 		<type name="float" length="0"/>
 	</column>
+
+	<customidxs object-type="column">
+		<object name="id_actuador_actuador" index="3"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="actuador_fk" index="0"/>
+		<object name="registro_uq" index="1"/>
+	</customidxs>
 </table>
 
-<table name="sistema_seguridad" layer="0" collapse-mode="2" max-obj-count="4" z-value="0">
+<table name="sistema_seguridad" layer="0" collapse-mode="2" max-obj-count="6" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="540" y="20"/>
+	<position x="700" y="80"/>
 	<column name="cod_sistema" not-null="true">
 		<type name="integer" length="0"/>
 	</column>
 	<column name="direccion" not-null="true">
-		<type name="character" length="50"/>
+		<type name="char" length="50"/>
 	</column>
 	<column name="nombre" not-null="true">
-		<type name="text" length="0"/>
+		<type name="char" length="50"/>
+	</column>
+	<column name="contrasenna_acceso" not-null="true">
+		<type name="char" length="4"/>
 	</column>
 	<constraint name="sistema_seguridad_pk" type="pk-constr" table="public.sistema_seguridad">
 		<columns names="cod_sistema" ref-type="src-columns"/>
 	</constraint>
+
+	<customidxs object-type="column">
+		<object name="id_cliente_cliente" index="4"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="cliente_fk" index="1"/>
+	</customidxs>
 </table>
 
 <relationship name="cliente_has_many_sistema_seguridad" type="rel1n" layer="0"
@@ -196,31 +225,47 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="sensor" layer="0" collapse-mode="2" max-obj-count="3" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="240" y="220"/>
+	<position x="140" y="280"/>
 	<column name="id_sensor" not-null="true">
 		<type name="integer" length="0"/>
 	</column>
 	<column name="tipo" not-null="true">
-		<type name="text" length="0"/>
+		<type name="char" length="50"/>
 	</column>
 	<constraint name="sensor_pk" type="pk-constr" table="public.sensor">
 		<columns names="id_sensor" ref-type="src-columns"/>
 	</constraint>
+
+	<customidxs object-type="column">
+		<object name="id_habitacion_habitacion" index="2"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="habitacion_fk" index="1"/>
+	</customidxs>
 </table>
 
 <table name="actuador" layer="0" collapse-mode="2" max-obj-count="3" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="1080" y="200"/>
+	<position x="1260" y="400"/>
 	<column name="id_actuador" not-null="true">
 		<type name="integer" length="0"/>
 	</column>
 	<column name="tipo" not-null="true">
-		<type name="text" length="0"/>
+		<type name="char" length="50"/>
 	</column>
 	<constraint name="actuador_pk" type="pk-constr" table="public.actuador">
 		<columns names="id_actuador" ref-type="src-columns"/>
 	</constraint>
+
+	<customidxs object-type="column">
+		<object name="id_habitacion_habitacion" index="2"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="habitacion_fk" index="1"/>
+	</customidxs>
 </table>
 
 <relationship name="habitacion_has_many_sensor" type="rel1n" layer="0"
@@ -249,6 +294,9 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	 src-table="public.actuador"
 	 dst-table="public.registro"
 	 src-required="false" dst-required="false">
+	<label ref-type="src-label">
+		<position x="-6.16563" y="-24.3938"/>
+	</label>
 	<label ref-type="name-label">
 		<position x="-2.60176" y="-26.6353"/>
 	</label>
