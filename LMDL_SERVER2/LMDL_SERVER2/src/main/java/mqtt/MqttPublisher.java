@@ -1,5 +1,6 @@
 package mqtt;
 
+import logic.Log;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
@@ -18,20 +19,20 @@ public class MqttPublisher {
             MqttClient sampleClient = new MqttClient(MqttBroker.getBroker(), MqttBroker.getClientId(), persistence);
             MqttConnectOptions connOpts = new MqttConnectOptions();
             connOpts.setCleanSession(true);
-            //Log.logmqtt.info("Connecting to broker: " + MqttBroker.getBroker());
+            Log.logmqtt.info("Connecting to broker: " + MqttBroker.getBroker());
             sampleClient.connect(connOpts);
-            //Log.logmqtt.info("Connected");
+            Log.logmqtt.info("Connected");
             MqttMessage message = new MqttMessage(content.getBytes());
             message.setQos(MqttBroker.getQos());
             sampleClient.publish(topic, message);
-            //Log.logmqtt.info("Message published");
+            Log.logmqtt.info("Message published");
             sampleClient.disconnect();
-            //Log.logmqtt.info("Disconnected");
+            Log.logmqtt.info("Disconnected");
 
         } catch (MqttException me) {
-            //Log.logmqtt.error("Error on publishing value: {}", me);
+            Log.logmqtt.error("Error on publishing value: {}", me);
         } catch (Exception e) {
-            //Log.logmqtt.error("Error on publishing value: {}", e);
+            Log.logmqtt.error("Error on publishing value: {}", e);
         }
     }
 }

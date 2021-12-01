@@ -102,19 +102,7 @@ public class MqttSuscriber implements MqttCallback {
             
                 //Guardar la información en la base de datos
                 Logic.guardarRegistroActuador(newTopic);
-            }else
-    	    {
-    		if(topicRecibido.contains("Habitacion"))
-        	{
-    			   
-        	}else
-        	{
-                    if (topicRecibido.contains("SistSeg"))
-                    {
-
-                    }   
-        	}
-    	    }
+            } //En principio no va a haber más tipos de topics pero se pueden añadir
         }
     }
 

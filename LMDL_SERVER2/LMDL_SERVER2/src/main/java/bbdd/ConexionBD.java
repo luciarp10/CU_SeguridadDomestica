@@ -132,6 +132,26 @@ public class ConexionBD {
     public static PreparedStatement InsertarRegistroActuador(Connection con){
         return getStatement(con, "INSERT INTO LMDL_BD.registro (hora_on, fecha_on, duracion, id_actuador_actuador) VALUES (?,?,?,?)");
     }
+    
+    public static PreparedStatement GetSensoresHabitacion (Connection con){
+        return getStatement (con, "SELECT * FROM LMDL_BD.sensor WHERE id_habitacion_habitacion=?");
+    }
+    
+    public static PreparedStatement GetActuadoresHabitacion (Connection con){
+        return getStatement (con, "SELECT * FROM LMDL_BD.actuador WHERE id_habitacion_habitacion=?");
+    }
+    
+    public static PreparedStatement GetRegistrosEstadisticosHabitacion(Connection con){
+        return getStatement (con, "SELECT fecha, valor, hora, id_sensor_sensor FROM LMDL_BD.registro_estadistico "
+                + "INNER JOIN LMDL_BD.sensor on id_sensor_sensor=id_sensor INNER JOIN LMDL_BD.habitacion on "
+                + "id_habitacion_habitacion=id_habitacion WHERE id_habitacion=?");
+    }
+    
+    public static PreparedStatement GetRegistrosActuadoresHabitacion(Connection con){
+        return getStatement(con,"SELECT hora_on, fecha_on, duracion, id_actuador_actuador FROM LMDL_BD.registro"
+                + "INNER JOIN LMDL_BD.actuador on id_actuador_actuador=id_actuador INNER JOIN LMDL_BD.habitacion on "
+                + "id_habitacion_habitacion=id_habitacion WHERE id_habitacion=?" );
+    }
     /*
     
     public static PreparedStatement GetStations(Connection con) {
