@@ -13,6 +13,10 @@ public class Identificacion {
         this.cod_sistema_sistema_seguridad = cod_sistema_sistema_seguridad;
     }
 
+    public Identificacion() {
+       
+    }
+
     public int getCodigo_qr() {
         return codigo_qr;
     }

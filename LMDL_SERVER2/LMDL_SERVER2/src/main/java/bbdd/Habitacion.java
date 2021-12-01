@@ -15,6 +15,9 @@ public class Habitacion {
         this.cod_sistema_sistema_seguridad = cod_sistema_sistema_seguridad;
     }
 
+    public Habitacion() {
+    }
+
     public int getId_habitacion() {
         return id_habitacion;
     }

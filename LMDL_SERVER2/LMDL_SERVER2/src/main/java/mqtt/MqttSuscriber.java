@@ -93,9 +93,16 @@ public class MqttSuscriber implements MqttCallback {
         }else
         {
     	    if(topicRecibido.contains("Actuador"))
-    	    {
-    		   
-    	    }else
+            {
+    		newTopic.setId_sistema(Integer.parseInt(topics[0].replace("SistSeg", "")));
+                newTopic.setId_habitacion(Integer.parseInt(topics[1].replace("Hab", "")));
+                newTopic.setId_sensor_actuador(Integer.parseInt(topics[2].replace("Actuador", "")));
+                Log.logmqtt.info("Mensaje de SistSeg{} Habitacion{} Actuador{}: {}", 
+                        newTopic.getId_sistema(), newTopic.getId_habitacion(), newTopic.getId_sensor_actuador(), message.toString());
+            
+                //Guardar la información en la base de datos
+                Logic.guardarRegistroActuador(newTopic);
+            }else
     	    {
     		if(topicRecibido.contains("Habitacion"))
         	{

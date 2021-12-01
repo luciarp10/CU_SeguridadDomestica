@@ -125,8 +125,12 @@ public class ConexionBD {
     }
     
     
-    public static PreparedStatement InsertarRegistro(Connection con) {
-        return getStatement(con, "INSERT INTO registro_estadistico (fecha_user, valor_user, hora_user, id_sensor_sensor) VALUES (?,?,?,?) ON duplicate key update fecha_user=?, valor_user=?, hora_user=?, id_sensor_sensor=?;");
+    public static PreparedStatement InsertarRegistroSensor(Connection con) {
+        return getStatement(con, "INSERT INTO LMDL_BD.registro_estadistico (fecha, valor, hora, id_sensor_sensor) VALUES (?,?,?,?)");
+    }
+    
+    public static PreparedStatement InsertarRegistroActuador(Connection con){
+        return getStatement(con, "INSERT INTO LMDL_BD.registro (hora_on, fecha_on, duracion, id_actuador_actuador) VALUES (?,?,?,?)");
     }
     /*
     
