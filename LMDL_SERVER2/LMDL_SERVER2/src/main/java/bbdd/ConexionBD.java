@@ -152,7 +152,16 @@ public class ConexionBD {
                 + "INNER JOIN LMDL_BD.actuador on id_actuador_actuador=id_actuador INNER JOIN LMDL_BD.habitacion on "
                 + "id_habitacion_habitacion=id_habitacion WHERE id_habitacion=?" );
     }
+    
+    public static PreparedStatement GetContrasenaUsuario(Connection con){
+        return getStatement(con, "SELECT password from LMDL_BD.identificacion WHERE nombre=? ");
+    }
+    
+    public static PreparedStatement GetUsuario_QR(Connection con){
+        return getStatement (con, "SELECT nombre from LMDL_BD.identificacion WHERE codigo_qr=?");
+    }
     /*
+    
     
     public static PreparedStatement GetStations(Connection con) {
         return getStatement(con, "SELECT * FROM WHEATHERSTATION.STATION");

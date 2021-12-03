@@ -25,58 +25,58 @@ import java.util.Date;
 
 public class Logic 
 {
-	private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
-	/**
-	 * 
-	 * @return La lista de todos los sistemas almacenados en la base de datos
-	 */
-	public static ArrayList<Sistema_seguridad> getSistemas()
-	{
-		ArrayList<Sistema_seguridad> sistemas = new ArrayList<Sistema_seguridad>();
+    /**
+     * 
+     * @return La lista de todos los sistemas almacenados en la base de datos
+     */
+    public static ArrayList<Sistema_seguridad> getSistemas()
+    {
+        ArrayList<Sistema_seguridad> sistemas = new ArrayList<Sistema_seguridad>();
 		
-		ConexionBD conector = new ConexionBD();
-		Connection con = null;
-		try
-		{
-			con = conector.obtainConnection(true);
-			Log.log.debug("Database Connected");
+        ConexionBD conector = new ConexionBD();
+        Connection con = null;
+	try
+        {
+            con = conector.obtainConnection(true);
+            Log.log.debug("Database Connected");
 			
-			PreparedStatement ps = ConexionBD.GetSistemas(con);
-			Log.log.info("Query=> {}", ps.toString());
-			ResultSet rs = ps.executeQuery();
-			while (rs.next())
-			{
-				Sistema_seguridad sistema = new Sistema_seguridad();
-				sistema.setNombre(rs.getString("nombre"));
-				sistema.setCod_sistema(Integer.parseInt(rs.getString("cod_sistema")));
-                                sistema.setDireccion(rs.getString("direccion"));
-                                sistema.setId_cliente_cliente(Integer.parseInt(rs.getString("id_cliente_cliente")));
-				sistemas.add(sistema);
-			}	
-		} catch (SQLException e)
-		{
-			Log.log.error("Error: {}", e);
-			sistemas = new ArrayList<Sistema_seguridad>();
-		} catch (NullPointerException e)
-		{
-			Log.log.error("Error: {}", e);
-			sistemas = new ArrayList<Sistema_seguridad>();
-		} catch (Exception e)
-		{
-			Log.log.error("Error:{}", e);
-			sistemas = new ArrayList<Sistema_seguridad>();
-		} finally
-		{
-			conector.closeConnection(con);
-		}
-		return sistemas;
-	}
+            PreparedStatement ps = ConexionBD.GetSistemas(con);
+            Log.log.info("Query=> {}", ps.toString());
+            ResultSet rs = ps.executeQuery();
+            while (rs.next())
+            {
+                Sistema_seguridad sistema = new Sistema_seguridad();
+                sistema.setNombre(rs.getString("nombre"));
+                sistema.setCod_sistema(Integer.parseInt(rs.getString("cod_sistema")));
+                sistema.setDireccion(rs.getString("direccion"));
+                sistema.setId_cliente_cliente(Integer.parseInt(rs.getString("id_cliente_cliente")));
+                sistemas.add(sistema);
+            }	
+	} catch (SQLException e)
+	{
+            Log.log.error("Error: {}", e);
+            sistemas = new ArrayList<Sistema_seguridad>();
+	} catch (NullPointerException e)
+        {
+            Log.log.error("Error: {}", e);
+            sistemas = new ArrayList<Sistema_seguridad>();
+	} catch (Exception e)
+        {
+            Log.log.error("Error:{}", e);
+            sistemas = new ArrayList<Sistema_seguridad>();
+        } finally
+        {
+            conector.closeConnection(con);
+        }
+        return sistemas;
+    }
 	
-	/**
-	 * 
-	 * @return La lista de todos los usuarios de un sistema
-	 */
+    /**
+     * 
+     * @return La lista de todos los usuarios de un sistema
+     */
     public static ArrayList<Identificacion> getIdentificaciones(){
         ArrayList<Identificacion> identificaciones = new ArrayList<Identificacion>();
 	ConexionBD conector = new ConexionBD();
@@ -117,10 +117,11 @@ public class Logic
         return identificaciones;
     }
 	
-	/**
-	 * 
-	 * @return La lista de todas las habitaciones de un sistema
-	 */
+
+    /**
+     * Funcion que pide a la base de datos las habitaciones registradas en el sistema. 
+     * @return La lista de todas las habitaciones de un sistema
+     */
     public static ArrayList<Habitacion> getHabitaciones(){
         ArrayList<Habitacion> habitaciones = new ArrayList<Habitacion>();
 	ConexionBD conector = new ConexionBD();
@@ -160,27 +161,118 @@ public class Logic
 	}
         return habitaciones;
     }
+    
+    /**
+     * Funcion que devuelve la contraseña de un id_usuario que recibe como parámetro
+     * @param nombre, contrasena 
+     * @return boolean
+     */
+    
+    public static Boolean getContrasena(String nombre, String contrasena_introducida){
+        String contrasena="";
+        ConexionBD conector = new ConexionBD();
+	Connection con = null;
+        try
+        {
+            con = conector.obtainConnection(true);
+            Log.log.debug("Database Connected");
+            PreparedStatement ps = ConexionBD.GetContrasenaUsuario(con);
+            ps.setString(1, nombre);
+            Log.log.info("Query=> {}", ps.toString());
+            ResultSet rs = ps.executeQuery();
+            contrasena=rs.getString("password");
+        } catch (SQLException e)
+	{
+            Log.log.error("Error: {}", e);
+            contrasena="";
+	} catch (NullPointerException e)
+        {
+            Log.log.error("Error: {}", e);
+            contrasena="";
+        } catch (Exception e)
+        {
+            Log.log.error("Error:{}", e);
+            contrasena="";
+        } finally
+        {
+            conector.closeConnection(con);
+	}
+        if(contrasena==""){
+            return false;
+        }
+        return contrasena_introducida==contrasena; 
+    }
 	
-	/**
-	 * 
-	 * @param idHabitacion ID de la habitación de la que queremos obtener los sensores
-	 * @return La lista de sensores de una habitacion 
-	 */
-        
-	
-         
+    /**
+     * Buscar el entero que representa el código QR pasado como parámetro en las identificaciones del sistema de la base de datos. 
+     * Devuelve el nombre del usuario asociado a ese QR. 
+     * @param cod_QR_leido
+     * @return usuario
+     */
+    
+    public static String getUsuarioQR (int cod_QR_leido){
+        String usuario="";
+        ConexionBD conector = new ConexionBD();
+	Connection con = null;
+        try
+        {
+            con = conector.obtainConnection(true);
+            Log.log.debug("Database Connected");
+            PreparedStatement ps = ConexionBD.GetContrasenaUsuario(con);
+            ps.setInt(1, cod_QR_leido);
+            Log.log.info("Query=> {}", ps.toString());
+            ResultSet rs = ps.executeQuery();
+            usuario=rs.getString("nombre");
+        } catch (SQLException e)
+	{
+            Log.log.error("Error: {}", e);
+            usuario="";
+	} catch (NullPointerException e)
+        {
+            Log.log.error("Error: {}", e);
+            usuario="";
+        } catch (Exception e)
+        {
+            Log.log.error("Error:{}", e);
+            usuario="";
+        } finally
+        {
+            conector.closeConnection(con);
+	}
 
+        return usuario;
+    }
+    
+    
+    
+    /**
+     * Funcion que devuelve los sensores que hay en una habitacion
+     * @param id_Habitacion ID de la habitación de la que queremos obtener los sensores
+     * @return La lista de sensores de una habitacion 
+     */
+      
+    /**
+     * Funcion que devuelve los actuadores que hay en una habitacion
+     * @param id_Habitacion ID de la habitación de la que queremos obtener los sensores
+     * @return La lista de actuadores de una habitacion 
+     */
 	
-	/**
-	 * 	
-	 * @param id_habitacion
-	 * @return Arraylist con los registros de los sensores de esa habitacion 
-	 */
+    /**
+     * Funcion que devuelve los registros_estadisticos de los sensores de una habitacion 
+     * @param id_habitacion
+     * @return Arraylist con los registros de los sensores de esa habitacion 
+     */
+    
+    /**
+     * Funcion que devuelve los registros de los actuadores de una habitacion 
+     * @param id_habitacion
+     * @return Arraylist con los registros de los actuadores de esa habitacion 
+     */
 
-	 /** 
-         * Añadir un nuevo registro de un sensor a la base de datos 
-         * @param newTopic 
-         */
+    /** 
+     * Añadir un nuevo registro de un sensor a la base de datos 
+     * @param newTopic 
+     */
     public static void guardarRegistroSensor(Topic newTopic) {
         ConexionBD conector = new ConexionBD();
 	Connection con = null;

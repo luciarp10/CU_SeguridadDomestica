@@ -1,4 +1,4 @@
-package com.mycompany.lmdl_server2;
+package webServices;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;

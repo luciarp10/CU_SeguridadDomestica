@@ -1,4 +1,4 @@
-package com.mycompany.lmdl_server2;
+package webServices;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
