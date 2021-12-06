@@ -206,15 +206,15 @@ ON DELETE SET NULL ON UPDATE CASCADE;
 ALTER TABLE public.registro_camara ADD CONSTRAINT registro_camara_uq UNIQUE (id_sensor_sensor);
 -- ddl-end --
 
--- object: public."Alerta" | type: TABLE --
--- DROP TABLE IF EXISTS public."Alerta" CASCADE;
-CREATE TABLE public."Alerta" (
+-- object: public.alerta | type: TABLE --
+-- DROP TABLE IF EXISTS public.alerta CASCADE;
+CREATE TABLE public.alerta (
 	id_alerta integer NOT NULL,
 	fecha date NOT NULL,
 	hora time NOT NULL,
 	info char(255) NOT NULL,
 	cod_sistema_sistema_seguridad integer NOT NULL,
-	CONSTRAINT "Alerta_pk" PRIMARY KEY (id_alerta)
+	CONSTRAINT alerta_pk PRIMARY KEY (id_alerta)
 
 );
 -- ddl-end --
