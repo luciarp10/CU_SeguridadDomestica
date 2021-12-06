@@ -206,4 +206,26 @@ ON DELETE SET NULL ON UPDATE CASCADE;
 ALTER TABLE public.registro_camara ADD CONSTRAINT registro_camara_uq UNIQUE (id_sensor_sensor);
 -- ddl-end --
 
+-- object: public."Alerta" | type: TABLE --
+-- DROP TABLE IF EXISTS public."Alerta" CASCADE;
+CREATE TABLE public."Alerta" (
+	id_alerta integer NOT NULL,
+	fecha date NOT NULL,
+	hora time NOT NULL,
+	info char(255) NOT NULL,
+	cod_sistema_sistema_seguridad integer NOT NULL,
+	CONSTRAINT "Alerta_pk" PRIMARY KEY (id_alerta)
+
+);
+-- ddl-end --
+ALTER TABLE public."Alerta" OWNER TO postgres;
+-- ddl-end --
+
+-- object: sistema_seguridad_fk | type: CONSTRAINT --
+-- ALTER TABLE public."Alerta" DROP CONSTRAINT IF EXISTS sistema_seguridad_fk CASCADE;
+ALTER TABLE public."Alerta" ADD CONSTRAINT sistema_seguridad_fk FOREIGN KEY (cod_sistema_sistema_seguridad)
+REFERENCES public.sistema_seguridad (cod_sistema) MATCH FULL
+ON DELETE RESTRICT ON UPDATE CASCADE;
+-- ddl-end --
+
 
