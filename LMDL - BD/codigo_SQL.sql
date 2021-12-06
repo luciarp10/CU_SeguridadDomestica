@@ -218,12 +218,12 @@ CREATE TABLE public.alerta (
 
 );
 -- ddl-end --
-ALTER TABLE public."Alerta" OWNER TO postgres;
+ALTER TABLE public.alerta OWNER TO postgres;
 -- ddl-end --
 
 -- object: sistema_seguridad_fk | type: CONSTRAINT --
--- ALTER TABLE public."Alerta" DROP CONSTRAINT IF EXISTS sistema_seguridad_fk CASCADE;
-ALTER TABLE public."Alerta" ADD CONSTRAINT sistema_seguridad_fk FOREIGN KEY (cod_sistema_sistema_seguridad)
+-- ALTER TABLE public.alerta DROP CONSTRAINT IF EXISTS sistema_seguridad_fk CASCADE;
+ALTER TABLE public.alerta ADD CONSTRAINT sistema_seguridad_fk FOREIGN KEY (cod_sistema_sistema_seguridad)
 REFERENCES public.sistema_seguridad (cod_sistema) MATCH FULL
 ON DELETE RESTRICT ON UPDATE CASCADE;
 -- ddl-end --
