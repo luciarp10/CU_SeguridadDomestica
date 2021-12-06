@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.3-beta1" use-changelog="false" last-position="61,87" last-zoom="1" max-obj-count="10"
+<dbmodel pgmodeler-ver="0.9.3-beta1" use-changelog="false" last-position="60,86" last-zoom="1" max-obj-count="10"
 	 default-schema="public" default-owner="postgres">
 <database name="new_database" is-template="false" allow-conns="true">
 </database>
@@ -11,10 +11,10 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <schema name="public" layer="0" fill-color="#e1e1e1" sql-disabled="true">
 </schema>
 
-<table name="habitacion" layer="0" collapse-mode="2" max-obj-count="6" z-value="0">
+<table name="habitacion" layer="0" collapse-mode="2" max-obj-count="7" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
-	<position x="680" y="400"/>
+	<position x="680" y="420"/>
 	<column name="id_habitacion" not-null="true">
 		<type name="integer" length="0"/>
 	</column>
@@ -26,6 +26,9 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</column>
 	<column name="tamanno">
 		<type name="integer" length="0"/>
+	</column>
+	<column name="descriptivo" not-null="true">
+		<type name="char" length="50"/>
 	</column>
 	<constraint name="habitacion_pk" type="pk-constr" table="public.habitacion">
 		<columns names="id_habitacion" ref-type="src-columns"/>
