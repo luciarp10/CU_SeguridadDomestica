@@ -4,10 +4,10 @@ public class Cliente {
     private String dni;
     private int id_cliente;
     private String direccion;
-    private int telefono;
+    private String telefono;
     private String nombre;
 
-    public Cliente(String dni, int id_cliente, String direccion, int telefono, String nombre) {
+    public Cliente(String dni, int id_cliente, String direccion, String telefono, String nombre) {
         this.dni = dni;
         this.id_cliente = id_cliente;
         this.direccion = direccion;
@@ -15,6 +15,10 @@ public class Cliente {
         this.nombre = nombre;
     }
 
+    public Cliente() {
+    }
+
+    
     public String getDni() {
         return dni;
     }
@@ -39,13 +43,15 @@ public class Cliente {
         this.direccion = direccion;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
+
+
 
     public String getNombre() {
         return nombre;

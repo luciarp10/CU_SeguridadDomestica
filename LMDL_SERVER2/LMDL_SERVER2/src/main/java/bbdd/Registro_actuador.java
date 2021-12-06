@@ -16,6 +16,11 @@ public class Registro_actuador{
         this.id_actuador_actuador = id_actuador_actuador;
     }
 
+    public Registro_actuador() {
+    }
+    
+    
+
     public Timestamp getHora_on() {
         return hora_on;
     }

@@ -125,14 +125,6 @@ public class ConexionBD {
     }
     
     
-    public static PreparedStatement InsertarRegistroSensor(Connection con) {
-        return getStatement(con, "INSERT INTO LMDL_BD.registro_estadistico (fecha, valor, hora, id_sensor_sensor) VALUES (?,?,?,?)");
-    }
-    
-    public static PreparedStatement InsertarRegistroActuador(Connection con){
-        return getStatement(con, "INSERT INTO LMDL_BD.registro (hora_on, fecha_on, duracion, id_actuador_actuador) VALUES (?,?,?,?)");
-    }
-    
     public static PreparedStatement GetSensoresHabitacion (Connection con){
         return getStatement (con, "SELECT * FROM LMDL_BD.sensor WHERE id_habitacion_habitacion=?");
     }
@@ -157,8 +149,8 @@ public class ConexionBD {
         return getStatement(con, "SELECT fecha, hora, valor, tipo FROM LMDL_BD.registro_estadistico "
                 + "INNER JOIN LMDL_BD.sensor on id_sensor_sensor=id_sensor "
                 + "INNER JOIN LMDL_BD.habitacion on id_habitacion_habitacion=id_habitacion "
-                + "INNER JOIN LMDL_BD.sistema_seguridad ON id_sistema=id_sistema_sistema_seguridad "
-                + "WHERE id_sistema=? and fecha>=? and fecha <=?" ); //Desde x fecha hasta y fecha 
+                + "INNER JOIN LMDL_BD.sistema_seguridad ON cod_sistema=cod_sistema_sistema_seguridad "
+                + "WHERE cod_sistema=? and fecha>=? and fecha <=?" ); //Desde x fecha hasta y fecha 
         }
     
     public static PreparedStatement GetRegistrosAlertas(Connection con){
@@ -185,27 +177,33 @@ public class ConexionBD {
                 + "inner join LMDL_BD.identificacion on sistema_seguridad.cod_sistema = identificacion.cod_sistema_sistema_seguridad "
                 + "where identificacion.nombre=?");
     }
-
-    public static PreparedStatement InsertAlerta(Connection con){
-        return getStatement(con, "INSERT INTO LMDL_BD.alerta (id_alerta, fecha, hora, info) VALUES (?,?,?,?)");
-    }
     
     //Para añadir las alertas con id correlativos
     public static PreparedStatement GetIdUltimaAlerta(Connection con){
-        return getStatement(con, "SELECT id_alerta FROM LMDL_BD.alerta order by fecha desc limit 1");
+        return getStatement(con, "SELECT id_alerta FROM LMDL_BD.alerta order by fecha desc limit 1 where cod_sistema_sistema_seguridad=?");
     }
     
     public static PreparedStatement GetSimulaciones(Connection con){
         return getStatement(con, "SELECT * FROM LMDL_BD.registro INNER JOIN LMDL_BD.actuador ON id_actuador_actuador=id_actuador "
-                + "INNER JOIN LMDL_BD.sistema_seguridad on id_sistema=id_sistema_sistema_seguridad "
-                + "WHERE id_sistema=? and tipo='zumbador'"); //Importante registrar los zumbadores con tipo=zumbador. 
+                + "INNER JOIN LMDL_BD.sistema_seguridad on cod_sistema=cod_sistema_sistema_seguridad "
+                + "WHERE cod_sistema=? and tipo='zumbador'"); //Importante registrar los zumbadores con tipo=zumbador. 
     }
     
     public static PreparedStatement GetRegFotosDia(Connection con){
         return getStatement(con, "SELECT fecha, foto, hora, id_sensor_sensor FROM LMDL_BD.registro_camara INNER JOIN LMDL_BD.sensor ON id_sensor=id_sensor_sensor"
-                + "INNER JOIN LMDL_BD.sistema_seguridad on id_sistema=id_sistema_sistema_seguridad WHERE fecha=? and id_sistema=?");
+                + "INNER JOIN LMDL_BD.sistema_seguridad on cod_sistema=cod_sistema_sistema_seguridad WHERE fecha=? and cod_sistema=?");
     }
     
+    public static PreparedStatement InsertarRegistroSensor(Connection con) {
+        return getStatement(con, "INSERT INTO LMDL_BD.registro_estadistico (fecha, valor, hora, id_sensor_sensor) VALUES (?,?,?,?)");
+    }
     
+    public static PreparedStatement InsertarRegistroActuador(Connection con){
+        return getStatement(con, "INSERT INTO LMDL_BD.registro (hora_on, fecha_on, duracion, id_actuador_actuador) VALUES (?,?,?,?)");
+    }
+    
+    public static PreparedStatement InsertarAlerta(Connection con){
+        return getStatement(con, "INSERT INTO LMDL_BD.alerta (id_alerta, fecha, hora, info, cod_sistema_sistema_seguridad) VALUES (?,?,?,?)");
+    }
         
 }

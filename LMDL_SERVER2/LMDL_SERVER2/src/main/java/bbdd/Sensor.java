@@ -11,6 +11,9 @@ public class Sensor {
         this.id_habitacion_habitacion = id_habitacion_habitacion;
     }
 
+    public Sensor() {
+    }
+    
     public int getId_sensor() {
         return id_sensor;
     }

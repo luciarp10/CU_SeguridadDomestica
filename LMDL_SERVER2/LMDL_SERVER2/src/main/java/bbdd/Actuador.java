@@ -11,6 +11,10 @@ public class Actuador {
         this.id_habitacion = id_habitacion;
     }
 
+    public Actuador() {
+    }
+
+    
     public int getId_actuador() {
         return id_actuador;
     }

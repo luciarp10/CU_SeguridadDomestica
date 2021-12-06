@@ -1,3 +1,4 @@
+package bbdd;
 
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -14,6 +15,11 @@ public class Registro_camara {
         this.hora = hora;
         this.id_sensor_sensor = id_sensor_sensor;
     }
+
+    public Registro_camara() {
+    }
+    
+    
 
     public Date getFecha() {
         return fecha;
