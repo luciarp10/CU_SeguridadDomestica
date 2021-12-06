@@ -2,7 +2,7 @@ package mqtt;
 
 public class MqttBroker {
     private static int qos = 2;
-    private static String broker = "tcp://192.168.88.129:1883";
+    private static String broker = "tcp://192.168.1.105:1883";
     private static String clientId = "UbicompUAH";
 
     public MqttBroker() {

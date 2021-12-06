@@ -153,66 +153,59 @@ public class ConexionBD {
                 + "id_habitacion_habitacion=id_habitacion WHERE id_habitacion=?" );
     }
     
+        public static PreparedStatement GetRegistrosEstadisticosHabitacionFecha(Connection con){
+        return getStatement(con, "SELECT fecha, hora, valor, tipo FROM LMDL_BD.registro_estadistico "
+                + "INNER JOIN LMDL_BD.sensor on id_sensor_sensor=id_sensor "
+                + "INNER JOIN LMDL_BD.habitacion on id_habitacion_habitacion=id_habitacion "
+                + "INNER JOIN LMDL_BD.sistema_seguridad ON id_sistema=id_sistema_sistema_seguridad "
+                + "WHERE id_sistema=? and fecha>=? and fecha <=?" ); //Desde x fecha hasta y fecha 
+        }
+    
+    public static PreparedStatement GetRegistrosAlertas(Connection con){
+        return getStatement(con, "SELECT id_alerta, fecha, hora, info FROM LMDL_BD.alerta "
+                + "INNER JOIN LMDL_BD.sistema_seguridad on cod_sistema=cod_sistema_sistema_seguridad where cod_sistema=?");
+    }
+    
     public static PreparedStatement GetContrasenaUsuario(Connection con){
         return getStatement(con, "SELECT password from LMDL_BD.identificacion WHERE nombre=? ");
     }
     
     public static PreparedStatement GetUsuario_QR(Connection con){
-        return getStatement (con, "SELECT nombre from LMDL_BD.identificacion WHERE codigo_qr=?");
+        return getStatement (con, "SELECT nombre from LMDL_BD.identificacion WHERE codigo_qr=? and cod_sistema_sistema_seguridad=?");
     }
-    /*
+    
+    //Pendiente de borrar porque si al final la relación entre sistema_seguridad e identificacion es 1:n, no hace falta. Por seguridad, lo que tiene sentido es que sea así. 
+    public static PreparedStatement GetSistemasUsuario(Connection con){
+        return getStatement (con, "SELECT nombre from LMDL_BD.sistema_seguridad inner join LMDL_BD.identificacion ON cod_sistema=cod_sistema_sistema_seguridad where identificacion.nombre=?");
+    }
+    
+    public static PreparedStatement GetHabitacionesSistema(Connection con){
+        return getStatement(con, "SELECT descriptivo from LMDL_BD.habitacion "
+                + "inner join LMDL_BD.sistema_seguridad on habitacion.cod_sistema_sistema_seguridad = sistema_seguridad.cod_sistema "
+                + "inner join LMDL_BD.identificacion on sistema_seguridad.cod_sistema = identificacion.cod_sistema_sistema_seguridad "
+                + "where identificacion.nombre=?");
+    }
+
+    public static PreparedStatement InsertAlerta(Connection con){
+        return getStatement(con, "INSERT INTO LMDL_BD.alerta (id_alerta, fecha, hora, info) VALUES (?,?,?,?)");
+    }
+    
+    //Para añadir las alertas con id correlativos
+    public static PreparedStatement GetIdUltimaAlerta(Connection con){
+        return getStatement(con, "SELECT id_alerta FROM LMDL_BD.alerta order by fecha desc limit 1");
+    }
+    
+    public static PreparedStatement GetSimulaciones(Connection con){
+        return getStatement(con, "SELECT * FROM LMDL_BD.registro INNER JOIN LMDL_BD.actuador ON id_actuador_actuador=id_actuador "
+                + "INNER JOIN LMDL_BD.sistema_seguridad on id_sistema=id_sistema_sistema_seguridad "
+                + "WHERE id_sistema=? and tipo='zumbador'"); //Importante registrar los zumbadores con tipo=zumbador. 
+    }
+    
+    public static PreparedStatement GetRegFotosDia(Connection con){
+        return getStatement(con, "SELECT fecha, foto, hora, id_sensor_sensor FROM LMDL_BD.registro_camara INNER JOIN LMDL_BD.sensor ON id_sensor=id_sensor_sensor"
+                + "INNER JOIN LMDL_BD.sistema_seguridad on id_sistema=id_sistema_sistema_seguridad WHERE fecha=? and id_sistema=?");
+    }
     
     
-    public static PreparedStatement GetStations(Connection con) {
-        return getStatement(con, "SELECT * FROM WHEATHERSTATION.STATION");
-    }
-
-    public static PreparedStatement GetStationsFromCity(Connection con) {
-        return getStatement(con, "SELECT * FROM WHEATHERSTATION.STATION WHERE CITY_ID=?");
-    }
-
-    public static PreparedStatement GetStationSensors(Connection con) {
-        return getStatement(con, "SELECT * FROM SENSORTYPE LEFT OUTER JOIN STATION_SENSORTYPE ON SENSORTYPE.ID=STATION_SENSORTYPE.SENSORTYPE_ID and STATION_ID=?;");
-    }
-
-    public static PreparedStatement GetStationSensorMeasurementLastDays(Connection con) {
-        return getStatement(con, "SELECT date(DATE) as date, min(VALUE) as min, max(VALUE) as max, avg(VALUE) as avg, dayofweek(DATE) as dayofweek FROM MEASUREMENT WHERE STATION_ID=? AND SENSORTYPE_ID=? and date(DATE)>=date(now()) - INTERVAL ? DAY and DATE<=now() group by date(DATE) ORDER BY DATE ASC;");
-    }
-
-    public static PreparedStatement GetStationSensorMeasurementLastMonths(Connection con) {
-        return getStatement(con, "SELECT month(DATE) as month,min(VALUE) as min, max(VALUE) as max, avg(VALUE) as avg FROM MEASUREMENT WHERE STATION_ID=? AND SENSORTYPE_ID=? and date(DATE)>=date(now()) - INTERVAL ? DAY group by month(DATE) ORDER BY DATE ASC;");
-    }
-
-    public static PreparedStatement GetCities(Connection con) {
-        return getStatement(con, "SELECT * FROM CITY;");
-    }
-
-    public static PreparedStatement InsertWeatherForecast(Connection con) {
-        return getStatement(con, "INSERT INTO MEASUREMENT (STATION_ID, SENSORTYPE_ID, DATE, VALUE) VALUES (?,?,?,?) ON duplicate key update STATION_ID=?, SENSORTYPE_ID=?, DATE=?, VALUE=?;");
-    }
-
-    public static PreparedStatement GetStationSensorMeasurementMonth(Connection con) {
-        return getStatement(con, "SELECT month(DATE) as date,  min(VALUE) as min, max(VALUE) as max, avg(VALUE) as avg FROM MEASUREMENT WHERE STATION_ID=? AND SENSORTYPE_ID=? group by month(DATE) ORDER BY DATE ASC;");
-    }
-
-    public static PreparedStatement GetLastValueStationSensor(Connection con) {
-        return getStatement(con, "select * from MEASUREMENT where STATION_ID=? AND SENSORTYPE_ID= ? ORDER BY DATE LIMIT 1;");
-    }
-
-    public static PreparedStatement GetInfoFromStation(Connection con) {
-        return getStatement(con, "SELECT * FROM WHEATHERSTATION.STATION WHERE ID=?;");
-    }
-
-    public static PreparedStatement InsertnewMeasurement(Connection con) {
-        return getStatement(con, "INSERT INTO MEASUREMENT (STATION_ID, SENSORTYPE_ID, DATE, VALUE) VALUES (?,?,?,?) ON duplicate key update STATION_ID=?, SENSORTYPE_ID=?, DATE=?, VALUE=?;");
-    }
-
-
-    public static PreparedStatement GetDataBD(Connection con) {
-        return getStatement(con, "SELECT * FROM UBICOMP.MEASUREMENT");
-    }
-
-    public static PreparedStatement SetDataBD(Connection con) {
-        return getStatement(con, "INSERT INTO UBICOMP.MEASUREMENT VALUES (?,?)");
-    }*/
+        
 }

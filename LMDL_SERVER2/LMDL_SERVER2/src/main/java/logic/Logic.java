@@ -210,7 +210,7 @@ public class Logic
      * @return usuario
      */
     
-    public static String getUsuarioQR (int cod_QR_leido){
+    public static String getUsuarioQR (int cod_QR_leido, int cod_sistema){
         String usuario="";
         ConexionBD conector = new ConexionBD();
 	Connection con = null;
@@ -218,8 +218,9 @@ public class Logic
         {
             con = conector.obtainConnection(true);
             Log.log.debug("Database Connected");
-            PreparedStatement ps = ConexionBD.GetContrasenaUsuario(con);
+            PreparedStatement ps = ConexionBD.GetUsuario_QR(con);
             ps.setInt(1, cod_QR_leido);
+            ps.setInt(2, cod_sistema );
             Log.log.info("Query=> {}", ps.toString());
             ResultSet rs = ps.executeQuery();
             usuario=rs.getString("nombre");
