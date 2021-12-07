@@ -6,15 +6,17 @@ public class Habitacion {
     private int n_ventanas;
     private int tamanno;
     private int cod_sistema_sistema_seguridad;
+    private String descriptivo;
 
-    public Habitacion(int id_habitacion, int n_puertas, int n_ventanas, int tamanno, int cod_sistema_sistema_seguridad) {
+    public Habitacion(int id_habitacion, int n_puertas, int n_ventanas, int tamanno, int cod_sistema_sistema_seguridad, String descriptivo) {
         this.id_habitacion = id_habitacion;
         this.n_puertas = n_puertas;
         this.n_ventanas = n_ventanas;
         this.tamanno = tamanno;
         this.cod_sistema_sistema_seguridad = cod_sistema_sistema_seguridad;
+        this.descriptivo=descriptivo;
     }
-
+  
     public Habitacion() {
     }
 
@@ -57,4 +59,14 @@ public class Habitacion {
     public void setCod_sistema_sistema_seguridad(int cod_sistema_sistema_seguridad) {
         this.cod_sistema_sistema_seguridad = cod_sistema_sistema_seguridad;
     }
+
+    public String getDescriptivo() {
+        return descriptivo;
+    }
+
+    public void setDescriptivo(String descriptivo) {
+        this.descriptivo = descriptivo;
+    }
+    
+    
 }
