@@ -730,11 +730,13 @@ public class Logic
             con = conector.obtainConnection(true);
             Log.log.debug("Database Connected");
             PreparedStatement ps = ConexionBD.GetUsuario_QR(con);
-            ps.setInt(1, cod_QR_leido);
+            ps.setInt(1,cod_QR_leido);
             ps.setInt(2, cod_sistema );
             Log.log.info("Query=> {}", ps.toString());
             ResultSet rs = ps.executeQuery();
-            usuario=rs.getString("nombre");
+            if(rs.next()){
+                usuario=rs.getString("nombre");
+            }
         } catch (SQLException e)
 	{
             Log.log.error("Error: {}", e);
