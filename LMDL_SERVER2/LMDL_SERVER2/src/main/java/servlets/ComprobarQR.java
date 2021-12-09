@@ -45,8 +45,8 @@ public class ComprobarQR extends HttpServlet {
         try {
             int codigo_leido = Integer.parseInt(request.getParameter("codigo"));
             int codigo_sistema = Integer.parseInt(request.getParameter("id_sistema"));
-            
             String usuario = Logic.getUsuarioQR(codigo_leido, codigo_sistema);
+            
             String jsonUsuario = new Gson().toJson(usuario);
             Log.log.info("JSON value => {}", jsonUsuario);
             out.println(jsonUsuario);

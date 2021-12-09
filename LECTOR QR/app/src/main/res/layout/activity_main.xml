@@ -33,6 +33,7 @@
         android:id="@+id/saludo"
         android:layout_width="match_parent"
         android:layout_height="106dp"
+        android:backgroundTintMode="src_atop"
         android:fontFamily="@font/roboto"
         android:text="BIENVENIDO A CASA, ESCANEE SU CÓDIGO QR O INTRODUZCA SU PIN EN EL TECLADO"
         android:textAlignment="center"

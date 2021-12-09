@@ -1,24 +1,31 @@
 package com.example.lectorqr;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.Manifest;
-import android.content.Intent;
+import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Build;
-import androidx.core.app.ActivityCompat;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.webkit.URLUtil;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
     private CameraSource cameraSource;
@@ -86,48 +93,37 @@ public class MainActivity extends AppCompatActivity {
                 cameraSource.stop();
             }
         });
+
         // preparo el detector de QR
         barcodeDetector.setProcessor(new Detector.Processor<Barcode>() {
             @Override
             public void release() {
             }
 
-
             @Override
             public void receiveDetections(Detector.Detections<Barcode> detections) {
                 final SparseArray<Barcode> barcodes = detections.getDetectedItems();
 
                 if (barcodes.size() > 0) {
-
                     // obtenemos el token
-                    token = barcodes.valueAt(0).displayValue.toString();
-
+                    token = barcodes.valueAt(0).rawValue.toString();
+                    String[] tokenSplit = token.split("/"); //Depende de como los generemos desde la otra aplicación.
                     // verificamos que el token anterior no se igual al actual
                     // esto es util para evitar multiples llamadas empleando el mismo token
                     if (!token.equals(tokenanterior)) {
-
-                        // guardamos el ultimo token proceado
+                        // guardamos el ultimo token procesado
                         tokenanterior = token;
+                        TextView saludo = (TextView)findViewById(R.id.saludo);
+                        saludo.setText(tokenSplit[tokenSplit.length-1]);
                         Log.i("token", token);
-
-                        if (URLUtil.isValidUrl(token)) {
-                            // si es una URL valida abre el navegador
-                            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(token));
-                            startActivity(browserIntent);
-                        } else {
-                            // comparte en otras apps
-                            Intent shareIntent = new Intent();
-                            shareIntent.setAction(Intent.ACTION_SEND);
-                            shareIntent.putExtra(Intent.EXTRA_TEXT, token);
-                            shareIntent.setType("text/plain");
-                            startActivity(shareIntent);
-                        }
+                        comprobarQR(tokenSplit[tokenSplit.length-1], 1);
+                    }
 
                         new Thread(new Runnable() {
                             public void run() {
                                 try {
                                     synchronized (this) {
-                                        wait(5000);
+                                        wait(2000);
                                         // limpiamos el token
                                         tokenanterior = "";
                                     }
@@ -141,8 +137,62 @@ public class MainActivity extends AppCompatActivity {
 
                     }
                 }
+
+            @SuppressLint("ResourceAsColor")
+            private  void comprobarQR(String codigoQR, int i) {
+                TextView saludo = (TextView)findViewById(R.id.saludo);
+                //Aquí iria el WS que lo envía al servidor y comprueba si existe algún usuario con ese código QR/
+                String urlStr = "http://192.168.1.108:8080/LMDL_SERVER2/ComprobarQR?codigo="+codigoQR+"&id_sistema="+1;
+                saludo.setText("Conectando... ");
+                try {
+                    URL url = new URL(urlStr);
+                    HttpURLConnection urlConnection = null;
+                    urlConnection = (HttpURLConnection) url.openConnection();
+                    //Get the information from the url
+                    InputStream is = new BufferedInputStream(urlConnection.getInputStream());
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+                    StringBuilder sb = new StringBuilder();
+                    String line = null;
+                    try {
+                        while ((line = reader.readLine()) != null) {
+                            sb.append(line).append('\n');
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } finally {
+                        try {
+                            is.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    String response =sb.toString();
+                    response= response.substring(1,response.length()-2); //Para quitar las comillas del string
+                    if(!response.equals("")) {
+                        saludo.setText("BIENVENIDO A CASA " + response +"\nALARMA DESCONECTADA.");
+                    }
+                    else {
+                        saludo.setText("USUARIO NO REGISTRADO. \nALARMA ACTIVADA");
+                    }
+                    try {
+                        synchronized (this) {
+                            wait(8000);
+                        }
+                    } catch (InterruptedException e) {
+                        // TODO Auto-generated catch block
+                        Log.e("Error", "Waiting didnt work!!");
+                        e.printStackTrace();
+                    }
+                }
+                catch (IOException  e) {
+                    e.printStackTrace();
+                    saludo.setText(e.getMessage());
+                }
+                saludo.setText("BIENVENIDO A CASA. ESCANEE SU CODIGO QR O INTRODUZCA EL PIN EN EL TECLADO");
             }
+
         });
 
     }
+
 }
