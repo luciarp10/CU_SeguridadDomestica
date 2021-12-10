@@ -820,16 +820,14 @@ public class Logic
             con = conector.obtainConnection(true);
             Log.log.debug("Database Connected");
 		
-            PreparedStatement ps = ConexionBD.GetRegistrosAlertas(con);
+            PreparedStatement ps = ConexionBD.GetIdUltimaAlerta(con);
             ps.setInt(1, cod_sistema);
             Log.log.info("Query=> {}", ps.toString());
             ResultSet rs = ps.executeQuery();
-            alerta.setId_alerta(rs.getInt("id_alerta"));
-            alerta.setFecha(rs.getDate("fecha"));
-            alerta.setHora(rs.getTimestamp("hora"));
-            alerta.setInfo(rs.getString("info"));
-            alerta.setCod_sistema_sistema_seguridad(rs.getInt("cpd_sistema_sistema_seguridad"));
-	
+            if(rs.next()){
+                alerta.setId_alerta(rs.getInt("id_alerta"));
+            }
+            
         } catch (SQLException e)
 	{
             Log.log.error("Error: {}", e);
@@ -1028,7 +1026,8 @@ public class Logic
             ps.setInt(1, alerta_nueva.getId_alerta());
             ps.setDate(2, java.sql.Date.valueOf(LocalDate.now()));
             ps.setTime(3, java.sql.Time.valueOf(LocalTime.now(ZoneId.of("Europe/Madrid"))));
-            ps.setInt(4, alerta_nueva.getCod_sistema_sistema_seguridad());
+            ps.setString(4, alerta_nueva.getInfo());
+            ps.setInt(5, alerta_nueva.getCod_sistema_sistema_seguridad());
             Log.log.info("Query=> {}", ps.toString());
             ps.executeUpdate();            	
 	} catch (SQLException e)

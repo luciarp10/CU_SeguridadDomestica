@@ -5,6 +5,7 @@
  */
 package servlets;
 
+import bbdd.Alerta;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,6 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import logic.Log;
 import logic.Logic;
+import mqtt.MqttBroker;
+import mqtt.MqttPublisher;
 
 /**
  *
@@ -46,9 +49,18 @@ public class ComprobarQR extends HttpServlet {
             int codigo_leido = Integer.parseInt(request.getParameter("codigo"));
             int codigo_sistema = Integer.parseInt(request.getParameter("id_sistema"));
             String usuario = Logic.getUsuarioQR(codigo_leido, codigo_sistema);
-            
             String jsonUsuario = new Gson().toJson(usuario);
             Log.log.info("JSON value => {}", jsonUsuario);
+            //Registrar alerta en la base de datos
+            Log.log.info("Insertar en alerta registro de entrada de: "+usuario);
+            Alerta alerta_nueva=new Alerta();
+            alerta_nueva.setId_alerta(Logic.getUltimaAlerta(codigo_sistema)+1);
+            alerta_nueva.setInfo("Alarma desconectada por "+usuario+" mediante código QR.");
+            alerta_nueva.setCod_sistema_sistema_seguridad(codigo_sistema);
+            Logic.insertarAlerta(alerta_nueva);
+            //Publicar topic para que los sensores de la alarma se apaguen (desconecten) 
+            MqttBroker broker = new MqttBroker();
+            MqttPublisher.publish(broker, "SistSeg"+codigo_sistema+"/Alerta", "Desactivar");
             out.println(jsonUsuario);
         }
         catch (NumberFormatException nfe) 

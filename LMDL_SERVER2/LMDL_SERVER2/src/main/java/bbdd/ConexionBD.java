@@ -180,7 +180,7 @@ public class ConexionBD {
     
     //Para añadir las alertas con id correlativos
     public static PreparedStatement GetIdUltimaAlerta(Connection con){
-        return getStatement(con, "SELECT id_alerta FROM LMDL_BD.alerta order by fecha desc limit 1 where cod_sistema_sistema_seguridad=?");
+        return getStatement(con, "SELECT id_alerta FROM LMDL_BD.alerta where cod_sistema_sistema_seguridad=? order by fecha, hora desc limit 1");
     }
     
     public static PreparedStatement GetSimulaciones(Connection con){
@@ -203,7 +203,7 @@ public class ConexionBD {
     }
     
     public static PreparedStatement InsertarAlerta(Connection con){
-        return getStatement(con, "INSERT INTO LMDL_BD.alerta (id_alerta, fecha, hora, info, cod_sistema_sistema_seguridad) VALUES (?,?,?,?)");
+        return getStatement(con, "INSERT INTO LMDL_BD.alerta (id_alerta, fecha, hora, info, cod_sistema_sistema_seguridad) VALUES (?,?,?,?,?)");
     }
         
 }
