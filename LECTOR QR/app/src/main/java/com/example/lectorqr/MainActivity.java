@@ -172,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
                         saludo.setText("BIENVENIDO A CASA " + response +"\nALARMA DESCONECTADA.");
                     }
                     else {
-                        saludo.setText("USUARIO NO REGISTRADO. \nALARMA ACTIVADA");
+                        saludo.setText("USUARIO NO REGISTRADO.");
                     }
                     try {
                         synchronized (this) {

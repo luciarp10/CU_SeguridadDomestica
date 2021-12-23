@@ -52,15 +52,17 @@ public class ComprobarQR extends HttpServlet {
             String jsonUsuario = new Gson().toJson(usuario);
             Log.log.info("JSON value => {}", jsonUsuario);
             //Registrar alerta en la base de datos
-            Log.log.info("Insertar en alerta registro de entrada de: "+usuario);
-            Alerta alerta_nueva=new Alerta();
-            alerta_nueva.setId_alerta(Logic.getUltimaAlerta(codigo_sistema)+1);
-            alerta_nueva.setInfo("Alarma desconectada por "+usuario+" mediante código QR.");
-            alerta_nueva.setCod_sistema_sistema_seguridad(codigo_sistema);
-            Logic.insertarAlerta(alerta_nueva);
-            //Publicar topic para que los sensores de la alarma se apaguen (desconecten) 
-            MqttBroker broker = new MqttBroker();
-            MqttPublisher.publish(broker, "SistSeg"+codigo_sistema+"/Alerta", "Desactivar");
+            if(!usuario.equals("")){
+                Log.log.info("Insertar en alerta registro de entrada de: "+usuario);
+                Alerta alerta_nueva=new Alerta();
+                alerta_nueva.setId_alerta(Logic.getUltimaAlerta(codigo_sistema)+1);
+                alerta_nueva.setInfo("Alarma desconectada por "+usuario+" mediante código QR.");
+                alerta_nueva.setCod_sistema_sistema_seguridad(codigo_sistema);
+                Logic.insertarAlerta(alerta_nueva);
+                //Publicar topic para que los sensores de la alarma se apaguen (desconecten) 
+                MqttBroker broker = new MqttBroker();
+                MqttPublisher.publish(broker, "SistSeg"+codigo_sistema+"/Alerta", "Desactivar");
+            }
             out.println(jsonUsuario);
         }
         catch (NumberFormatException nfe) 

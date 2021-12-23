@@ -827,7 +827,7 @@ public class Logic
             if(rs.next()){
                 alerta.setId_alerta(rs.getInt("id_alerta"));
             }
-            
+             
         } catch (SQLException e)
 	{
             Log.log.error("Error: {}", e);
