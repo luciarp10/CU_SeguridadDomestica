@@ -63,6 +63,14 @@ public class ComprobarQR extends HttpServlet {
                 MqttBroker broker = new MqttBroker();
                 MqttPublisher.publish(broker, "SistSeg"+codigo_sistema+"/Alerta", "Desactivar");
             }
+            else{
+                Log.log.info("Insertar en Alerta registro de entrada incorrecto.");
+                Alerta alerta_nueva = new Alerta();
+                alerta_nueva.setId_alerta(Logic.getUltimaAlerta(codigo_sistema)+1);
+                alerta_nueva.setInfo("Intento de desconexión de alarma incorrecto. Código QR desconocido.");
+                alerta_nueva.setCod_sistema_sistema_seguridad(codigo_sistema);
+                Logic.insertarAlerta(alerta_nueva);
+            }
             out.println(jsonUsuario);
         }
         catch (NumberFormatException nfe) 

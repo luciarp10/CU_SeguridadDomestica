@@ -180,7 +180,7 @@ public class ConexionBD {
     
     //Para añadir las alertas con id correlativos
     public static PreparedStatement GetIdUltimaAlerta(Connection con){
-        return getStatement(con, "SELECT id_alerta FROM LMDL_BD.alerta where cod_sistema_sistema_seguridad=? order by fecha, hora desc limit 1");
+        return getStatement(con, "SELECT id_alerta FROM LMDL_BD.alerta where cod_sistema_sistema_seguridad=? order by id_alerta desc limit 1");
     }
     
     public static PreparedStatement GetSimulaciones(Connection con){
