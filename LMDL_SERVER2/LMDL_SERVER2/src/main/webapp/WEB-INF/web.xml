@@ -5,9 +5,17 @@
         <servlet-name>ComprobarQR</servlet-name>
         <servlet-class>servlets.ComprobarQR</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GetSistemasCliente</servlet-name>
+        <servlet-class>servlets.GetSistemasCliente</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ComprobarQR</servlet-name>
         <url-pattern>/ComprobarQR</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetSistemasCliente</servlet-name>
+        <url-pattern>/GetSistemasCliente</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>

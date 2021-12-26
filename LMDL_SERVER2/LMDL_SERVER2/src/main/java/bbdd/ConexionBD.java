@@ -97,6 +97,10 @@ public class ConexionBD {
         return getStatement(con, "SELECT * FROM LMDL_BD.sistema_seguridad");
     }
     
+    public static PreparedStatement GetSistemasCliente(Connection con){
+        return getStatement(con, "SELECT * FROM LMDL_BD.sistema_seguridad where id_cliente_cliente=?");
+    }
+    
     public static PreparedStatement GetActuadores(Connection con){
         return getStatement(con, "SELECT * FROM LMDL_BD.actuador");
     }

@@ -77,6 +77,55 @@ public class Logic
         }
         return sistemas;
     }
+    
+    	
+    /**
+     * Función que devuelve los sistemas que tiene un cliente
+     * @param id_cliente 
+     * @return La lista de todos los sistemas almacenados en la base de datos
+     */
+    public static ArrayList<Sistema_seguridad> getSistemasCliente(int id_cliente)
+    {
+        ArrayList<Sistema_seguridad> sistemas = new ArrayList<Sistema_seguridad>();
+		
+        ConexionBD conector = new ConexionBD();
+        Connection con = null;
+	try
+        {
+            con = conector.obtainConnection(true);
+            Log.log.debug("Database Connected");
+			
+            PreparedStatement ps = ConexionBD.GetSistemasCliente(con);
+            ps.setInt(1, id_cliente);
+            Log.log.info("Query=> {}", ps.toString());
+            ResultSet rs = ps.executeQuery();
+            while (rs.next())
+            {
+                Sistema_seguridad sistema = new Sistema_seguridad();
+                sistema.setNombre(rs.getString("nombre"));
+                sistema.setCod_sistema(Integer.parseInt(rs.getString("cod_sistema")));
+                sistema.setDireccion(rs.getString("direccion"));
+                sistema.setId_cliente_cliente(Integer.parseInt(rs.getString("id_cliente_cliente")));
+                sistemas.add(sistema);
+            }	
+	} catch (SQLException e)
+	{
+            Log.log.error("Error: {}", e);
+            sistemas = new ArrayList<Sistema_seguridad>();
+	} catch (NullPointerException e)
+        {
+            Log.log.error("Error: {}", e);
+            sistemas = new ArrayList<Sistema_seguridad>();
+	} catch (Exception e)
+        {
+            Log.log.error("Error:{}", e);
+            sistemas = new ArrayList<Sistema_seguridad>();
+        } finally
+        {
+            conector.closeConnection(con);
+        }
+        return sistemas;
+    }
 	
     /**
      * @return lista de actuadores de la base de datos
@@ -119,11 +168,7 @@ public class Logic
 	}
         return actuadores;
     }
-    
-    /**
-     * Funcion que devuelve los clientes registrados en la base de datos
-     * @return lista de clientes
-     */
+
     
         /**
      * Funcion que pide a la base de datos las habitaciones registradas en el sistema. 
