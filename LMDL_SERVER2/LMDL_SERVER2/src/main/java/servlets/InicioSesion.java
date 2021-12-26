@@ -6,11 +6,9 @@
 package servlets;
 
 import bbdd.Alerta;
-import bbdd.Sistema_seguridad;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,22 +19,20 @@ import mqtt.MqttBroker;
 import mqtt.MqttPublisher;
 
 /**
- * Pendiente de decidir si se usa o no. 
+ * Si el usuario está registrado y la contraseña es correcta, devuelve el código del sistema de seguridad
+ * del usuario para que todo lo que se le muestre en la aplicación sea en relación con ese sistema. 
  * @author lucyr
  */
-public class GetSistemasCliente extends HttpServlet {
+public class InicioSesion extends HttpServlet {
 
-    private static final long serialVersionUID = 1L; 
-        
-    public GetSistemasCliente(){
+
+    public InicioSesion(){
         super();
     }
-
-   
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
-     * 
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -45,17 +41,25 @@ public class GetSistemasCliente extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Log.log.info("-- Buscando sistemas registrados en la base de datos --");
+        Log.log.info("-- Comprobando si usuario y contraseña están registrados --");
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        
         try {
-            int id_cliente = Integer.parseInt(request.getParameter("id_cliente"));
-            ArrayList<Sistema_seguridad> sistemas = Logic.getSistemasCliente(id_cliente);
-            String jsonSistemas = new Gson().toJson(sistemas);
-            Log.log.info("JSON value => {}", jsonSistemas);
+            String usuario = request.getParameter("usuario");
+            String contrasenna= request.getParameter("password");
+            Boolean usuario_registrado = Logic.getContrasena(usuario,contrasenna);
+            if(usuario_registrado){
+                int cod_sistema_seguridad = Logic.getSistemaUsuario(usuario);
+                String jsonSistema = new Gson().toJson(cod_sistema_seguridad);
+                Log.log.info("JSON value => {}", jsonSistema);
+                out.println(jsonSistema);
+            }
+            else{
+                String jsonSistema = new Gson().toJson(-1);
+                Log.log.info("JSON value => {}", jsonSistema);
+                out.println(jsonSistema);
+            }
             
-            out.println(jsonSistemas);
         }
         catch (NumberFormatException nfe) 
         {

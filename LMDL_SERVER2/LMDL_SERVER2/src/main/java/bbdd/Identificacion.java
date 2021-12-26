@@ -5,12 +5,14 @@ public class Identificacion {
     private String password;
     private String nombre;
     private int cod_sistema_sistema_seguridad;
+    private boolean admin; 
 
-    public Identificacion(int codigo_qr, String password, String nombre, int cod_sistema_sistema_seguridad) {
+    public Identificacion(int codigo_qr, String password, String nombre, int cod_sistema_sistema_seguridad, boolean admin) {
         this.codigo_qr = codigo_qr;
         this.password = password;
         this.nombre = nombre;
         this.cod_sistema_sistema_seguridad = cod_sistema_sistema_seguridad;
+        this.admin=admin;
     }
 
     public Identificacion() {
@@ -48,4 +50,14 @@ public class Identificacion {
     public void setCod_sistema_sistema_seguridad(int cod_sistema_sistema_seguridad) {
         this.cod_sistema_sistema_seguridad = cod_sistema_sistema_seguridad;
     }
+
+    public boolean isAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
+    }
+    
+    
 }

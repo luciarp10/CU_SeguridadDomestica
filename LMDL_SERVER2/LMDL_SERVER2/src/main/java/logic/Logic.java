@@ -126,6 +126,52 @@ public class Logic
         }
         return sistemas;
     }
+    
+        /**
+     * Función que devuelve el código de sistema de un usuario
+     * @param id_usuario 
+     * @return La lista de todos los sistemas almacenados en la base de datos
+     */
+    public static int getSistemaUsuario(String usuario)
+    {
+        int cod_sistema=-1;
+		
+        ConexionBD conector = new ConexionBD();
+        Connection con = null;
+	try
+        {
+            con = conector.obtainConnection(true);
+            Log.log.debug("Database Connected");
+			
+            PreparedStatement ps = ConexionBD.GetSistemaUsuario(con);
+            ps.setString(1, usuario);
+            Log.log.info("Query=> {}", ps.toString());
+            ResultSet rs = ps.executeQuery();
+            while (rs.next())
+            {
+                cod_sistema=rs.getInt("cod_sistema_sistema_seguridad");
+                
+            }	
+	} catch (SQLException e)
+	{
+            Log.log.error("Error: {}", e);
+            cod_sistema=-1;
+	} catch (NullPointerException e)
+        {
+            Log.log.error("Error: {}", e);
+            cod_sistema=-1;
+
+	} catch (Exception e)
+        {
+            Log.log.error("Error:{}", e);
+            cod_sistema=-1;
+
+        } finally
+        {
+            conector.closeConnection(con);
+        }
+        return cod_sistema;
+    }
 	
     /**
      * @return lista de actuadores de la base de datos
@@ -279,6 +325,7 @@ public class Logic
                 identificacion.setNombre(rs.getString("nombre"));
                 identificacion.setPassword(rs.getString("password"));
                 identificacion.setCod_sistema_sistema_seguridad(rs.getInt("cod_sistema_sistema_seguridad"));
+                identificacion.setAdmin(rs.getBoolean("admin"));
                 identificaciones.add(identificacion);
             }	
         } catch (SQLException e)
@@ -719,7 +766,8 @@ public class Logic
         
     /**
      * Funcion que devuelve la contraseña de un id_usuario que recibe como parámetro
-     * @param nombre, contrasena 
+     * @param nombre
+     * @param contrasena_introducida 
      * @return boolean
      */
     
@@ -735,7 +783,9 @@ public class Logic
             ps.setString(1, nombre);
             Log.log.info("Query=> {}", ps.toString());
             ResultSet rs = ps.executeQuery();
-            contrasena=rs.getString("password");
+            if(rs.next()){
+                contrasena=rs.getString("password");
+            }
         } catch (SQLException e)
 	{
             Log.log.error("Error: {}", e);
@@ -752,10 +802,10 @@ public class Logic
         {
             conector.closeConnection(con);
 	}
-        if(contrasena==""){
+        if(contrasena.equals("")){
             return false;
         }
-        return contrasena_introducida==contrasena; 
+        return contrasena_introducida.equals(contrasena); 
     }
 	
     /**
