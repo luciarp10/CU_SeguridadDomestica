@@ -5,73 +5,58 @@
  */
 package servlets;
 
-import bbdd.Alerta;
+import bbdd.Registro_sensor;
+import bbdd.Sensor;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import logic.Log;
 import logic.Logic;
-import mqtt.MqttBroker;
-import mqtt.MqttPublisher;
 
 /**
- *
+ * Devuelve los sensores de la habitación y sus últimos registros en dos json distintos. El orden de los registros
+ * corresponde al orden de los sensores. 
  * @author lucyr
  */
-public class ComprobarQR extends HttpServlet {
+public class GetUltRegistrosEstadisticosHabitacion extends HttpServlet {
 
-    private static final long serialVersionUID = 1L; 
-    
-    public ComprobarQR(){
+    public GetUltRegistrosEstadisticosHabitacion() {
         super();
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
-     * Parametros --> codigo e id_sistema
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Log.log.info("-- Comprobando si QR escaneado está en el sistema --");
+        ArrayList<Sensor> sensores_habitacion= new ArrayList<>();
+        ArrayList<Registro_sensor> registros_habitacion = new ArrayList<>();
+        Log.log.info("-- Buscando ultimos registros de la habitacion" + request.getParameter("id_habitacion") + " --");
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            int codigo_leido = Integer.parseInt(request.getParameter("codigo"));
-            int codigo_sistema = Integer.parseInt(request.getParameter("id_sistema"));
-            String usuario = Logic.getUsuarioQR(codigo_leido, codigo_sistema);
-            String jsonUsuario = new Gson().toJson(usuario);
-            Log.log.info("JSON value => {}", jsonUsuario);
-            //Registrar alerta en la base de datos
-            if(!usuario.equals("")){
-                Log.log.info("Insertar en alerta registro de entrada de: "+usuario);
-                Alerta alerta_nueva=new Alerta();
-                alerta_nueva.setId_alerta(Logic.getUltimaAlerta(codigo_sistema)+1);
-                alerta_nueva.setInfo("Alarma desconectada por "+usuario+" mediante código QR.");
-                alerta_nueva.setCod_sistema_sistema_seguridad(codigo_sistema);
-                Logic.insertarAlerta(alerta_nueva);
-                //Publicar topic para que los sensores de la alarma se apaguen (desconecten) 
-                MqttBroker broker = new MqttBroker();
-                MqttPublisher.publish(broker, "SistSeg"+codigo_sistema+"/Alerta", "Desactivar");
+            sensores_habitacion=Logic.getSensoresHabitacion(Integer.parseInt(request.getParameter("id_habitacion")));
+            for (int i=0; i<sensores_habitacion.size();i++){
+                registros_habitacion.add(Logic.getUltimoRegistroSensor(sensores_habitacion.get(i).getId_sensor()));
             }
-            else{
-                Log.log.info("Insertar en Alerta registro de entrada incorrecto.");
-                Alerta alerta_nueva = new Alerta();
-                alerta_nueva.setId_alerta(Logic.getUltimaAlerta(codigo_sistema)+1);
-                alerta_nueva.setInfo("Intento de desconexión de alarma incorrecto. Código QR desconocido.");
-                alerta_nueva.setCod_sistema_sistema_seguridad(codigo_sistema);
-                Logic.insertarAlerta(alerta_nueva);
-            }
-            out.println(jsonUsuario);
+            String jsonSensores = new Gson().toJson(sensores_habitacion);
+            String jsonRegistros = new Gson().toJson(registros_habitacion);
+            Log.log.info("JSON value => {}", jsonSensores);
+            Log.log.info("JSON value => {}", jsonRegistros);
+            out.println(jsonSensores);
+            out.println(jsonRegistros);
         }
         catch (NumberFormatException nfe) 
         {
@@ -99,11 +84,20 @@ public class ComprobarQR extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         doGet(request, response);
     }
 
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
 
 }

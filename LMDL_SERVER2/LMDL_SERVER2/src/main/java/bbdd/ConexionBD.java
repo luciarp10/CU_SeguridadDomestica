@@ -13,7 +13,7 @@ import logic.Log;
 
 
 public class ConexionBD {
-
+    
     public Connection obtainConnection(boolean autoCommit) throws NullPointerException {
         Connection con = null;
         int intentos = 5;
@@ -122,6 +122,10 @@ public class ConexionBD {
         return getStatement(con, "SELECT * FROM LMDL_BD.identificacion");
     }
     
+    public static PreparedStatement GetIdentificacionesSistema(Connection con) {
+        return getStatement(con, "SELECT * FROM LMDL_BD.identificacion WHERE cod_sistema_sistema_seguridad=?");
+    }
+    
     public static PreparedStatement GetRegistrosActuadores(Connection con){
         return getStatement(con, "SELECT * FROM LMDL_BD.registro");
     }
@@ -155,13 +159,18 @@ public class ConexionBD {
                 + "id_habitacion_habitacion=id_habitacion WHERE id_habitacion=?" );
     }
     
-        public static PreparedStatement GetRegistrosEstadisticosHabitacionFecha(Connection con){
+    public static PreparedStatement GetRegistrosEstadisticosHabitacionFecha(Connection con){
         return getStatement(con, "SELECT fecha, hora, valor, tipo FROM LMDL_BD.registro_estadistico "
                 + "INNER JOIN LMDL_BD.sensor on id_sensor_sensor=id_sensor "
                 + "INNER JOIN LMDL_BD.habitacion on id_habitacion_habitacion=id_habitacion "
                 + "INNER JOIN LMDL_BD.sistema_seguridad ON cod_sistema=cod_sistema_sistema_seguridad "
                 + "WHERE cod_sistema=? and fecha>=? and fecha <=?" ); //Desde x fecha hasta y fecha 
         }
+    
+    public static PreparedStatement GetUltimoRegistroSensor(Connection con){
+        return getStatement(con, "SELECT * FROM LMDL_BD.registro_estadistico where"
+                + " id_sensor_sensor=? order by fecha desc limit 1");
+    }
     
     public static PreparedStatement GetRegistrosAlertas(Connection con){
         return getStatement(con, "SELECT id_alerta, fecha, hora, info FROM LMDL_BD.alerta "
@@ -181,11 +190,10 @@ public class ConexionBD {
         return getStatement (con, "SELECT nombre from LMDL_BD.sistema_seguridad inner join LMDL_BD.identificacion ON cod_sistema=cod_sistema_sistema_seguridad where identificacion.nombre=?");
     }
     
+    
     public static PreparedStatement GetHabitacionesSistema(Connection con){
-        return getStatement(con, "SELECT descriptivo from LMDL_BD.habitacion "
-                + "inner join LMDL_BD.sistema_seguridad on habitacion.cod_sistema_sistema_seguridad = sistema_seguridad.cod_sistema "
-                + "inner join LMDL_BD.identificacion on sistema_seguridad.cod_sistema = identificacion.cod_sistema_sistema_seguridad "
-                + "where identificacion.nombre=?");
+        return getStatement(con, "SELECT * FROM LMDL_BD.habitacion WHERE "
+                + "cod_sistema_sistema_seguridad=?");
     }
     
     //Para añadir las alertas con id correlativos

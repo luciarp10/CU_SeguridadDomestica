@@ -5,61 +5,50 @@
  */
 package servlets;
 
-import bbdd.Alerta;
+import bbdd.Identificacion;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import logic.Log;
 import logic.Logic;
-import mqtt.MqttBroker;
-import mqtt.MqttPublisher;
 
 /**
- * Si el usuario está registrado y la contraseña es correcta, devuelve el código del sistema de seguridad
- * del usuario para que todo lo que se le muestre en la aplicación sea en relación con ese sistema. 
+ * Devuelve los objetos Identificacion correspondientes a los usuarios registrados para un sistema. 
+ * El codigo_sistema se pasa como parámetro de la petición. 
  * @author lucyr
  */
-public class InicioSesion extends HttpServlet {
-
-
-    public InicioSesion(){
+public class GetUsuariosSistema extends HttpServlet {
+    public GetUsuariosSistema() {    
         super();
     }
+  
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
-     * Parámetros --> usuario y password
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        Log.log.info("-- Comprobando si usuario y contraseña están registrados --");
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        ArrayList<Identificacion> identificaciones_sistema = new ArrayList<>();
+        Log.log.info("-- Buscando usuarios del sistema de seguridad " + request.getParameter("cod_sistema")+ " --");
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            String usuario = request.getParameter("usuario");
-            String contrasenna= request.getParameter("password");
-            Boolean usuario_registrado = Logic.getContrasena(usuario,contrasenna);
-            if(usuario_registrado){
-                int cod_sistema_seguridad = Logic.getSistemaUsuario(usuario);
-                String jsonSistema = new Gson().toJson(cod_sistema_seguridad);
-                Log.log.info("JSON value => {}", jsonSistema);
-                out.println(jsonSistema);
-            }
-            else{
-                String jsonSistema = new Gson().toJson(-1);
-                Log.log.info("JSON value => {}", jsonSistema);
-                out.println(jsonSistema);
-            }
+            int codigo_sistema = Integer.parseInt(request.getParameter("cod_sistema"));
+            identificaciones_sistema = Logic.getIdentificacionesSistema(codigo_sistema);
             
+            String jsonIdentificaciones = new Gson().toJson(identificaciones_sistema);
+            Log.log.info("JSON value => {}", jsonIdentificaciones);
+            out.println(jsonIdentificaciones);
         }
         catch (NumberFormatException nfe) 
         {
@@ -92,5 +81,15 @@ public class InicioSesion extends HttpServlet {
             throws ServletException, IOException {
         doGet(request, response);
     }
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
 
 }

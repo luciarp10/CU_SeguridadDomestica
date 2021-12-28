@@ -13,6 +13,18 @@
         <servlet-name>InicioSesion</servlet-name>
         <servlet-class>servlets.InicioSesion</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GetUsuariosSistema</servlet-name>
+        <servlet-class>servlets.GetUsuariosSistema</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetHabitacionesSistema</servlet-name>
+        <servlet-class>servlets.GetHabitacionesSistema</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetUltRegistrosEstadisticosHabitacion</servlet-name>
+        <servlet-class>servlets.GetUltRegistrosEstadisticosHabitacion</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ComprobarQR</servlet-name>
         <url-pattern>/ComprobarQR</url-pattern>
@@ -24,6 +36,18 @@
     <servlet-mapping>
         <servlet-name>InicioSesion</servlet-name>
         <url-pattern>/InicioSesion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetUsuariosSistema</servlet-name>
+        <url-pattern>/GetUsuariosSistema</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetHabitacionesSistema</servlet-name>
+        <url-pattern>/GetHabitacionesSistema</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetUltRegistrosEstadisticosHabitacion</servlet-name>
+        <url-pattern>/GetUltRegistrosEstadisticosHabitacion</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>

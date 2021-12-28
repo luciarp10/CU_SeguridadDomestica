@@ -346,6 +346,53 @@ public class Logic
 	}
         return identificaciones;
     }
+    
+    /**
+     * Devuelve las identificaciones que tiene registradas un sistema dado como parámetro
+     * @param codigo_sistema
+     * @return 
+     */
+    public static ArrayList<Identificacion> getIdentificacionesSistema(int codigo_sistema) {
+        ArrayList<Identificacion> identificaciones = new ArrayList<Identificacion>();
+	ConexionBD conector = new ConexionBD();
+	Connection con = null;
+        try
+        {
+            con = conector.obtainConnection(true);
+            Log.log.debug("Database Connected");
+		
+            PreparedStatement ps = ConexionBD.GetIdentificacionesSistema(con);
+            ps.setInt(1, codigo_sistema);
+            Log.log.info("Query=> {}", ps.toString());
+            ResultSet rs = ps.executeQuery();
+            while (rs.next())
+            {
+                Identificacion identificacion = new Identificacion();
+		identificacion.setCodigo_qr(rs.getInt("codigo_qr"));
+                identificacion.setNombre(rs.getString("nombre"));
+                identificacion.setPassword(rs.getString("password"));
+                identificacion.setCod_sistema_sistema_seguridad(rs.getInt("cod_sistema_sistema_seguridad"));
+                identificacion.setAdmin(rs.getBoolean("admin"));
+                identificaciones.add(identificacion);
+            }	
+        } catch (SQLException e)
+	{
+            Log.log.error("Error: {}", e);
+            identificaciones = new ArrayList<Identificacion>();
+	} catch (NullPointerException e)
+        {
+            Log.log.error("Error: {}", e);
+            identificaciones = new ArrayList<Identificacion>();
+        } catch (Exception e)
+        {
+            Log.log.error("Error:{}", e);
+            identificaciones = new ArrayList<Identificacion>();
+        } finally
+        {
+            conector.closeConnection(con);
+	}
+        return identificaciones;
+    }
 
     /**
      * 
@@ -712,6 +759,45 @@ public class Logic
 	}
         return registros;
     }
+    
+    public static Registro_sensor getUltimoRegistroSensor(int id_sensor){
+        Registro_sensor ultimo_registro=new Registro_sensor();
+	ConexionBD conector = new ConexionBD();
+	Connection con = null;
+        try
+        {
+            con = conector.obtainConnection(true);
+            Log.log.debug("Database Connected");
+		
+            PreparedStatement ps = ConexionBD.GetUltimoRegistroSensor(con);
+            ps.setInt(1, id_sensor);
+            Log.log.info("Query=> {}", ps.toString());
+            ResultSet rs = ps.executeQuery();
+            if (rs.next())
+            {
+		ultimo_registro.setFecha(rs.getDate("fecha"));
+                ultimo_registro.setValor(rs.getFloat("valor"));
+                ultimo_registro.setHora(rs.getTimestamp("hora"));
+                ultimo_registro.setId_sensor_sensor(rs.getInt("id_sensor_sensor"));
+            }	
+        } catch (SQLException e)
+	{
+            Log.log.error("Error: {}", e);
+            ultimo_registro = new Registro_sensor();
+        } catch (NullPointerException e)
+        {
+            Log.log.error("Error: {}", e);
+            ultimo_registro = new Registro_sensor();
+        } catch (Exception e)
+        {
+            Log.log.error("Error:{}", e);
+            ultimo_registro = new Registro_sensor();
+        } finally
+        {
+            conector.closeConnection(con);
+	}
+        return ultimo_registro;
+    }
 
         
     /**
@@ -878,7 +964,7 @@ public class Logic
                 habitacion.setN_ventanas(rs.getInt("n_ventanas"));
                 habitacion.setTamanno(rs.getInt("tamanno"));
                 habitacion.setCod_sistema_sistema_seguridad(rs.getInt("cod_sistema_sistema_seguridad"));
-                habitacion.setDescriptivo(rs.getString(rs.getString("descriptivo")));
+                habitacion.setDescriptivo(rs.getString("descriptivo"));
                 habitaciones.add(habitacion);
             }	
         } catch (SQLException e)
@@ -1139,6 +1225,8 @@ public class Logic
             conector.closeConnection(con);
 	}
     }
+
+    
     
 	
 }
