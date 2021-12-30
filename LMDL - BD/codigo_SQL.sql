@@ -82,16 +82,16 @@ CREATE TABLE public.cliente (
 ALTER TABLE public.cliente OWNER TO postgres;
 -- ddl-end --
 
--- object: public.registro | type: TABLE --
--- DROP TABLE IF EXISTS public.registro CASCADE;
-CREATE TABLE public.registro (
+-- object: public.registro_actuador | type: TABLE --
+-- DROP TABLE IF EXISTS public.registro_actuador CASCADE;
+CREATE TABLE public.registro_actuador (
 	hora_on time NOT NULL,
 	fecha_on date NOT NULL,
 	duracion float NOT NULL,
 	id_actuador_actuador integer
 );
 -- ddl-end --
-ALTER TABLE public.registro OWNER TO postgres;
+ALTER TABLE public.registro_actuador OWNER TO postgres;
 -- ddl-end --
 
 -- object: public.sistema_seguridad | type: TABLE --
@@ -172,15 +172,15 @@ ON DELETE SET NULL ON UPDATE CASCADE;
 -- ddl-end --
 
 -- object: actuador_fk | type: CONSTRAINT --
--- ALTER TABLE public.registro DROP CONSTRAINT IF EXISTS actuador_fk CASCADE;
-ALTER TABLE public.registro ADD CONSTRAINT actuador_fk FOREIGN KEY (id_actuador_actuador)
+-- ALTER TABLE public.registro_actuador DROP CONSTRAINT IF EXISTS actuador_fk CASCADE;
+ALTER TABLE public.registro_actuador ADD CONSTRAINT actuador_fk FOREIGN KEY (id_actuador_actuador)
 REFERENCES public.actuador (id_actuador) MATCH FULL
 ON DELETE SET NULL ON UPDATE CASCADE;
 -- ddl-end --
 
--- object: registro_uq | type: CONSTRAINT --
--- ALTER TABLE public.registro DROP CONSTRAINT IF EXISTS registro_uq CASCADE;
-ALTER TABLE public.registro ADD CONSTRAINT registro_uq UNIQUE (id_actuador_actuador);
+-- object: registro_actuador_uq | type: CONSTRAINT --
+-- ALTER TABLE public.registro_actuador DROP CONSTRAINT IF EXISTS registro_actuador_uq CASCADE;
+ALTER TABLE public.registro_actuador ADD CONSTRAINT registro_actuador_uq UNIQUE (id_actuador_actuador);
 -- ddl-end --
 
 -- object: sensor_fk | type: CONSTRAINT --

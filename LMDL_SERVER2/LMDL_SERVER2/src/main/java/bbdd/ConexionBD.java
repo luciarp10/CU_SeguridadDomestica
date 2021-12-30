@@ -127,7 +127,7 @@ public class ConexionBD {
     }
     
     public static PreparedStatement GetRegistrosActuadores(Connection con){
-        return getStatement(con, "SELECT * FROM LMDL_BD.registro");
+        return getStatement(con, "SELECT * FROM LMDL_BD.registro_actuador");
     }
     
     public static PreparedStatement GetRegistrosCamaras(Connection con){
@@ -154,7 +154,7 @@ public class ConexionBD {
     }
     
     public static PreparedStatement GetRegistrosActuadoresHabitacion(Connection con){
-        return getStatement(con,"SELECT hora_on, fecha_on, duracion, id_actuador_actuador FROM LMDL_BD.registro"
+        return getStatement(con,"SELECT hora_on, fecha_on, duracion, id_actuador_actuador FROM LMDL_BD.registro_actuador"
                 + "INNER JOIN LMDL_BD.actuador on id_actuador_actuador=id_actuador INNER JOIN LMDL_BD.habitacion on "
                 + "id_habitacion_habitacion=id_habitacion WHERE id_habitacion=?" );
     }
