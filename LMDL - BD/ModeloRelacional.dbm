@@ -3,7 +3,7 @@
 CAUTION: Do not modify this file unless you know what you are doing.
          Unexpected results may occur if the code is changed deliberately.
 -->
-<dbmodel pgmodeler-ver="0.9.3-beta1" use-changelog="false" last-position="59,0" last-zoom="1" max-obj-count="12"
+<dbmodel pgmodeler-ver="0.9.3-beta1" use-changelog="false" last-position="58,0" last-zoom="1" max-obj-count="12"
 	 default-schema="public" default-owner="postgres">
 <database name="new_database" is-template="false" allow-conns="true">
 </database>
@@ -165,7 +165,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</customidxs>
 </table>
 
-<table name="sistema_seguridad" layer="0" collapse-mode="2" max-obj-count="6" z-value="0">
+<table name="sistema_seguridad" layer="0" collapse-mode="2" max-obj-count="7" z-value="0">
 	<schema name="public"/>
 	<role name="postgres"/>
 	<position x="700" y="80"/>
@@ -180,6 +180,9 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	</column>
 	<column name="contrasenna_acceso" not-null="true">
 		<type name="char" length="4"/>
+	</column>
+	<column name="estado" not-null="true">
+		<type name="boolean" length="0"/>
 	</column>
 	<constraint name="sistema_seguridad_pk" type="pk-constr" table="public.sistema_seguridad">
 		<columns names="cod_sistema" ref-type="src-columns"/>

@@ -36,7 +36,6 @@ CREATE TABLE public.identificacion (
 	password char(20) NOT NULL,
 	nombre char(50) NOT NULL,
 	cod_sistema_sistema_seguridad integer,
-	admin bool NOT NULL,
 	CONSTRAINT identificacion_pk PRIMARY KEY (nombre)
 
 );
@@ -103,6 +102,7 @@ CREATE TABLE public.sistema_seguridad (
 	nombre char(50) NOT NULL,
 	contrasenna_acceso char(4) NOT NULL,
 	id_cliente_cliente integer,
+	estado boolean NOT NULL,
 	CONSTRAINT sistema_seguridad_pk PRIMARY KEY (cod_sistema)
 
 );
