@@ -160,11 +160,10 @@ public class ConexionBD {
     }
     
     public static PreparedStatement GetRegistrosEstadisticosHabitacionFecha(Connection con){
-        return getStatement(con, "SELECT fecha, hora, valor, tipo FROM LMDL_BD.registro_estadistico "
+        return getStatement(con, "SELECT * FROM LMDL_BD.registro_estadistico "
                 + "INNER JOIN LMDL_BD.sensor on id_sensor_sensor=id_sensor "
                 + "INNER JOIN LMDL_BD.habitacion on id_habitacion_habitacion=id_habitacion "
-                + "INNER JOIN LMDL_BD.sistema_seguridad ON cod_sistema=cod_sistema_sistema_seguridad "
-                + "WHERE cod_sistema=? and fecha>=? and fecha <=?" ); //Desde x fecha hasta y fecha 
+                + "WHERE id_habitacion_habitacion=? and fecha>=? and fecha <=?" ); //Desde x fecha hasta y fecha 
         }
     
     public static PreparedStatement GetUltimoRegistroSensor(Connection con){
@@ -173,7 +172,7 @@ public class ConexionBD {
     }
     
     public static PreparedStatement GetRegistrosAlertas(Connection con){
-        return getStatement(con, "SELECT id_alerta, fecha, hora, info FROM LMDL_BD.alerta "
+        return getStatement(con, "SELECT * FROM LMDL_BD.alerta "
                 + "INNER JOIN LMDL_BD.sistema_seguridad on cod_sistema=cod_sistema_sistema_seguridad where cod_sistema=?");
     }
     
@@ -223,5 +222,12 @@ public class ConexionBD {
     public static PreparedStatement InsertarAlerta(Connection con){
         return getStatement(con, "INSERT INTO LMDL_BD.alerta (id_alerta, fecha, hora, info, cod_sistema_sistema_seguridad) VALUES (?,?,?,?,?)");
     }
+    
+    public static PreparedStatement CambiarEstadoSistema(Connection con){
+        return getStatement(con, "UPDATE LMDL_BD.sistema_seguridad set estado=? where cod_sistema=?");
+    }
         
+    public static PreparedStatement GetEstadoSistema(Connection con){
+        return getStatement(con, "SELECT estado from LMDL_BD.sistema_seguridad where cod_sistema=?");
+    }
 }

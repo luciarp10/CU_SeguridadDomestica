@@ -57,6 +57,7 @@ public class Logic
                 sistema.setCod_sistema(Integer.parseInt(rs.getString("cod_sistema")));
                 sistema.setDireccion(rs.getString("direccion"));
                 sistema.setId_cliente_cliente(Integer.parseInt(rs.getString("id_cliente_cliente")));
+                sistema.setEstado(rs.getBoolean("estado"));
                 sistemas.add(sistema);
             }	
 	} catch (SQLException e)
@@ -718,7 +719,7 @@ public class Logic
      * @param cod_sistema
      * @return ArrayList<Registro_sensor>
      */
-    public static ArrayList<Registro_sensor> getRegistrosSensoresHabitacionFecha(int id_habitacion, String fecha){
+    public static ArrayList<Registro_sensor> getRegistrosSensoresHabitacionFecha(int id_habitacion, String fecha_ini, String fecha_fin){
         ArrayList<Registro_sensor> registros = new ArrayList<Registro_sensor>();
 	ConexionBD conector = new ConexionBD();
 	Connection con = null;
@@ -727,9 +728,10 @@ public class Logic
             con = conector.obtainConnection(true);
             Log.log.debug("Database Connected");
 		
-            PreparedStatement ps = ConexionBD.GetRegistrosEstadisticosHabitacion(con);
+            PreparedStatement ps = ConexionBD.GetRegistrosEstadisticosHabitacionFecha(con);
             ps.setInt(1, id_habitacion);
-            ps.setDate(2, java.sql.Date.valueOf(fecha));
+            ps.setDate(2, java.sql.Date.valueOf(fecha_ini));
+            ps.setDate(3, java.sql.Date.valueOf(fecha_fin));
             Log.log.info("Query=> {}", ps.toString());
             ResultSet rs = ps.executeQuery();
             while (rs.next())
@@ -825,7 +827,7 @@ public class Logic
                 alerta.setFecha(rs.getDate("fecha"));
                 alerta.setHora(rs.getTimestamp("hora"));
                 alerta.setInfo(rs.getString("info"));
-                alerta.setCod_sistema_sistema_seguridad(rs.getInt("cpd_sistema_sistema_seguridad"));
+                alerta.setCod_sistema_sistema_seguridad(rs.getInt("cod_sistema_sistema_seguridad"));
 
                 registros_alertas.add(alerta);
             }	
@@ -1196,7 +1198,7 @@ public class Logic
      * @param alerta_nueva
      */
     //Ya veremos si es mejor con Topic como los registros de sensores y actuadores
-        public static void insertarAlerta(Alerta alerta_nueva){ 
+    public static void insertarAlerta(Alerta alerta_nueva){ 
         ConexionBD conector = new ConexionBD();
 	Connection con = null;
         try
@@ -1226,6 +1228,79 @@ public class Logic
 	}
     }
 
+    /**
+     * Cambiar el estado del sistema. 0=desactivado y 1=activado
+     * @param estado
+     * @param cod_sistema 
+     */
+    public static void cambiarEstadoSistema(int estado, int cod_sistema){ 
+        ConexionBD conector = new ConexionBD();
+	Connection con = null;
+        try
+	{
+            con = conector.obtainConnection(true);
+            Log.log.debug("Database Connected");
+            PreparedStatement ps = ConexionBD.CambiarEstadoSistema(con);
+            ps.setInt(1, estado);
+            ps.setInt(2, cod_sistema);
+            Log.log.info("Query=> {}", ps.toString());
+            ps.executeUpdate();            	
+	} catch (SQLException e)
+	{
+            Log.log.error("Error: {}", e);
+	} catch (NullPointerException e)
+	{
+            Log.log.error("Error: {}", e);
+	} catch (Exception e)
+	{
+            Log.log.error("Error:{}", e);
+        } finally
+        {
+            conector.closeConnection(con);
+	}
+    }
+    
+    public static int getEstadoSistema(int cod_sistema){
+        boolean estado=false;
+        ConexionBD conector = new ConexionBD();
+	Connection con = null;
+        try
+	{
+            con = conector.obtainConnection(true);
+            Log.log.debug("Database Connected");
+            PreparedStatement ps = ConexionBD.GetEstadoSistema(con);
+            ps.setInt(1, cod_sistema);
+            Log.log.info("Query=> {}", ps.toString());
+            ResultSet rs = ps.executeQuery();  
+            if (rs.next())
+            {
+                estado=rs.getBoolean("estado");
+                
+            }	
+        } catch (SQLException e)
+	{
+            Log.log.error("Error: {}", e);
+            return -1;
+	} catch (NullPointerException e)
+	{
+            Log.log.error("Error: {}", e);
+            return -1;
+	} catch (Exception e)
+	{
+            Log.log.error("Error:{}", e);
+            return -1;
+        } finally
+        {
+            conector.closeConnection(con);
+	}
+        if(estado==true){
+            return 1;
+        }
+        else {
+            return 0;
+        }
+        
+    }
     
     
 	

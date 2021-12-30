@@ -25,6 +25,22 @@
         <servlet-name>GetUltRegistrosEstadisticosHabitacion</servlet-name>
         <servlet-class>servlets.GetUltRegistrosEstadisticosHabitacion</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GetRegistrosSensoresHabitacionFecha</servlet-name>
+        <servlet-class>servlets.GetRegistrosSensoresHabitacionFecha</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetRegistrosAlertas</servlet-name>
+        <servlet-class>servlets.GetRegistrosAlertas</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CambiarEstadoAlarma</servlet-name>
+        <servlet-class>servlets.CambiarEstadoAlarma</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetEstadoAlarma</servlet-name>
+        <servlet-class>servlets.GetEstadoAlarma</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ComprobarQR</servlet-name>
         <url-pattern>/ComprobarQR</url-pattern>
@@ -48,6 +64,22 @@
     <servlet-mapping>
         <servlet-name>GetUltRegistrosEstadisticosHabitacion</servlet-name>
         <url-pattern>/GetUltRegistrosEstadisticosHabitacion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetRegistrosSensoresHabitacionFecha</servlet-name>
+        <url-pattern>/GetRegistrosSensoresHabitacionFecha</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetRegistrosAlertas</servlet-name>
+        <url-pattern>/GetRegistrosAlertas</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CambiarEstadoAlarma</servlet-name>
+        <url-pattern>/CambiarEstadoAlarma</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetEstadoAlarma</servlet-name>
+        <url-pattern>/GetEstadoAlarma</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>

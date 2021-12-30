@@ -5,12 +5,14 @@ public class Sistema_seguridad {
     private String direccion;
     private String nombre;
     private int id_cliente_cliente;
+    private boolean estado; 
 
-    public Sistema_seguridad(int cod_sistema, String direccion, String nombre, int id_cliente_cliente) {
+    public Sistema_seguridad(int cod_sistema, String direccion, String nombre, int id_cliente_cliente, boolean estado) {
         this.cod_sistema = cod_sistema;
         this.direccion = direccion;
         this.nombre = nombre;
         this.id_cliente_cliente = id_cliente_cliente;
+        this.estado=estado; 
     }
 
     public Sistema_seguridad() {
@@ -49,4 +51,14 @@ public class Sistema_seguridad {
     public void setId_cliente_cliente(int id_cliente_cliente) {
         this.id_cliente_cliente = id_cliente_cliente;
     }
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+    
+    
 }
