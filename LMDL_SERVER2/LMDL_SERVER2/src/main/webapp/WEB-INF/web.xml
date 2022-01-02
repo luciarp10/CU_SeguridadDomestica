@@ -61,6 +61,22 @@
         <servlet-name>InsertarUsuarioSistema</servlet-name>
         <servlet-class>servlets.InsertarUsuarioSistema</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GetRegistrosImagenes</servlet-name>
+        <servlet-class>servlets.GetRegistrosImagenes</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetImagen</servlet-name>
+        <servlet-class>servlets.GetImagen</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>HacerFoto</servlet-name>
+        <servlet-class>servlets.HacerFoto</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetCamarasDisponibles</servlet-name>
+        <servlet-class>servlets.GetCamarasDisponibles</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ComprobarQR</servlet-name>
         <url-pattern>/ComprobarQR</url-pattern>
@@ -120,6 +136,22 @@
     <servlet-mapping>
         <servlet-name>InsertarUsuarioSistema</servlet-name>
         <url-pattern>/InsertarUsuarioSistema</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetRegistrosImagenes</servlet-name>
+        <url-pattern>/GetRegistrosImagenes</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetImagen</servlet-name>
+        <url-pattern>/GetImagen</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HacerFoto</servlet-name>
+        <url-pattern>/HacerFoto</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetCamarasDisponibles</servlet-name>
+        <url-pattern>/GetCamarasDisponibles</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>

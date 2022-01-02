@@ -52,4 +52,10 @@ public class Registro_camara {
     public void setId_sensor_sensor(int id_sensor_sensor) {
         this.id_sensor_sensor = id_sensor_sensor;
     }
+    
+    public String descargarFoto(String enlace){
+        String ruta="";
+        
+        return ruta;
+    }
 }

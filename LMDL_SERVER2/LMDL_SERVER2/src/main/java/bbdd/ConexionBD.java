@@ -240,4 +240,14 @@ public class ConexionBD {
     public static PreparedStatement BorrarIdentificacion (Connection con){
         return getStatement(con, "DELETE FROM LMDL_BD.identificacion WHERE nombre=?");
     }
+    
+    public static PreparedStatement GetCamarasDisponibles (Connection con){
+        return getStatement (con, "SELECT descriptivo, id_sensor FROM LMDL_BD.sensor INNER JOIN LMDL_BD.habitacion ON "
+                + "id_habitacion = id_habitacion_habitacion INNER JOIN LMDL_BD.sistema_seguridad ON cod_sistema=cod_sistema_sistema_seguridad"
+                + " WHERE cod_sistema=? AND tipo LIKE \"%Camara%\"");
+    }
+    
+    public static PreparedStatement InsertarRegistroCamara (Connection con){
+        return getStatement(con, "INSERT INTO LMDL_BD.registro_camara VALUES (?,?,?,?)");
+    }
 }

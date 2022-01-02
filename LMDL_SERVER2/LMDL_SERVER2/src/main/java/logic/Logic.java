@@ -1362,5 +1362,74 @@ public class Logic
             conector.closeConnection(con);
 	}
     }
+    
+    public static ArrayList<String> getCamarasDisponibles (int cod_sistema){
+        ArrayList<String> camaras=new ArrayList<>();
+        String camara;
+        ConexionBD conector = new ConexionBD();
+	Connection con = null;
+        try
+	{
+            con = conector.obtainConnection(true);
+            Log.log.debug("Database Connected");
+            PreparedStatement ps = ConexionBD.GetCamarasDisponibles(con);
+            ps.setInt(1, cod_sistema);
+            Log.log.info("Query=> {}", ps.toString());
+            ResultSet rs = ps.executeQuery();  
+            while (rs.next())
+            {
+                camara="";
+                camara=camara+rs.getString("descriptivo")+" id_camara: "+rs.getInt("id_sensor");
+                camaras.add(camara);
+                
+            }	
+        } catch (SQLException e)
+	{
+            Log.log.error("Error: {}", e);
+            return camaras=new ArrayList<>();
+	} catch (NullPointerException e)
+	{
+            Log.log.error("Error: {}", e);
+            return camaras=new ArrayList<>();
+	} catch (Exception e)
+	{
+            Log.log.error("Error:{}", e);
+            return camaras=new ArrayList<>();
+        } finally
+        {
+            conector.closeConnection(con);
+	}
+
+        return camaras; 
+    }
+    
+    public static void insertarRegistroCamara(Registro_camara nuevo_registro){
+        ConexionBD conector = new ConexionBD();
+	Connection con = null;
+        try
+	{
+            con = conector.obtainConnection(true);
+            Log.log.debug("Database Connected");
+            PreparedStatement ps = ConexionBD.InsertarRegistroCamara(con);
+            ps.setDate(1, java.sql.Date.valueOf(LocalDate.now()));
+            ps.setString(2, nuevo_registro.getEnlace_foto());
+            ps.setTime(3, java.sql.Time.valueOf(LocalTime.now(ZoneId.of("Europe/Madrid"))));
+            ps.setInt(4, nuevo_registro.getId_sensor_sensor());
+            Log.log.info("Query=> {}", ps.toString());
+            ps.executeUpdate();            	
+	} catch (SQLException e)
+	{
+            Log.log.error("Error: {}", e);
+	} catch (NullPointerException e)
+	{
+            Log.log.error("Error: {}", e);
+	} catch (Exception e)
+	{
+            Log.log.error("Error:{}", e);
+        } finally
+        {
+            conector.closeConnection(con);
+	}	
+    }
 	
 }
