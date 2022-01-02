@@ -5,6 +5,9 @@
  */
 package servlets;
 
+import bbdd.Actuador;
+import bbdd.Registro_actuador;
+import bbdd.Sensor;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,15 +20,16 @@ import logic.Log;
 import logic.Logic;
 
 /**
- * Dado el código del sistema como parámetro, devuelve 1 si está activado y 0 si está desactivado -1 si error. 
+ * Devuelve un json con los actuadores del sistema y otro con los registros de actuadores (simulación de presencia) 
  * @author lucyr
  */
-public class GetEstadoAlarma extends HttpServlet {
+public class GetRegistrosActuadores extends HttpServlet {
 
-    public GetEstadoAlarma() {
+    public GetRegistrosActuadores() {
         super();
     }
-    
+
+
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -39,15 +43,21 @@ public class GetEstadoAlarma extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int estado; 
-        Log.log.info("-- Comprobando estado del sistema de seguridad "+request.getParameter("cod_sistema")+" --");
+        ArrayList<Actuador> actuadores= new ArrayList<>();
+        ArrayList<Registro_actuador> registros_actuadores = new ArrayList<>();
+        Log.log.info("-- Buscando registros de simulaciones del sistema " + request.getParameter("cod_sistema")+" --");
+        
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            estado=Logic.getEstadoSistema(Integer.parseInt(request.getParameter("cod_sistema")));
-            String jsonEstado = new Gson().toJson(estado);
-            Log.log.info("JSON value => {}", jsonEstado);
-            out.println(jsonEstado);
+            actuadores=Logic.getActuadores(Integer.parseInt(request.getParameter("cod_sistema")));
+            registros_actuadores=(Logic.getRegistrosActuadoresSistema(Integer.parseInt(request.getParameter("cod_sistema"))));
+            String jsonActuadores = new Gson().toJson(actuadores);
+            String jsonRegistros = new Gson().toJson(registros_actuadores);
+            Log.log.info("JSON value => {}", jsonActuadores);
+            Log.log.info("JSON value => {}", jsonRegistros);
+            out.println(jsonActuadores);
+            out.println(jsonRegistros);
         }
         catch (NumberFormatException nfe) 
         {
@@ -83,6 +93,7 @@ public class GetEstadoAlarma extends HttpServlet {
 
     /**
      * Returns a short description of the servlet.
+     *
      * @return a String containing servlet description
      */
     @Override

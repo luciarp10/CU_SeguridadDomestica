@@ -36,6 +36,7 @@ CREATE TABLE public.identificacion (
 	password char(20) NOT NULL,
 	nombre char(50) NOT NULL,
 	cod_sistema_sistema_seguridad integer,
+	admin boolean NOT NULL,
 	CONSTRAINT identificacion_pk PRIMARY KEY (nombre)
 
 );

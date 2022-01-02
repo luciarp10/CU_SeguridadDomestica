@@ -5,27 +5,30 @@
  */
 package servlets;
 
+import bbdd.Alerta;
+import bbdd.Registro_actuador;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import logic.Log;
 import logic.Logic;
+import mqtt.MqttBroker;
+import mqtt.MqttPublisher;
 
 /**
- * Dado el código del sistema como parámetro, devuelve 1 si está activado y 0 si está desactivado -1 si error. 
+ * Dados como parámetros el codigo del sistema, el usuario que activa el sensor, el sensor que se quiere activar y el tiempo en segundos,
+ * se envía un topic al sensor a través de mqtt y se registra la activación en la base de datos en la tabla alerta y en registro_actuador. 
  * @author lucyr
  */
-public class GetEstadoAlarma extends HttpServlet {
+public class RegistrarSimulacion extends HttpServlet {
 
-    public GetEstadoAlarma() {
+    public RegistrarSimulacion() {
         super();
     }
-    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -39,15 +42,26 @@ public class GetEstadoAlarma extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int estado; 
-        Log.log.info("-- Comprobando estado del sistema de seguridad "+request.getParameter("cod_sistema")+" --");
+        Log.log.info("-- Registrando simulación de presencia en el sistema " + request.getParameter("cod_sistema")+" --");
         response.setContentType("text/html;charset=UTF-8");
+        Alerta alerta_nueva=new Alerta();
+        Registro_actuador registro_nuevo = new Registro_actuador();
         PrintWriter out = response.getWriter();
-        try {
-            estado=Logic.getEstadoSistema(Integer.parseInt(request.getParameter("cod_sistema")));
-            String jsonEstado = new Gson().toJson(estado);
-            Log.log.info("JSON value => {}", jsonEstado);
-            out.println(jsonEstado);
+        try {           
+            //Registrar alerta en la base de datos
+            Log.log.info("Insertar en alerta registro activación de simulación de presencia por el usuario: "+request.getParameter("usuario"));
+            alerta_nueva.setId_alerta(Logic.getUltimaAlerta(Integer.parseInt(request.getParameter("cod_sistema")))+1);
+            alerta_nueva.setInfo("Usuario "+ request.getParameter("usuario") + " activa sensor de presencia " + request.getParameter("id_actuador") + "durante " +request.getParameter("tiempo")+ " segundos");
+            alerta_nueva.setCod_sistema_sistema_seguridad(Integer.parseInt(request.getParameter("cod_sistema")));
+            Logic.insertarAlerta(alerta_nueva);
+            
+            //Publicar topic para que el sensor se active 
+            MqttBroker broker = new MqttBroker();
+            MqttPublisher.publish(broker, "SistSeg"+request.getParameter("cod_sistema")+"/Actuador"+request.getParameter("id_actuador"), request.getParameter("tiempo"));
+
+            String json = new Gson().toJson(1);
+            Log.log.info("JSON value => {}", json);
+            out.println(json);
         }
         catch (NumberFormatException nfe) 
         {

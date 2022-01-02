@@ -108,7 +108,8 @@ public class ConexionBD {
 
     
     public static PreparedStatement GetActuadores(Connection con){
-        return getStatement(con, "SELECT * FROM LMDL_BD.actuador");
+        return getStatement(con, "SELECT * FROM LMDL_BD.actuador inner join LMDL_BD.habitacion on id_habitacion_habitacion=id_habitacion inner join "
+                + "LMDL_BD.sistema_seguridad on cod_sistema=cod_sistema_sistema_seguridad WHERE cod_sistema=?");
     }
     
     public static PreparedStatement GetClientes(Connection con){
@@ -153,14 +154,15 @@ public class ConexionBD {
                 + "id_habitacion_habitacion=id_habitacion WHERE id_habitacion=?");
     }
     
-    public static PreparedStatement GetRegistrosActuadoresHabitacion(Connection con){
-        return getStatement(con,"SELECT hora_on, fecha_on, duracion, id_actuador_actuador FROM LMDL_BD.registro_actuador"
+    public static PreparedStatement GetRegistrosActuadoresSistema(Connection con){
+        return getStatement(con,"SELECT hora_on, fecha_on, duracion, id_actuador_actuador FROM LMDL_BD.registro_actuador "
                 + "INNER JOIN LMDL_BD.actuador on id_actuador_actuador=id_actuador INNER JOIN LMDL_BD.habitacion on "
-                + "id_habitacion_habitacion=id_habitacion WHERE id_habitacion=?" );
+                + "id_habitacion_habitacion=id_habitacion  INNER JOIN "
+                + "LMDL_BD.sistema_seguridad on cod_sistema = cod_sistema_sistema_seguridad WHERE cod_sistema=?" );
     }
     
     public static PreparedStatement GetRegistrosEstadisticosHabitacionFecha(Connection con){
-        return getStatement(con, "SELECT * FROM LMDL_BD.registro_estadistico "
+        return getStatement(con, "SELECT fecha, valor, hora, id_sensor_sensor FROM LMDL_BD.registro_estadistico "
                 + "INNER JOIN LMDL_BD.sensor on id_sensor_sensor=id_sensor "
                 + "INNER JOIN LMDL_BD.habitacion on id_habitacion_habitacion=id_habitacion "
                 + "WHERE id_habitacion_habitacion=? and fecha>=? and fecha <=?" ); //Desde x fecha hasta y fecha 
@@ -229,5 +231,13 @@ public class ConexionBD {
         
     public static PreparedStatement GetEstadoSistema(Connection con){
         return getStatement(con, "SELECT estado from LMDL_BD.sistema_seguridad where cod_sistema=?");
+    }
+    
+    public static PreparedStatement InsertarIdentificacion(Connection con){
+        return getStatement(con, "INSERT INTO LMDL_BD.identificacion VALUES (?,?,?,?,?)");
+    }
+    
+    public static PreparedStatement BorrarIdentificacion (Connection con){
+        return getStatement(con, "DELETE FROM LMDL_BD.identificacion WHERE nombre=?");
     }
 }

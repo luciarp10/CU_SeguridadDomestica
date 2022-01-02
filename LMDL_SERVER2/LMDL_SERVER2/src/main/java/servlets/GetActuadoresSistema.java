@@ -5,6 +5,7 @@
  */
 package servlets;
 
+import bbdd.Actuador;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,16 +18,15 @@ import logic.Log;
 import logic.Logic;
 
 /**
- * Dado el código del sistema como parámetro, devuelve 1 si está activado y 0 si está desactivado -1 si error. 
+ * Dado como parámetro el código del sistema de seguridad, devuelve todos sus actuadores
  * @author lucyr
  */
-public class GetEstadoAlarma extends HttpServlet {
+public class GetActuadoresSistema extends HttpServlet {
 
-    public GetEstadoAlarma() {
+    public GetActuadoresSistema() {
         super();
     }
     
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -39,15 +39,16 @@ public class GetEstadoAlarma extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int estado; 
-        Log.log.info("-- Comprobando estado del sistema de seguridad "+request.getParameter("cod_sistema")+" --");
+        ArrayList<Actuador> actuadores = new ArrayList<>();
+        Log.log.info("-- Buscando actuadores del sistema de seguridad" + request.getParameter("cod_sistema") + " --");
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            estado=Logic.getEstadoSistema(Integer.parseInt(request.getParameter("cod_sistema")));
-            String jsonEstado = new Gson().toJson(estado);
-            Log.log.info("JSON value => {}", jsonEstado);
-            out.println(jsonEstado);
+            actuadores =Logic.getActuadores(Integer.parseInt(request.getParameter("cod_sistema")));
+        
+            String jsonActuadores = new Gson().toJson(actuadores);
+            Log.log.info("JSON value => {}", jsonActuadores);
+            out.println(jsonActuadores);
         }
         catch (NumberFormatException nfe) 
         {
@@ -83,6 +84,7 @@ public class GetEstadoAlarma extends HttpServlet {
 
     /**
      * Returns a short description of the servlet.
+     *
      * @return a String containing servlet description
      */
     @Override

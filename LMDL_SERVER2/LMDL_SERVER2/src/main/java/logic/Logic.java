@@ -177,7 +177,7 @@ public class Logic
     /**
      * @return lista de actuadores de la base de datos
      */
-    public static ArrayList<Actuador> getActuadores(){
+    public static ArrayList<Actuador> getActuadores(int cod_sistema){
         ArrayList<Actuador> actuadores = new ArrayList<Actuador>();
 	ConexionBD conector = new ConexionBD();
 	Connection con = null;
@@ -187,6 +187,7 @@ public class Logic
             Log.log.debug("Database Connected");
 		
             PreparedStatement ps = ConexionBD.GetActuadores(con);
+            ps.setInt(1, cod_sistema);
             Log.log.info("Query=> {}", ps.toString());
             ResultSet rs = ps.executeQuery();
             while (rs.next())
@@ -671,7 +672,7 @@ public class Logic
      * @param id_habitacion
      * @return ArrayList<Registro_actuador>
      */
-    public static ArrayList<Registro_actuador> getRegistrosActuadoresHabitacion(int id_habitacion){
+    public static ArrayList<Registro_actuador> getRegistrosActuadoresSistema(int cod_sistema){
         ArrayList<Registro_actuador> registros = new ArrayList<Registro_actuador>();
 	ConexionBD conector = new ConexionBD();
 	Connection con = null;
@@ -680,8 +681,8 @@ public class Logic
             con = conector.obtainConnection(true);
             Log.log.debug("Database Connected");
 		
-            PreparedStatement ps = ConexionBD.GetRegistrosActuadoresHabitacion(con);
-            ps.setInt(1, id_habitacion);
+            PreparedStatement ps = ConexionBD.GetRegistrosActuadoresSistema(con);
+            ps.setInt(1, cod_sistema);
             Log.log.info("Query=> {}", ps.toString());
             ResultSet rs = ps.executeQuery();
             while (rs.next())
@@ -1197,7 +1198,7 @@ public class Logic
      * Insertar una alerta nueva en el sistema
      * @param alerta_nueva
      */
-    //Ya veremos si es mejor con Topic como los registros de sensores y actuadores
+    
     public static void insertarAlerta(Alerta alerta_nueva){ 
         ConexionBD conector = new ConexionBD();
 	Connection con = null;
@@ -1302,6 +1303,64 @@ public class Logic
         
     }
     
+    /**
+     * Dado un objeto de la clase Identificacion, insertarlo en la base de datos
+     * @param identificacion_nueva 
+     */
+    public static void insertarIdentificacion(Identificacion identificacion_nueva){ 
+        ConexionBD conector = new ConexionBD();
+	Connection con = null;
+        try
+	{
+            con = conector.obtainConnection(true);
+            Log.log.debug("Database Connected");
+            PreparedStatement ps = ConexionBD.InsertarIdentificacion(con);
+            ps.setInt(1, identificacion_nueva.getCodigo_qr());
+            ps.setString(2, identificacion_nueva.getPassword());
+            ps.setString(3, identificacion_nueva.getNombre());
+            ps.setInt(4, identificacion_nueva.getCod_sistema_sistema_seguridad());
+            ps.setBoolean(5, identificacion_nueva.isAdmin());
+            Log.log.info("Query=> {}", ps.toString());
+            ps.executeUpdate();            	
+	} catch (SQLException e)
+	{
+            Log.log.error("Error: {}", e);
+	} catch (NullPointerException e)
+	{
+            Log.log.error("Error: {}", e);
+	} catch (Exception e)
+	{
+            Log.log.error("Error:{}", e);
+        } finally
+        {
+            conector.closeConnection(con);
+	}
+    }
     
+    public static void borrarIdentificacion(String usuario){
+        ConexionBD conector = new ConexionBD();
+	Connection con = null;
+        try
+	{
+            con = conector.obtainConnection(true);
+            Log.log.debug("Database Connected");
+            PreparedStatement ps = ConexionBD.BorrarIdentificacion(con);
+            ps.setString(1, usuario);
+            Log.log.info("Query=> {}", ps.toString());
+            ps.executeUpdate();            	
+	} catch (SQLException e)
+	{
+            Log.log.error("Error: {}", e);
+	} catch (NullPointerException e)
+	{
+            Log.log.error("Error: {}", e);
+	} catch (Exception e)
+	{
+            Log.log.error("Error:{}", e);
+        } finally
+        {
+            conector.closeConnection(con);
+	}
+    }
 	
 }

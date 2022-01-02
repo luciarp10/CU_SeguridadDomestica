@@ -5,6 +5,8 @@
  */
 package servlets;
 
+
+import bbdd.Identificacion;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,16 +19,16 @@ import logic.Log;
 import logic.Logic;
 
 /**
- * Dado el código del sistema como parámetro, devuelve 1 si está activado y 0 si está desactivado -1 si error. 
+ * Dados los datos del usuario y el código del sistema, insertarlos en la base de datos. 
  * @author lucyr
  */
-public class GetEstadoAlarma extends HttpServlet {
+public class InsertarUsuarioSistema extends HttpServlet {
 
-    public GetEstadoAlarma() {
+    public InsertarUsuarioSistema() {
         super();
     }
-    
 
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -39,15 +41,36 @@ public class GetEstadoAlarma extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int estado; 
-        Log.log.info("-- Comprobando estado del sistema de seguridad "+request.getParameter("cod_sistema")+" --");
+        Log.log.info("-- Creando nueva identificacion en el sistema " + request.getParameter("cod_sistema")+" --");
         response.setContentType("text/html;charset=UTF-8");
+        Identificacion usuario_nuevo = new Identificacion();
         PrintWriter out = response.getWriter();
-        try {
-            estado=Logic.getEstadoSistema(Integer.parseInt(request.getParameter("cod_sistema")));
-            String jsonEstado = new Gson().toJson(estado);
-            Log.log.info("JSON value => {}", jsonEstado);
-            out.println(jsonEstado);
+        try {           
+            //Registrar usuario en la base de datos si no existe ya
+            ArrayList<Identificacion> identificaciones_sistema = Logic.getIdentificacionesSistema(Integer.parseInt(request.getParameter("cod_sistema")));
+            ArrayList<String> nombres_de_usuario = new ArrayList<>();
+            for (int i=0; i<identificaciones_sistema.size();i++){
+                nombres_de_usuario.add(identificaciones_sistema.get(i).getNombre());
+            }
+            if (nombres_de_usuario.contains(request.getParameter("nombre_usuario"))){
+                String json = new Gson().toJson(-1);
+                Log.log.info("-- Error al registrar la identificación, el nombre de usuario " + request.getParameter("nombre_usuario")+ " ya existe --");
+                Log.log.info("JSON value => {}", json);
+                out.println(json);
+            }
+            else{
+                usuario_nuevo.setCodigo_qr(Integer.parseInt(request.getParameter("cod_qr")));
+                usuario_nuevo.setNombre(request.getParameter("nombre_usuario"));
+                usuario_nuevo.setPassword(request.getParameter("password"));
+                usuario_nuevo.setCod_sistema_sistema_seguridad(Integer.parseInt(request.getParameter("cod_sistema")));
+                usuario_nuevo.setAdmin(false); //solo se pueden registrar administradores cuando se da de alta el sistema (se crea una identificación para el cliente principal, ese es el administrador)
+                Logic.insertarIdentificacion(usuario_nuevo);
+                String json = new Gson().toJson(1);
+                Log.log.info("JSON value => {}", json);
+                out.println(json);
+            }
+
+           
         }
         catch (NumberFormatException nfe) 
         {
@@ -83,6 +106,7 @@ public class GetEstadoAlarma extends HttpServlet {
 
     /**
      * Returns a short description of the servlet.
+     *
      * @return a String containing servlet description
      */
     @Override

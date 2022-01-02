@@ -5,6 +5,7 @@
  */
 package servlets;
 
+import bbdd.Identificacion;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,15 +18,16 @@ import logic.Log;
 import logic.Logic;
 
 /**
- * Dado el código del sistema como parámetro, devuelve 1 si está activado y 0 si está desactivado -1 si error. 
+ * Dado un nombre de usuario, se elimina de la base de datos. No se comprueba que esté porque al hacer un getUsuariosSistema previamente desde
+ * la app, el usuario que seleccione para borrar siempre va a estar. 
  * @author lucyr
  */
-public class GetEstadoAlarma extends HttpServlet {
 
-    public GetEstadoAlarma() {
+public class BorrarUsuarioSistema extends HttpServlet {
+
+    public BorrarUsuarioSistema() {
         super();
     }
-    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -39,15 +41,18 @@ public class GetEstadoAlarma extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int estado; 
-        Log.log.info("-- Comprobando estado del sistema de seguridad "+request.getParameter("cod_sistema")+" --");
+        Log.log.info("-- Borrando identificacion del sistema " + request.getParameter("cod_sistema")+" --");
         response.setContentType("text/html;charset=UTF-8");
+        Identificacion usuario_nuevo = new Identificacion();
         PrintWriter out = response.getWriter();
-        try {
-            estado=Logic.getEstadoSistema(Integer.parseInt(request.getParameter("cod_sistema")));
-            String jsonEstado = new Gson().toJson(estado);
-            Log.log.info("JSON value => {}", jsonEstado);
-            out.println(jsonEstado);
+        try {           
+            
+            Logic.borrarIdentificacion(request.getParameter("nombre_usuario"));
+            String json = new Gson().toJson(1);
+            Log.log.info("Se ha borrado la identificación con nombre: "+ request.getParameter("nombre_usuario")+" de la base de datos.");
+            Log.log.info("JSON value => {}", json);
+            out.println(json);
+           
         }
         catch (NumberFormatException nfe) 
         {
@@ -83,6 +88,7 @@ public class GetEstadoAlarma extends HttpServlet {
 
     /**
      * Returns a short description of the servlet.
+     *
      * @return a String containing servlet description
      */
     @Override

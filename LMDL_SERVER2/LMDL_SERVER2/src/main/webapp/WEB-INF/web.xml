@@ -41,6 +41,26 @@
         <servlet-name>GetEstadoAlarma</servlet-name>
         <servlet-class>servlets.GetEstadoAlarma</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GetRegistrosActuadores</servlet-name>
+        <servlet-class>servlets.GetRegistrosActuadores</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RegistrarSimulacion</servlet-name>
+        <servlet-class>servlets.RegistrarSimulacion</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GetActuadoresSistema</servlet-name>
+        <servlet-class>servlets.GetActuadoresSistema</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BorrarUsuarioSistema</servlet-name>
+        <servlet-class>servlets.BorrarUsuarioSistema</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>InsertarUsuarioSistema</servlet-name>
+        <servlet-class>servlets.InsertarUsuarioSistema</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ComprobarQR</servlet-name>
         <url-pattern>/ComprobarQR</url-pattern>
@@ -80,6 +100,26 @@
     <servlet-mapping>
         <servlet-name>GetEstadoAlarma</servlet-name>
         <url-pattern>/GetEstadoAlarma</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetRegistrosActuadores</servlet-name>
+        <url-pattern>/GetRegistrosActuadores</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegistrarSimulacion</servlet-name>
+        <url-pattern>/RegistrarSimulacion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetActuadoresSistema</servlet-name>
+        <url-pattern>/GetActuadoresSistema</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BorrarUsuarioSistema</servlet-name>
+        <url-pattern>/BorrarUsuarioSistema</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InsertarUsuarioSistema</servlet-name>
+        <url-pattern>/InsertarUsuarioSistema</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
