@@ -484,6 +484,54 @@ public class Logic
         return registros_camaras;
     }
     
+        /**
+     * Devuelve todos los registros de cámara de la base de datos de una fecha dada y de un sistema concreto
+     * @param fecha
+     * @param cod_sistema
+     * @return arraylist<Registro_camara>
+     */
+    public static ArrayList<Registro_camara> getRegistrosCamarasFecha(String fecha, int cod_sistema){
+        ArrayList<Registro_camara> registros_camaras = new ArrayList<Registro_camara>();
+	ConexionBD conector = new ConexionBD();
+	Connection con = null;
+        try
+        {
+            con = conector.obtainConnection(true);
+            Log.log.debug("Database Connected");
+		
+            PreparedStatement ps = ConexionBD.GetRegistrosCamarasFecha(con);
+            ps.setDate(1, java.sql.Date.valueOf(fecha));
+            ps.setInt(2, cod_sistema);
+            Log.log.info("Query=> {}", ps.toString());
+            ResultSet rs = ps.executeQuery();
+            while (rs.next())
+            {
+                Registro_camara registroCam = new Registro_camara();
+		registroCam.setFecha(rs.getDate("fecha"));
+                registroCam.setEnlace_foto(rs.getString("foto"));
+                registroCam.setHora(rs.getTimestamp("hora"));
+                registroCam.setId_sensor_sensor(rs.getInt("id_sensor_sensor"));
+                registros_camaras.add(registroCam);
+            }	
+        } catch (SQLException e)
+	{
+            Log.log.error("Error: {}", e);
+            registros_camaras = new ArrayList<Registro_camara>();
+        } catch (NullPointerException e)
+        {
+            Log.log.error("Error: {}", e);
+            registros_camaras = new ArrayList<Registro_camara>();
+        } catch (Exception e)
+        {
+            Log.log.error("Error:{}", e);
+            registros_camaras = new ArrayList<Registro_camara>();
+        } finally
+        {
+            conector.closeConnection(con);
+	}
+        return registros_camaras;
+    }
+    
     /**
      * Funcion que devuelve la lista de sensores del sistema
      * @return ArrayList<Sensor>

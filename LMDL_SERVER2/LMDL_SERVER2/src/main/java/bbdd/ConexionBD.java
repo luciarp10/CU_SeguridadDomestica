@@ -135,6 +135,12 @@ public class ConexionBD {
         return getStatement(con, "SELECT * FROM LMDL_BD.registro_camara");
     }
     
+    public static PreparedStatement GetRegistrosCamarasFecha(Connection con){
+        return getStatement(con, "SELECT fecha, foto, hora, id_sensor_sensor FROM LMDL_BD.registro_camara INNER JOIN LMDL_BD.sensor ON id_sensor_sensor=id_sensor "
+                + "INNER JOIN LMDL_BD.habitacion ON id_habitacion=id_habitacion_habitacion INNER JOIN "
+                + "LMDL_BD.sistema_seguridad ON cod_sistema=cod_sistema_sistema_seguridad WHERE fecha=? and cod_sistema=?");
+    }
+    
     public static PreparedStatement GetSensores(Connection con){
         return getStatement(con, "SELECT * FROM LMDL_BD.sensor");
     }

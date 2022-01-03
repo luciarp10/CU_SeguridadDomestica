@@ -1,7 +1,25 @@
 package bbdd;
 
+import java.awt.Image;
+import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import javax.imageio.ImageIO;
+import logic.Log;
 
 public class Registro_camara {
     private Date fecha;
@@ -53,8 +71,30 @@ public class Registro_camara {
         this.id_sensor_sensor = id_sensor_sensor;
     }
     
-    public String descargarFoto(String enlace){
-        String ruta="";
+    public String descargarFoto(String enlace) throws MalformedURLException, IOException{
+        String ruta="/tmp/imagenes/"+LocalDate.now()+"_"+LocalTime.now(ZoneId.of("Europe/Madrid"))+".jpg";
+        
+        try{
+            URL url = new URL(enlace);
+            InputStream in = new BufferedInputStream(url.openStream());
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            byte[] buf = new byte[1024];
+            int n = 0;
+             while (-1!=(n=in.read(buf)))
+            {
+                out.write(buf, 0, n);
+            }
+            out.close();
+            in.close();
+            byte[] response = out.toByteArray();
+        
+            FileOutputStream fos = new FileOutputStream(ruta);
+            fos.write(response);
+            fos.close();
+        }
+        catch (Exception e){
+            Log.log.error("Exception: {}", e);
+        }
         
         return ruta;
     }

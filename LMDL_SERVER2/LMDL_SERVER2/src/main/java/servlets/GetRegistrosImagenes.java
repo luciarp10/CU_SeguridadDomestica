@@ -5,44 +5,29 @@
  */
 package servlets;
 
+import bbdd.Registro_camara;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import logic.Log;
+import logic.Logic;
 
 /**
- *
+ * Dado el codigo del sistema y una fecha, devuelve todos los registros de imágenes de ese día. 
  * @author lucyr
  */
 public class GetRegistrosImagenes extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet GetRegistrosImagenes</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet GetRegistrosImagenes at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+    public GetRegistrosImagenes() {
+        super();
     }
+
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -56,7 +41,34 @@ public class GetRegistrosImagenes extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        ArrayList<Registro_camara> registros_camaras = new ArrayList<>();
+        Log.log.info("-- Buscando registros de cámaras del sistema " + request.getParameter("cod_sistema")+" el día "+ request.getParameter("fecha")+ " --");
+        
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        try {
+            registros_camaras=(Logic.getRegistrosCamarasFecha(request.getParameter("fecha"), Integer.parseInt(request.getParameter("cod_sistema"))));
+            String jsonRegistros = new Gson().toJson(registros_camaras);
+            Log.log.info("JSON value => {}", jsonRegistros);
+            out.println(jsonRegistros);
+        }
+        catch (NumberFormatException nfe) 
+        {
+            out.println("-1");
+            Log.log.error("Number Format Exception: {}", nfe);
+	} catch (IndexOutOfBoundsException iobe) 
+        {
+            out.println("-1");
+            Log.log.error("Index out of bounds Exception: {}", iobe);
+        } catch (Exception e) 
+	{
+            out.println("-1");
+            Log.log.error("Exception: {}", e);
+	} finally 
+        {
+            out.close();
+	}
     }
 
     /**
@@ -70,7 +82,7 @@ public class GetRegistrosImagenes extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        doGet(request, response);
     }
 
     /**
