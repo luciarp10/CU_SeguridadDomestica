@@ -196,6 +196,10 @@ public class ConexionBD {
         return getStatement (con, "SELECT nombre from LMDL_BD.identificacion WHERE codigo_qr=? and cod_sistema_sistema_seguridad=?");
     }
     
+    public static PreparedStatement GetCodigo_QR(Connection con){
+        return getStatement(con, "SELECT codigo_qr FROM LMDL_BD.identificacion WHERE nombre=?");
+    }
+    
     //Pendiente de borrar porque si al final la relación entre sistema_seguridad e identificacion es 1:n, no hace falta. Por seguridad, lo que tiene sentido es que sea así. 
     public static PreparedStatement GetSistemasUsuario(Connection con){
         return getStatement (con, "SELECT nombre from LMDL_BD.sistema_seguridad inner join LMDL_BD.identificacion ON cod_sistema=cod_sistema_sistema_seguridad where identificacion.nombre=?");

@@ -987,7 +987,7 @@ public class Logic
     }
 	
     /**
-     * Buscar el entero que representa el código QR pasado como parámetro en las identificaciones del sistema de la base de datos. 
+     * Buscar el usuario que representa el código QR pasado como parámetro en las identificaciones del sistema de la base de datos. 
      * Devuelve el nombre del usuario asociado a ese QR. 
      * @param cod_QR_leido
      * @param cod_sistema
@@ -1028,6 +1028,48 @@ public class Logic
 	}
 
         return usuario;
+    }
+    
+    /**
+     * Buscar el entero que representa el código QR del usuario que se pasa como parámetro. 
+     * Devuelve el nombre del usuario asociado a ese QR. 
+     * @param usuario
+     * @return cod_qr
+     */
+    
+    public static int getCodigo_QR (String usuario){
+        int cod_qr=-1;
+        ConexionBD conector = new ConexionBD();
+	Connection con = null;
+        try
+        {
+            con = conector.obtainConnection(true);
+            Log.log.debug("Database Connected");
+            PreparedStatement ps = ConexionBD.GetCodigo_QR(con);
+            ps.setString(1,usuario);
+            Log.log.info("Query=> {}", ps.toString());
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                cod_qr=rs.getInt("codigo_qr");
+            }
+        } catch (SQLException e)
+	{
+            Log.log.error("Error: {}", e);
+            cod_qr=-1;
+	} catch (NullPointerException e)
+        {
+            Log.log.error("Error: {}", e);
+            cod_qr=-1;
+        } catch (Exception e)
+        {
+            Log.log.error("Error:{}", e);
+            cod_qr=-1;
+        } finally
+        {
+            conector.closeConnection(con);
+	}
+
+        return cod_qr;
     }
     
     /**
