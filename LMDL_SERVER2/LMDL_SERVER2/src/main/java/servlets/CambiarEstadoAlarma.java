@@ -42,35 +42,35 @@ public class CambiarEstadoAlarma extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if(Integer.parseInt(request.getParameter("estado"))==1){
-            Log.log.info("-- Activando sistema de seguridad "+request.getParameter("cod_sistema")+" --");
-            Log.log.info("Insertar en alerta registro de activación de alarma ");
-            Alerta alerta_nueva=new Alerta();
-            alerta_nueva.setId_alerta(Logic.getUltimaAlerta(Integer.parseInt(request.getParameter("cod_sistema")))+1);
-            alerta_nueva.setInfo("Alarma activada desde app por usuario "+ request.getParameter("usuario"));
-            alerta_nueva.setCod_sistema_sistema_seguridad(Integer.parseInt(request.getParameter("cod_sistema")));
-            Logic.insertarAlerta(alerta_nueva);
-            Logic.cambiarEstadoSistema(1,Integer.parseInt(request.getParameter("cod_sistema")));
-            //Publicar topic para que los sensores de la alarma se activen 
-            MqttBroker broker = new MqttBroker();
-            MqttPublisher.publish(broker, "SistSeg"+request.getParameter("cod_sistema")+"/Alerta", "Activar");
-        }
-        else{
-            Log.log.info("-- Desactivando sistema de seguridad "+request.getParameter("cod_sistema")+" --");
-            Alerta alerta_nueva=new Alerta();
-            alerta_nueva.setId_alerta(Logic.getUltimaAlerta(Integer.parseInt(request.getParameter("cod_sistema")))+1);
-            alerta_nueva.setInfo("Alarma desactivada desde app por usuario "+ request.getParameter("usuario"));
-            alerta_nueva.setCod_sistema_sistema_seguridad(Integer.parseInt(request.getParameter("cod_sistema")));
-            Logic.insertarAlerta(alerta_nueva);
-            Logic.cambiarEstadoSistema(0,Integer.parseInt(request.getParameter("cod_sistema")));
-            //Publicar topic para que los sensores de la alarma se apaguen (desconecten) 
-            MqttBroker broker = new MqttBroker();
-            MqttPublisher.publish(broker, "SistSeg"+request.getParameter("cod_sistema")+"/Alerta", "Desactivar");
-        }
-        
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        try {
+        try{
+            if(Integer.parseInt(request.getParameter("estado"))==1){
+                Log.log.info("-- Activando sistema de seguridad "+request.getParameter("cod_sistema")+" --");
+                Log.log.info("Insertar en alerta registro de activación de alarma ");
+                Alerta alerta_nueva=new Alerta();
+                alerta_nueva.setId_alerta(Logic.getUltimaAlerta(Integer.parseInt(request.getParameter("cod_sistema")))+1);
+                alerta_nueva.setInfo("Alarma activada desde app por usuario "+ request.getParameter("usuario"));
+                alerta_nueva.setCod_sistema_sistema_seguridad(Integer.parseInt(request.getParameter("cod_sistema")));
+                Logic.insertarAlerta(alerta_nueva);
+                Logic.cambiarEstadoSistema(1,Integer.parseInt(request.getParameter("cod_sistema")));
+                //Publicar topic para que los sensores de la alarma se activen 
+                MqttBroker broker = new MqttBroker();
+                MqttPublisher.publish(broker, "SistSeg"+request.getParameter("cod_sistema")+"/Alerta", "Activar");
+            }
+            else{
+                Log.log.info("-- Desactivando sistema de seguridad "+request.getParameter("cod_sistema")+" --");
+                Alerta alerta_nueva=new Alerta();
+                alerta_nueva.setId_alerta(Logic.getUltimaAlerta(Integer.parseInt(request.getParameter("cod_sistema")))+1);
+                alerta_nueva.setInfo("Alarma desactivada desde app por usuario "+ request.getParameter("usuario"));
+                alerta_nueva.setCod_sistema_sistema_seguridad(Integer.parseInt(request.getParameter("cod_sistema")));
+                Logic.insertarAlerta(alerta_nueva);
+                Logic.cambiarEstadoSistema(0,Integer.parseInt(request.getParameter("cod_sistema")));
+                //Publicar topic para que los sensores de la alarma se apaguen (desconecten) 
+                MqttBroker broker = new MqttBroker();
+                MqttPublisher.publish(broker, "SistSeg"+request.getParameter("cod_sistema")+"/Alerta", "Desactivar");
+            }
+
             String json = new Gson().toJson("1");
             Log.log.info("JSON value => {}", json);
             out.println(json);
