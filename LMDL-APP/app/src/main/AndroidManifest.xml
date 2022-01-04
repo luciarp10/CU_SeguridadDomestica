@@ -13,7 +13,8 @@
         android:label="LMDL - SISTEMA SEGURIDAD"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.LMDLAPP">
+        android:theme="@style/Theme.LMDLAPP"
+        android:usesCleartextTraffic="true">
 
         <activity android:name=".MenuSistemaAdmin" />
         <activity android:name=".MenuSistema" />

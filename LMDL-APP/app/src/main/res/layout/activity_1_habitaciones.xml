@@ -15,7 +15,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/espacioCalidadA"
+        app:layout_constraintTop_toBottomOf="@+id/espacioPassword"
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
@@ -59,7 +59,7 @@
         android:layout_marginEnd="20dp"
         android:text="Calidad del aire:"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/espacioCalidadA"
+        app:layout_constraintEnd_toStartOf="@+id/espacioPassword"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textoFechaInformes"
         app:layout_constraintVertical_bias="0.0" />
@@ -99,12 +99,12 @@
         android:ems="10"
         android:inputType="numberDecimal"
         android:minHeight="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/espacioCalidadA"
+        app:layout_constraintBottom_toTopOf="@+id/espacioPassword"
         app:layout_constraintEnd_toEndOf="parent"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <EditText
-        android:id="@+id/espacioCalidadA"
+        android:id="@+id/espacioPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="56dp"

@@ -20,7 +20,7 @@ import mqtt.MqttBroker;
 import mqtt.MqttPublisher;
 
 /**
- * Dados como parámetros el codigo del sistema, el usuario que activa el sensor, el sensor que se quiere activar y el tiempo en segundos,
+ * Dados como parámetros el codigo del sistema, el usuario que activa el actuador, el actuador que se quiere activar y el tiempo en segundos,
  * se envía un topic al sensor a través de mqtt y se registra la activación en la base de datos en la tabla alerta y en registro_actuador. 
  * @author lucyr
  */
