@@ -944,6 +944,47 @@ public class Logic
         }
         return contrasena_introducida.equals(contrasena); 
     }
+    
+    /**
+     * Funcion que devuelve el tipo de un id_usuario que recibe como parámetro
+     * @param nombre
+     * @param contrasena_introducida 
+     * @return boolean
+     */
+    
+    public static Boolean getTipoUsuario(String nombre){
+        Boolean admin=false;
+        ConexionBD conector = new ConexionBD();
+	Connection con = null;
+        try
+        {
+            con = conector.obtainConnection(true);
+            Log.log.debug("Database Connected");
+            PreparedStatement ps = ConexionBD.GetTipoUsuario(con);
+            ps.setString(1, nombre);
+            Log.log.info("Query=> {}", ps.toString());
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                admin=rs.getBoolean("admin");
+            }
+        } catch (SQLException e)
+	{
+            Log.log.error("Error: {}", e);
+            admin=false;
+	} catch (NullPointerException e)
+        {
+            Log.log.error("Error: {}", e);
+            admin=false;
+        } catch (Exception e)
+        {
+            Log.log.error("Error:{}", e);
+            admin=false;
+        } finally
+        {
+            conector.closeConnection(con);
+	}
+        return admin; 
+    }
 	
     /**
      * Buscar el entero que representa el código QR pasado como parámetro en las identificaciones del sistema de la base de datos. 

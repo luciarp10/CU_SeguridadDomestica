@@ -188,6 +188,10 @@ public class ConexionBD {
         return getStatement(con, "SELECT password from LMDL_BD.identificacion WHERE nombre=? ");
     }
     
+    public static PreparedStatement GetTipoUsuario(Connection con){
+        return getStatement(con, "SELECT admin from LMDL_BD.identificacion WHERE nombre=?");
+    }
+    
     public static PreparedStatement GetUsuario_QR(Connection con){
         return getStatement (con, "SELECT nombre from LMDL_BD.identificacion WHERE codigo_qr=? and cod_sistema_sistema_seguridad=?");
     }

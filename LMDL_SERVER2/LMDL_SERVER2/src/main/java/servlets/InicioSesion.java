@@ -19,7 +19,7 @@ import mqtt.MqttBroker;
 import mqtt.MqttPublisher;
 
 /**
- * Si el usuario está registrado y la contraseña es correcta, devuelve el código del sistema de seguridad
+ * Si el usuario está registrado y la contraseña es correcta, devuelve el código del sistema de seguridad y true si el usuario es administrador o false si no lo es.
  * del usuario para que todo lo que se le muestre en la aplicación sea en relación con ese sistema. 
  * @author lucyr
  */
@@ -49,10 +49,14 @@ public class InicioSesion extends HttpServlet {
             String contrasenna= request.getParameter("password");
             Boolean usuario_registrado = Logic.getContrasena(usuario,contrasenna);
             if(usuario_registrado){
+                boolean es_admin = Logic.getTipoUsuario(usuario);
                 int cod_sistema_seguridad = Logic.getSistemaUsuario(usuario);
+                String jsontipoUsuario= new Gson().toJson(es_admin);
                 String jsonSistema = new Gson().toJson(cod_sistema_seguridad);
                 Log.log.info("JSON value => {}", jsonSistema);
+                Log.log.info("JSON value => {}", jsontipoUsuario);
                 out.println(jsonSistema);
+                out.println(jsontipoUsuario);
             }
             else{
                 String jsonSistema = new Gson().toJson(-1);
