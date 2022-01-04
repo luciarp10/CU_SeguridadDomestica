@@ -1,4 +1,4 @@
-package com.example.lmdl_app.tasks;
+package com.example.lmdl_app;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,25 +9,24 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.lmdl_app.R;
 
-public class Estadisticas extends AppCompatActivity {
+public class RegistrarSimulacion extends AppCompatActivity {
 
-    private Button botonInformes;
+    private Button botonRegProgam;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_3_estadisticas);
+        setContentView(R.layout.activity_2_3_2_reg_sim);
 
-        this.botonInformes = this.findViewById(R.id.botonVerInfo);
+        this.botonRegProgam = this.findViewById(R.id.botonRegSim);
 
-        botonInformes.setOnClickListener(new View.OnClickListener() {
+        botonRegProgam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Estadisticas.this, Informes.class);
+               /* Intent i = new Intent(RegistrarSimulacion.this, .class);
                 startActivity(i);
-                //finish();
+                //finish();*/
             }
         });
-
     }
 }

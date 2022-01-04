@@ -15,24 +15,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LMDLAPP">
 
-        <activity android:name=".tasks.MenuSistemaAdmin" />
-        <activity android:name=".tasks.MenuSistema" />
-        <activity android:name=".tasks.Camaras" />
-        <activity android:name=".tasks.Estadisticas" />
-        <activity android:name=".tasks.EstadoAlarma" />
-        <activity android:name=".tasks.Habitaciones" />
-        <activity android:name=".tasks.Informes" />
-        <activity android:name=".tasks.Registros" />
-        <activity android:name=".tasks.RegistrosCamaras" />
-        <activity android:name=".tasks.Seguridad"/>
-        <activity android:name=".tasks.SimulacionPresencia"/>
-        <activity android:name=".tasks.Usuarios"/>
-        <activity android:name=".tasks.VerQR"/>
-        <activity android:name=".tasks.RegistrarSimulacion"/>
-        <activity android:name=".tasks.SimulacionesProgramadas"/>
+        <activity android:name=".MenuSistemaAdmin" />
+        <activity android:name=".MenuSistema" />
+        <activity android:name=".Camaras" />
+        <activity android:name=".Estadisticas" />
+        <activity android:name=".EstadoAlarma" />
+        <activity android:name=".Habitaciones" />
+        <activity android:name=".Informes" />
+        <activity android:name=".Registros" />
+        <activity android:name=".RegistrosCamaras" />
+        <activity android:name=".Seguridad"/>
+        <activity android:name=".SimulacionPresencia"/>
+        <activity android:name=".Usuarios"/>
+        <activity android:name=".VerQR"/>
+        <activity android:name=".RegistrarSimulacion"/>
+        <activity android:name=".SimulacionesProgramadas"/>
 
         <activity
-            android:name=".tasks.MainActivity"
+            android:name=".MainActivity"
             android:exported="true">
 
             <intent-filter>

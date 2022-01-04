@@ -1,4 +1,4 @@
-package com.example.lmdl_app.tasks;
+package com.example.lmdl_app;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,8 +7,6 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.lmdl_app.R;
 
 public class MainActivity extends AppCompatActivity {
 

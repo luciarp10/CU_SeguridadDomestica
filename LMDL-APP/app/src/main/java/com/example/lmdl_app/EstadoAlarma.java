@@ -1,4 +1,4 @@
-package com.example.lmdl_app.tasks;
+package com.example.lmdl_app;
 
 import android.os.Bundle;
 import android.view.View;

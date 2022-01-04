@@ -1,4 +1,4 @@
-package com.example.lmdl_app.tasks;
+package com.example.lmdl_app;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,27 +7,24 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.lmdl_app.R;
+public class Camaras extends AppCompatActivity {
 
-public class Estadisticas extends AppCompatActivity {
-
-    private Button botonInformes;
+    private Button botonVerFotos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_3_estadisticas);
+        setContentView(R.layout.activity_2_2_camaras);
 
-        this.botonInformes = this.findViewById(R.id.botonVerInfo);
+        this.botonVerFotos = this.findViewById(R.id.botonVerFotos);
 
-        botonInformes.setOnClickListener(new View.OnClickListener() {
+        botonVerFotos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Estadisticas.this, Informes.class);
+                Intent i = new Intent(Camaras.this, RegistrosCamaras.class);
                 startActivity(i);
                 //finish();
             }
         });
-
     }
 }
