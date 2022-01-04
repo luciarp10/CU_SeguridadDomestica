@@ -59,6 +59,8 @@ public class ComprobarQR extends HttpServlet {
                 alerta_nueva.setInfo("Alarma desconectada por "+usuario+" mediante código QR.");
                 alerta_nueva.setCod_sistema_sistema_seguridad(codigo_sistema);
                 Logic.insertarAlerta(alerta_nueva);
+                //Cambiar el estado de la alarma en la base de datos
+                Logic.cambiarEstadoSistema(0, codigo_sistema);
                 //Publicar topic para que los sensores de la alarma se apaguen (desconecten) 
                 MqttBroker broker = new MqttBroker();
                 MqttPublisher.publish(broker, "SistSeg"+codigo_sistema+"/Alerta", "Desactivar");

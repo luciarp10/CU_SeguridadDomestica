@@ -142,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
             private  void comprobarQR(String codigoQR, int i) {
                 TextView saludo = (TextView)findViewById(R.id.saludo);
                 //Aquí iria el WS que lo envía al servidor y comprueba si existe algún usuario con ese código QR/
-                String urlStr = "http://192.168.1.108:8080/LMDL_SERVER2/ComprobarQR?codigo="+codigoQR+"&id_sistema="+1;
+                String urlStr = "http://192.168.1.109:8080/LMDL_SERVER2/ComprobarQR?codigo="+codigoQR+"&id_sistema="+1;
                 saludo.setText("Conectando... ");
                 try {
                     URL url = new URL(urlStr);

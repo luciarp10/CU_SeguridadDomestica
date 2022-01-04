@@ -45,7 +45,7 @@
         android:inputType="textPersonName"
         android:textSize="20sp"
         android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/espacioCalidadA"
+        app:layout_constraintBottom_toTopOf="@+id/espacioPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textoUsuario"
         app:layout_constraintTop_toBottomOf="@+id/imageEstado"
@@ -53,7 +53,7 @@
         tools:ignore="SpeakableTextPresentCheck" />
 
     <EditText
-        android:id="@+id/espacioCalidadA"
+        android:id="@+id/espacioPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="6dp"
@@ -80,7 +80,7 @@
         android:text="Contraseña:"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/espacioCalidadA"
+        app:layout_constraintEnd_toStartOf="@+id/espacioPassword"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textoUsuario" />
 
@@ -91,10 +91,25 @@
         android:layout_marginStart="222dp"
         android:layout_marginTop="31dp"
         android:layout_marginEnd="39dp"
-        android:layout_marginBottom="178dp"
+        android:layout_marginBottom="170dp"
         android:text="INICIAR SESION"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/espacioCalidadA" />
+        app:layout_constraintTop_toBottomOf="@+id/espacioPassword"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/mensajeError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#EC1919"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/botonIniSesion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.33"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/espacioPassword"
+        app:layout_constraintVertical_bias="1.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>
