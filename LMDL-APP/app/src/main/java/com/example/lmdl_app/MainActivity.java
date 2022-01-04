@@ -55,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
             String[] respuesta_separada = respuestaServidor.split("\n");
             if(respuesta_separada[1].equals("true")){
                 Intent i = new Intent(MainActivity.this, MenuSistemaAdmin.class);
+                i.putExtra("cod_sistema",respuesta_separada[0]);
+                i.putExtra("usuario", usuario.getText().toString());
                 startActivity(i);
                 finish();
             }
