@@ -28,6 +28,8 @@
         <activity android:name=".tasks.SimulacionPresencia"/>
         <activity android:name=".tasks.Usuarios"/>
         <activity android:name=".tasks.VerQR"/>
+        <activity android:name=".tasks.RegistrarSimulacion"/>
+        <activity android:name=".tasks.SimulacionesProgramadas"/>
 
         <activity
             android:name=".tasks.MainActivity"

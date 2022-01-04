@@ -32,7 +32,7 @@ public class MenuSistemaAdmin extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(MenuSistemaAdmin.this, Habitaciones.class);
                 startActivity(i);
-                finish();
+                //finish();
             }
         });
 
@@ -41,7 +41,7 @@ public class MenuSistemaAdmin extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(MenuSistemaAdmin.this, Seguridad.class);
                 startActivity(i);
-                finish();
+                //finish();
             }
         });
 
@@ -50,7 +50,7 @@ public class MenuSistemaAdmin extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(MenuSistemaAdmin.this, Estadisticas.class);
                 startActivity(i);
-                finish();
+                //finish();
             }
         });
 
@@ -59,7 +59,7 @@ public class MenuSistemaAdmin extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(MenuSistemaAdmin.this, Usuarios.class);
                 startActivity(i);
-                finish();
+                //finish();
             }
         });
 
