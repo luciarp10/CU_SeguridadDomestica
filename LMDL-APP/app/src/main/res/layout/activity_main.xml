@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".tasks.MainActivity">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imageEstado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -31,7 +31,7 @@
         app:layout_constraintEnd_toStartOf="@+id/espacioUsuario"
         app:layout_constraintHorizontal_bias="0.461"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/imageEstado"
         app:layout_constraintVertical_bias="0.0" />
 
     <EditText
@@ -45,15 +45,15 @@
         android:inputType="textPersonName"
         android:textSize="20sp"
         android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/espacioContrasena"
+        app:layout_constraintBottom_toTopOf="@+id/espacioCalidadA"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textoUsuario"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/imageEstado"
         app:layout_constraintVertical_bias="0.0"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <EditText
-        android:id="@+id/espacioContrasena"
+        android:id="@+id/espacioCalidadA"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="6dp"
@@ -80,12 +80,12 @@
         android:text="Contraseña:"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/espacioContrasena"
+        app:layout_constraintEnd_toStartOf="@+id/espacioCalidadA"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textoUsuario" />
 
     <Button
-        android:id="@+id/botonInicioSesion"
+        android:id="@+id/botonIniSesion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="222dp"
@@ -96,5 +96,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/espacioContrasena" />
+        app:layout_constraintTop_toBottomOf="@+id/espacioCalidadA" />
 </androidx.constraintlayout.widget.ConstraintLayout>

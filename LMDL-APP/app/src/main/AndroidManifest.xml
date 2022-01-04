@@ -2,16 +2,37 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.lmdl_app">
 
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="LMDL - SISTEMA DE SEGURIDAD"
+        android:label="LMDL - SISTEMA SEGURIDAD"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LMDLAPP">
+
+        <activity android:name=".tasks.MenuSistemaAdmin" />
+        <activity android:name=".tasks.MenuSistema" />
+        <activity android:name=".tasks.Camaras" />
+        <activity android:name=".tasks.Estadisticas" />
+        <activity android:name=".tasks.EstadoAlarma" />
+        <activity android:name=".tasks.Habitaciones" />
+        <activity android:name=".tasks.Informes" />
+        <activity android:name=".tasks.Registros" />
+        <activity android:name=".tasks.RegistrosCamaras" />
+        <activity android:name=".tasks.Seguridad"/>
+        <activity android:name=".tasks.SimulacionPresencia"/>
+        <activity android:name=".tasks.Usuarios"/>
+        <activity android:name=".tasks.VerQR"/>
+
         <activity
-            android:name=".MainActivity"
+            android:name=".tasks.MainActivity"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
