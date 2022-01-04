@@ -1,5 +1,6 @@
 package mqtt;
 
+import bbdd.Alerta;
 import bbdd.ConexionBD;
 import bbdd.Registro_camara;
 import bbdd.Topic;
@@ -81,7 +82,7 @@ public class MqttSuscriber implements MqttCallback {
         
      
         //Comprobar el topic en función de los nombres que les demos y según sea el topic, tomar una decisión u otra.
-        if(topicRecibido.contains("Sensor"))
+        if(topicRecibido.contains("Sensor")) //SistSeg1/Hab1/Sensor1
         {
             newTopic.setId_sistema(Integer.parseInt(topics[0].replace("SistSeg", "")));
             newTopic.setId_habitacion(Integer.parseInt(topics[1].replace("Hab", "")));
@@ -94,7 +95,7 @@ public class MqttSuscriber implements MqttCallback {
             Logic.guardarRegistroSensor(newTopic);
         }else
         {
-    	    if(topicRecibido.contains("Actuador"))
+    	    if(topicRecibido.contains("Actuador")) //SistSeg1/Hab1/Actuador1
             {
     		newTopic.setId_sistema(Integer.parseInt(topics[0].replace("SistSeg", "")));
                 newTopic.setId_habitacion(Integer.parseInt(topics[1].replace("Hab", "")));
@@ -106,7 +107,7 @@ public class MqttSuscriber implements MqttCallback {
                 //Guardar la información en la base de datos
                 Logic.guardarRegistroActuador(newTopic);
             } 
-            else if (topicRecibido.contains("Camara")){
+            else if (topicRecibido.contains("Camara")){ //SistSeg1/Hab1/Camara1
                 newTopic.setId_sistema(Integer.parseInt(topics[0].replace("SistSeg", "")));
                 newTopic.setId_habitacion(Integer.parseInt(topics[1].replace("Hab", "")));
                 newTopic.setId_sensor_actuador(Integer.parseInt(topics[2].replace("Camara", "")));
@@ -116,6 +117,32 @@ public class MqttSuscriber implements MqttCallback {
                 nuevaFoto.setEnlace_foto(nuevaFoto.descargarFoto(message.toString()));
                 nuevaFoto.setId_sensor_sensor(newTopic.getId_sensor_actuador());
                 Logic.insertarRegistroCamara(nuevaFoto);
+            }
+            else if (topicRecibido.contains("Alarma")){ //SistSeg1/Alarma
+                //Registrar que ha saltado la alarma o que se ha desconectado desde el pinpad 
+                if(message.toString().equals("intrusion")){
+                    Alerta alerta_nueva = new Alerta();
+                    alerta_nueva.setId_alerta(Logic.getUltimaAlerta(Integer.parseInt(topics[0].replace("SistSeg", "")))+1);
+                    alerta_nueva.setInfo("Se ha detectado una intrusion");
+                    alerta_nueva.setCod_sistema_sistema_seguridad(Integer.parseInt(topics[0].replace("SistSeg", "")));
+                    Logic.insertarAlerta(alerta_nueva);
+                }
+                else if (message.toString().equals("desconectada")){
+                    Alerta alerta_nueva = new Alerta();
+                    alerta_nueva.setId_alerta(Logic.getUltimaAlerta(Integer.parseInt(topics[0].replace("SistSeg", "")))+1);
+                    alerta_nueva.setInfo("La alarma se ha desconectado desde el pinpad");
+                    alerta_nueva.setCod_sistema_sistema_seguridad(Integer.parseInt(topics[0].replace("SistSeg", "")));
+                    Logic.cambiarEstadoSistema(0, Integer.parseInt(topics[0].replace("SistSeg", "")));
+                    Logic.insertarAlerta(alerta_nueva);
+                }
+                else if (message.toString().equals("conectada")){
+                    Alerta alerta_nueva = new Alerta();
+                    alerta_nueva.setId_alerta(Logic.getUltimaAlerta(Integer.parseInt(topics[0].replace("SistSeg", "")))+1);
+                    alerta_nueva.setInfo("La alarma se ha conectado desde el pinpad");
+                    alerta_nueva.setCod_sistema_sistema_seguridad(Integer.parseInt(topics[0].replace("SistSeg", "")));
+                    Logic.cambiarEstadoSistema(1, Integer.parseInt(topics[0].replace("SistSeg", "")));
+                    Logic.insertarAlerta(alerta_nueva);
+                }
             }
             
         }
