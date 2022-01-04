@@ -1,13 +1,20 @@
 package com.example.lmdl_app;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.lmdl_app.data.Habitacion;
+import com.example.lmdl_app.tasks.TaskSelectHabitacion;
+
+import java.util.ArrayList;
 
 public class Habitaciones extends AppCompatActivity {
 
@@ -22,11 +29,13 @@ public class Habitaciones extends AppCompatActivity {
     private int idStation = 0;
     private String nameStation = "";*/
 
+    private String tag = "SelectHabitacion";
     private Button botonEstadisticas;
     private Spinner spinnerHabitac;
     private int idHab = 0;
     private String nameHab = "";
-    //private ArrayList<Habitacion> listHabitacion;
+    private ArrayList<Habitacion> listHabitacion;
+    //private final Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,11 +44,25 @@ public class Habitaciones extends AppCompatActivity {
 
         this.botonEstadisticas = this.findViewById(R.id.botonEstadist);
         this.spinnerHabitac = this.findViewById(R.id.spinnerHabitac);
-
         //this.spinnerCities = this.findViewById(R.id.spinnerCity);
 
         //this.listCities = new ArrayList<>();
+        this.listHabitacion = new ArrayList<>();
 
+        spinnerHabitac.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                int id = listHabitacion.get(i).getId_habitacion();//Get the id of the selected position
+                Log.i(tag, "City selected:" + listHabitacion.get(i).getDescriptivo());
+
+                //Get the list of stations of the selected city
+                //loadHabitaciones(listHabitacion.get(i).getId_habitacion());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
         /*
         * //Add action when the spinner of the cities changes
         spinnerCities.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
@@ -79,17 +102,15 @@ public class Habitaciones extends AppCompatActivity {
             }
         });
 
-        spinnerHabitac.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
-        {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-            }
-        });
         //loadCities();
+        loadHabitaciones();
+    }
+
+    //Search the cities and fill the spinner with the information
+    private void loadHabitaciones() {
+        new TaskSelectHabitacion(this).
+                execute("http://192.168.1.108:8080/LMDL_SERVER2/GetHabitaciones?");
+              //execute("http://192.168.1.108:8080/LMDL_SERVER2/ComprobarQR?codigo="+codigoQR+"&id_sistema="+1);
     }
     /*
     * //Search the cities and fill the spinner with the information
@@ -98,12 +119,6 @@ public class Habitaciones extends AppCompatActivity {
         new TaskSelectStation(this).execute("http://192.168.1.131:8080/UbicompServerExample/GetCities");
     }
 
-    //Search the stations of the selected city and fill the spinner with the information
-    private void loadStations(final int cityId)
-    {
-        new TaskSelectStation(this).execute("http://192.168.1.131:8080/UbicompServerExample/GetStationsCity?cityId="+cityId);
-
-    }
 
     public void setListCities(JSONArray jsonCities)
     {

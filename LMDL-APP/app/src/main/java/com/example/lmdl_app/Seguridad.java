@@ -32,7 +32,7 @@ public class Seguridad extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(Seguridad.this, Registros.class);
                 startActivity(i);
-                finish();
+                //finish();
             }
         });
 
@@ -41,7 +41,7 @@ public class Seguridad extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(Seguridad.this, Camaras.class);
                 startActivity(i);
-                finish();
+                //finish();
             }
         });
 
@@ -50,7 +50,7 @@ public class Seguridad extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(Seguridad.this, SimulacionPresencia.class);
                 startActivity(i);
-                finish();
+                //finish();
             }
         });
 
@@ -59,7 +59,7 @@ public class Seguridad extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(Seguridad.this, EstadoAlarma.class);
                 startActivity(i);
-                finish();
+                //finish();
             }
         });
 
@@ -68,7 +68,7 @@ public class Seguridad extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(Seguridad.this, VerQR.class);
                 startActivity(i);
-                finish();
+                //finish();
             }
         });
     }
