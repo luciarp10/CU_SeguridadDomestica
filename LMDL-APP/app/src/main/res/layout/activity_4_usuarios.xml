@@ -17,7 +17,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Spinner
-        android:id="@+id/spinnerListaUsers"
+        android:id="@+id/spinnerListaHabitaciones"
         android:layout_width="355dp"
         android:layout_height="55dp"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -16,11 +16,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.77"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerDiasCam"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerMedida"
         app:layout_constraintVertical_bias="1.0" />
 
     <Spinner
-        android:id="@+id/spinnerListaUsers"
+        android:id="@+id/spinnerListaHabitaciones"
         android:layout_width="355dp"
         android:layout_height="55dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -31,13 +31,13 @@
         tools:ignore="SpeakableTextPresentCheck" />
 
     <Spinner
-        android:id="@+id/spinnerDiasCam"
+        android:id="@+id/spinnerMedida"
         android:layout_width="355dp"
         android:layout_height="55dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerListaUsers"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerListaHabitaciones"
         app:layout_constraintVertical_bias="0.18"
         tools:ignore="SpeakableTextPresentCheck" />
 

@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <Spinner
-        android:id="@+id/spinnerListaUsers"
+        android:id="@+id/spinnerListaHabitaciones"
         android:layout_width="355dp"
         android:layout_height="55dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -33,7 +33,7 @@
         android:id="@+id/textDateCam"
         android:layout_width="288dp"
         android:layout_height="33dp"
-        app:layout_constraintBottom_toTopOf="@+id/spinnerListaUsers"
+        app:layout_constraintBottom_toTopOf="@+id/spinnerListaHabitaciones"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
