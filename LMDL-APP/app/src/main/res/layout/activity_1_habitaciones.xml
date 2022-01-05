@@ -15,7 +15,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/espacioPassword"
+        app:layout_constraintTop_toBottomOf="@+id/espacioCAire"
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
@@ -25,7 +25,7 @@
         android:layout_marginBottom="68dp"
         android:text="Temperatura:"
         app:layout_constraintBottom_toTopOf="@+id/textoPeriodo"
-        app:layout_constraintEnd_toStartOf="@+id/espacioMedida"
+        app:layout_constraintEnd_toStartOf="@+id/espacioTemperatura"
         app:layout_constraintHorizontal_bias="0.525"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -38,7 +38,7 @@
         app:layout_constraintEnd_toStartOf="@+id/espacioHumedad"
         app:layout_constraintHorizontal_bias="0.628"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/espacioMedida" />
+        app:layout_constraintTop_toBottomOf="@+id/espacioTemperatura" />
 
     <TextView
         android:id="@+id/textoFechaInformes"
@@ -59,13 +59,13 @@
         android:layout_marginEnd="20dp"
         android:text="Calidad del aire:"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/espacioPassword"
+        app:layout_constraintEnd_toStartOf="@+id/espacioCAire"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textoFechaInformes"
         app:layout_constraintVertical_bias="0.0" />
 
     <EditText
-        android:id="@+id/espacioMedida"
+        android:id="@+id/espacioTemperatura"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="60dp"
@@ -99,12 +99,12 @@
         android:ems="10"
         android:inputType="numberDecimal"
         android:minHeight="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/espacioPassword"
+        app:layout_constraintBottom_toTopOf="@+id/espacioCAire"
         app:layout_constraintEnd_toEndOf="parent"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <EditText
-        android:id="@+id/espacioPassword"
+        android:id="@+id/espacioCAire"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="56dp"
@@ -127,7 +127,7 @@
         android:id="@+id/spinnerHabitac"
         android:layout_width="337dp"
         android:layout_height="50dp"
-        app:layout_constraintBottom_toTopOf="@+id/espacioMedida"
+        app:layout_constraintBottom_toTopOf="@+id/espacioTemperatura"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"

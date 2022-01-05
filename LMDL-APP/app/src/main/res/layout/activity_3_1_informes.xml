@@ -13,7 +13,7 @@
         android:layout_marginBottom="60dp"
         android:text="Médida:"
         app:layout_constraintBottom_toTopOf="@+id/textoPeriodo"
-        app:layout_constraintEnd_toStartOf="@+id/espacioMedida"
+        app:layout_constraintEnd_toStartOf="@+id/espacioTemperatura"
         app:layout_constraintHorizontal_bias="0.637"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -26,7 +26,7 @@
         app:layout_constraintEnd_toStartOf="@+id/espacioHumedad"
         app:layout_constraintHorizontal_bias="0.719"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/espacioMedida" />
+        app:layout_constraintTop_toBottomOf="@+id/espacioTemperatura" />
 
     <TextView
         android:id="@+id/textoFechaInformes"
@@ -51,7 +51,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/espacioMedida"
+        android:id="@+id/espacioTemperatura"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"

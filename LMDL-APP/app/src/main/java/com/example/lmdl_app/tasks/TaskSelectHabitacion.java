@@ -57,18 +57,25 @@ public class TaskSelectHabitacion extends AsyncTask<String,Void, String>
         try
         {
             Log.d(tag, "get json: " + response);
-            JSONArray jsonarray = new JSONArray(response);
+
             //Read Responses and fill the spinner
             if(urlStr.contains("GetHabitacionesSistema"))
             {
-               activity.setListHabitacion(jsonarray);
-            }/*else
-            {
-                if (urlStr.contains("GetStationsCity"))
+                JSONArray jsonarrayHabs = new JSONArray(response);
+                activity.setListHabitacion(jsonarrayHabs);
+            }
+            else {
+                if (urlStr.contains("GetUltRegistrosEstadisticosHabitacion"))
                 {
-            //        activity.setListStations(jsonarray);
+                    String[] response_separada;
+                    response_separada=response.split("]");
+                    response_separada[0]=response_separada[0]+"]";
+                    response_separada[1]=response_separada[1]+"]";
+                    JSONArray jsonSensores = new JSONArray(response_separada[0]);
+                    JSONArray jsonRegistros = new JSONArray(response_separada[1]);
+                    activity.setUltimosRegistros(jsonSensores, jsonRegistros);
                 }
-            }*/
+            }
         }catch (Exception e)
         {
             Log.e(tag, "Error on postExecute:" + e);

@@ -49,7 +49,9 @@ public class GetUltRegistrosEstadisticosHabitacion extends HttpServlet {
         try {
             sensores_habitacion=Logic.getSensoresHabitacion(Integer.parseInt(request.getParameter("id_habitacion")));
             for (int i=0; i<sensores_habitacion.size();i++){
-                registros_habitacion.add(Logic.getUltimoRegistroSensor(sensores_habitacion.get(i).getId_sensor()));
+                if(!sensores_habitacion.get(i).getTipo().contains("Camara")){
+                    registros_habitacion.add(Logic.getUltimoRegistroSensor(sensores_habitacion.get(i).getId_sensor()));
+                }
             }
             String jsonSensores = new Gson().toJson(sensores_habitacion);
             String jsonRegistros = new Gson().toJson(registros_habitacion);

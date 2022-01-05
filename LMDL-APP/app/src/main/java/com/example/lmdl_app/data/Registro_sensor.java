@@ -5,11 +5,11 @@ import java.sql.Timestamp;
 
 public class Registro_sensor{
     private Date fecha;
-    private float valor;
+    private double valor;
     private Timestamp hora;
     private int id_sensor_sensor;
 
-    public Registro_sensor(Date fecha, float valor, Timestamp hora, int id_sensor_sensor) {
+    public Registro_sensor(Date fecha, double valor, Timestamp hora, int id_sensor_sensor) {
         this.fecha = fecha;
         this.valor = valor;
         this.hora = hora;
@@ -27,11 +27,11 @@ public class Registro_sensor{
         this.fecha = fecha;
     }
 
-    public float getValor() {
+    public double getValor() {
         return valor;
     }
 
-    public void setValor(float valor) {
+    public void setValor(double valor) {
         this.valor = valor;
     }
 

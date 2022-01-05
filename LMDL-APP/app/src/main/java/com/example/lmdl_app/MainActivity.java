@@ -2,7 +2,6 @@ package com.example.lmdl_app;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         //Inicializamos elementos
         this.botonIniSesion = this.findViewById(R.id.botonIniSesion);
         this.usuario = (EditText) this.findViewById(R.id.espacioUsuario);
-        this.password = (EditText) this.findViewById(R.id.espacioPassword);
+        this.password = (EditText) this.findViewById(R.id.espacioCAire);
         this.mensajeError = (TextView) this.findViewById(R.id.mensajeError);
 
        botonIniSesion.setOnClickListener(new View.OnClickListener() {
