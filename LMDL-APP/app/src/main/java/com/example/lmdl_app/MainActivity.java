@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.lmdl_app.tasks.ServerConnectionThread;
 
 
-
 public class MainActivity extends AppCompatActivity {
 
     private Button botonIniSesion;
@@ -31,43 +30,55 @@ public class MainActivity extends AppCompatActivity {
         this.botonIniSesion = this.findViewById(R.id.botonIniSesion);
         this.usuario = (EditText) this.findViewById(R.id.espacioUsuario);
         this.password = (EditText) this.findViewById(R.id.espacioPassword);
-        this.mensajeError =(TextView) this.findViewById(R.id.mensajeError);
+        this.mensajeError = (TextView) this.findViewById(R.id.mensajeError);
 
-        botonIniSesion.setOnClickListener(new View.OnClickListener() {
+       /* botonIniSesion.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 comprobarDatos();
             }
 
-        });
+        });*/
 
+
+        botonIniSesion.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, MenuSistemaAdmin.class);
+                startActivity(i);
+                finish();
+            }
+        });
 
     }
 
-    public void comprobarDatos(){
-        String urlStr = "http://192.168.1.109:8080/LMDL_SERVER2/InicioSesion?usuario="+usuario.getText().toString()+"&password="+password.getText().toString();
+
+
+    public void comprobarDatos() {
+        String urlStr = "http://192.168.1.109:8080/LMDL_SERVER2/InicioSesion?usuario=" + usuario.getText().toString() + "&password=" + password.getText().toString();
         ServerConnectionThread thread = new ServerConnectionThread(this, urlStr);
         try {
             thread.join();
-        }catch (InterruptedException e){}
-        if(!respuestaServidor.contains("-1")){
+        } catch (InterruptedException e) {
+        }
+        if (!respuestaServidor.contains("-1")) {
             String[] respuesta_separada = respuestaServidor.split("\n");
-            if(respuesta_separada[1].equals("true")){
+            if (respuesta_separada[1].equals("true")) {
                 Intent i = new Intent(MainActivity.this, MenuSistemaAdmin.class);
                 i.putExtra("cod_sistema",respuesta_separada[0]);
                 i.putExtra("usuario", usuario.getText().toString());
                 startActivity(i);
+                i.putExtra("cod_sistema", 1); //Se pasa el codigo de sistema al resto de actividades
                 finish();
-            }
-            else{
+            } else {
                 Intent i = new Intent(MainActivity.this, MenuSistema.class);
                 startActivity(i);
                 finish();
             }
 
-        }
-        else{
+        } else {
             //mensaje de error en el usuario y contraseña introducidos
             mensajeError.setText("El usuario o contraseña introducidos no son correctos.");
         }
