@@ -46,6 +46,7 @@ public class Habitaciones extends AppCompatActivity {
         codigoSist = getIntent().getStringExtra("cod_sistema");
 
         this.botonEstadisticas = this.findViewById(R.id.botonEstadist);
+        this.spinnerHabitac = this.findViewById(R.id.spinnerHabitac);
 
         this.listHabitacion = new ArrayList<>();
 
