@@ -27,8 +27,8 @@ public class Habitaciones extends AppCompatActivity {
     private Spinner spinnerHabitac;
     private int idHab = 0;
     private String nameHab = "";
-    ArrayList<String> arrayHab;
-    private ArrayList<Habitacion> listHabitacion;
+    ArrayList<String> arrayHab = new ArrayList<>();
+    private ArrayList<Habitacion> listHabitacion = new ArrayList<>();
     private final Context context;
 
     private String codigoSist = ""; //parametro que pasa main
@@ -36,6 +36,7 @@ public class Habitaciones extends AppCompatActivity {
     public Habitaciones() {
         super();
         this.context = this;
+
     }
 
     @Override
@@ -43,7 +44,7 @@ public class Habitaciones extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_1_habitaciones);
 
-        codigoSist = getIntent().getStringExtra("cod_sistema");
+        this.codigoSist= getIntent().getStringExtra("cod_sistema");
 
         this.botonEstadisticas = this.findViewById(R.id.botonEstadist);
         this.spinnerHabitac = this.findViewById(R.id.spinnerHabitac);
@@ -80,7 +81,7 @@ public class Habitaciones extends AppCompatActivity {
     //Search the cities and fill the spinner with the information
     private void loadHabitaciones() {
         new TaskSelectHabitacion(this).
-                execute("http://192.168.1.108:8080/LMDL_SERVER2/GetHabitacionesSistema?cod_sistema="+codigoSist);
+                execute("http://192.168.1.109:8080/LMDL_SERVER2/GetHabitacionesSistema?cod_sistema="+codigoSist);
               //execute("http://192.168.1.108:8080/LMDL_SERVER2/
              // ComprobarQR?codigo="+codigoQR+"&id_sistema="+1);
 
@@ -90,17 +91,23 @@ public class Habitaciones extends AppCompatActivity {
     {
         Log.e(tag,"Loading habitaciones " + jsonHabitaciones);
         try {
-            ArrayList<String> arrayCities = new ArrayList<>();
+            //ArrayList<String> arrayCities = new ArrayList<>();
             //listStation = new ArrayList<>();
             for (int i = 0; i < jsonHabitaciones.length(); i++) {
                 JSONObject jsonobject = jsonHabitaciones.getJSONObject(i);
-                listHabitacion.add(new Habitacion(jsonobject.getInt("id_habitacion"),
-                        jsonobject.getInt("n_puertas"),jsonobject.getInt("n_ventanas"),
-                        jsonobject.getInt("tamanno"),jsonobject.getInt("cod_sistema_sistema_seguridad"),
-                        jsonobject.getString("descriptivo")));
+                Habitacion habitacion_recibida = new Habitacion();
+                habitacion_recibida.setId_habitacion(jsonobject.getInt("id_habitacion"));
+                habitacion_recibida.setDescriptivo(jsonobject.getString("descriptivo"));
+                habitacion_recibida.setN_puertas(jsonobject.getInt("n_puertas"));
+                habitacion_recibida.setN_ventanas(jsonobject.getInt("n_ventanas"));
+                habitacion_recibida.setTamanno(jsonobject.getInt("tamanno"));
+                habitacion_recibida.setCod_sistema_sistema_seguridad(jsonobject.getInt("cod_sistema_sistema_seguridad"));
+                Log.e(tag, ""+habitacion_recibida.toString());
+                listHabitacion.add(habitacion_recibida);
                 arrayHab.add(jsonobject.getString("descriptivo"));
 
             }
+            Log.e(tag, ""+listHabitacion);
 
             spinnerHabitac.setAdapter(new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, arrayHab));
         }catch (Exception e)

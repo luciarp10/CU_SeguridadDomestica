@@ -32,16 +32,16 @@ public class MainActivity extends AppCompatActivity {
         this.password = (EditText) this.findViewById(R.id.espacioPassword);
         this.mensajeError = (TextView) this.findViewById(R.id.mensajeError);
 
-       /* botonIniSesion.setOnClickListener(new View.OnClickListener() {
+       botonIniSesion.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 comprobarDatos();
             }
 
-        });*/
+        });
 
-
+        /*
         botonIniSesion.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
                 finish();
             }
-        });
+        }); */
 
     }
 
@@ -69,11 +69,13 @@ public class MainActivity extends AppCompatActivity {
                 Intent i = new Intent(MainActivity.this, MenuSistemaAdmin.class);
                 i.putExtra("cod_sistema",respuesta_separada[0]);
                 i.putExtra("usuario", usuario.getText().toString());
+
                 startActivity(i);
-                i.putExtra("cod_sistema", 1); //Se pasa el codigo de sistema al resto de actividades
                 finish();
             } else {
                 Intent i = new Intent(MainActivity.this, MenuSistema.class);
+                i.putExtra("cod_sistema",respuesta_separada[0]);
+                i.putExtra("usuario", usuario.getText().toString());
                 startActivity(i);
                 finish();
             }

@@ -34,8 +34,9 @@ public class MenuSistemaAdmin extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MenuSistemaAdmin.this, Habitaciones.class);
+                i.putExtra("cod_sistema", codigoSist); //Se pasa el codigo de sistema al resto de actividades
                 startActivity(i);
-                i.putExtra("cod_sistema", 1); //Se pasa el codigo de sistema al resto de actividades
+
                 //finish();
             }
         });

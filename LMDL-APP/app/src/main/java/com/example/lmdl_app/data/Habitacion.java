@@ -69,5 +69,16 @@ public class Habitacion {
     }
 
 
+    @Override
+    public String toString() {
+        return "Habitacion{" +
+                "id_habitacion=" + id_habitacion +
+                ", n_puertas=" + n_puertas +
+                ", n_ventanas=" + n_ventanas +
+                ", tamanno=" + tamanno +
+                ", cod_sistema_sistema_seguridad=" + cod_sistema_sistema_seguridad +
+                ", descriptivo='" + descriptivo + '\'' +
+                '}';
+    }
 }
 
