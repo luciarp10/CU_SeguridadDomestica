@@ -51,7 +51,7 @@ public class RegistrarSimulacion extends HttpServlet {
             //Registrar alerta en la base de datos
             Log.log.info("Insertar en alerta registro activación de simulación de presencia por el usuario: "+request.getParameter("usuario"));
             alerta_nueva.setId_alerta(Logic.getUltimaAlerta(Integer.parseInt(request.getParameter("cod_sistema")))+1);
-            alerta_nueva.setInfo("Usuario "+ request.getParameter("usuario") + " activa sensor de presencia " + request.getParameter("id_actuador") + "durante " +request.getParameter("tiempo")+ " segundos");
+            alerta_nueva.setInfo("Usuario "+ request.getParameter("usuario") + " activa sensor de presencia " + request.getParameter("id_actuador") + " durante " +request.getParameter("tiempo")+ " segundos");
             alerta_nueva.setCod_sistema_sistema_seguridad(Integer.parseInt(request.getParameter("cod_sistema")));
             Logic.insertarAlerta(alerta_nueva);
             

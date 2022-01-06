@@ -45,7 +45,7 @@ public class GetRegistrosActuadores extends HttpServlet {
             throws ServletException, IOException {
         ArrayList<Actuador> actuadores= new ArrayList<>();
         ArrayList<Registro_actuador> registros_actuadores = new ArrayList<>();
-        Log.log.info("-- Buscando registros de simulaciones del sistema " + request.getParameter("cod_sistema")+" --");
+        Log.log.info("-- Buscando registros de actuadores del sistema " + request.getParameter("cod_sistema")+" --");
         
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();

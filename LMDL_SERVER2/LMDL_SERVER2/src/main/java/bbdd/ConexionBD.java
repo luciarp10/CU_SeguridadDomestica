@@ -181,7 +181,7 @@ public class ConexionBD {
     
     public static PreparedStatement GetRegistrosAlertas(Connection con){
         return getStatement(con, "SELECT * FROM LMDL_BD.alerta "
-                + "INNER JOIN LMDL_BD.sistema_seguridad on cod_sistema=cod_sistema_sistema_seguridad where cod_sistema=?");
+                + "INNER JOIN LMDL_BD.sistema_seguridad on cod_sistema=cod_sistema_sistema_seguridad where cod_sistema=? order by id_alerta desc");
     }
     
     public static PreparedStatement GetContrasenaUsuario(Connection con){

@@ -34,7 +34,6 @@ public class Habitaciones extends AppCompatActivity {
     private Button botonEstadisticas;
     private Spinner spinnerHabitac;
     private int idHab = 0;
-    private String nameHab = "";
     private ArrayList<String> arrayHab = new ArrayList<>();
     private ArrayList<Habitacion> listHabitacion = new ArrayList<>();
     private ArrayList<Sensor> sensoresHabitacion = new ArrayList<>();
@@ -67,7 +66,7 @@ public class Habitaciones extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 borrarRegistros();
                 idHab = listHabitacion.get(i).getId_habitacion();//Get the id of the selected position
-                Log.i(tag, "Habitacion selected:" + listHabitacion.get(i).getDescriptivo());
+                Log.i(tag, "Habitacion selecionada:" + listHabitacion.get(i).getDescriptivo());
                 loadUltimosRegistros();
             }
 
@@ -81,8 +80,7 @@ public class Habitaciones extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Habitaciones.this, Estadisticas.class);
-                //i.putExtra("stationId", "station" + idStation);
-                //i.putExtra("stationName", nameStation);
+                i.putExtra("cod_sistema", codigoSist);
                 startActivity(i);
                 //finish();
             }
@@ -123,7 +121,6 @@ public class Habitaciones extends AppCompatActivity {
                 arrayHab.add(jsonobject.getString("descriptivo"));
 
             }
-            Log.e(tag, ""+listHabitacion);
 
             spinnerHabitac.setAdapter(new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, arrayHab));
         }catch (Exception e)
@@ -134,7 +131,8 @@ public class Habitaciones extends AppCompatActivity {
     }
 
     public void setUltimosRegistros (JSONArray jsonSensores, JSONArray jsonRegistros){
-        Log.e(tag,"Loading ultimos registros " + jsonSensores);
+        Log.e(tag,"Loading sensores " + jsonSensores);
+        Log.e(tag,"Loading ultimos registros " + jsonRegistros);
         try {
 
             for (int i = 0; i < jsonSensores.length(); i++) {

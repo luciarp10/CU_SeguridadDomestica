@@ -107,16 +107,16 @@ public class MainActivity extends AppCompatActivity {
                 if (barcodes.size() > 0) {
                     // obtenemos el token
                     token = barcodes.valueAt(0).rawValue.toString();
-                    String[] tokenSplit = token.split("/"); //Depende de como los generemos desde la otra aplicación.
+                    String tokenCodUsuario = token.substring(0,5);
                     // verificamos que el token anterior no se igual al actual
                     // esto es util para evitar multiples llamadas empleando el mismo token
                     if (!token.equals(tokenanterior)) {
                         // guardamos el ultimo token procesado
                         tokenanterior = token;
                         TextView saludo = (TextView)findViewById(R.id.saludo);
-                        saludo.setText(tokenSplit[tokenSplit.length-1]);
-                        Log.i("token", token);
-                        comprobarQR(tokenSplit[tokenSplit.length-1], 1);
+                        saludo.setText(tokenCodUsuario);
+                        Log.i("token", tokenCodUsuario);
+                        comprobarQR(tokenCodUsuario, 1);
                     }
 
                         new Thread(new Runnable() {
@@ -139,10 +139,10 @@ public class MainActivity extends AppCompatActivity {
                 }
 
             @SuppressLint("ResourceAsColor")
-            private  void comprobarQR(String codigoQR, int i) {
+            private  void comprobarQR(String codigoQR, int cod_sistema) {
                 TextView saludo = (TextView)findViewById(R.id.saludo);
                 //Aquí iria el WS que lo envía al servidor y comprueba si existe algún usuario con ese código QR/
-                String urlStr = "http://192.168.1.109:8080/LMDL_SERVER2/ComprobarQR?codigo="+codigoQR+"&id_sistema="+1;
+                String urlStr = "http://192.168.1.109:8080/LMDL_SERVER2/ComprobarQR?codigo="+codigoQR+"&id_sistema="+cod_sistema;
                 saludo.setText("Conectando... ");
                 try {
                     URL url = new URL(urlStr);

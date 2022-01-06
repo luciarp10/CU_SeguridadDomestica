@@ -6,20 +6,31 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/grafico"
+        android:layout_width="344dp"
+        android:layout_height="188dp"
+        app:layout_constraintBottom_toTopOf="@+id/spinnerMedida"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerListaHabitaciones"
+        app:layout_constraintVertical_bias="0.481" />
+
     <Spinner
-        android:id="@+id/spinnerListaUsers"
+        android:id="@+id/spinnerListaHabitaciones"
         android:layout_width="249dp"
         android:layout_height="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.827"
+        app:layout_constraintHorizontal_bias="0.746"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.093"
+        app:layout_constraintVertical_bias="0.09"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <Spinner
-        android:id="@+id/spinnerDiasCam"
+        android:id="@+id/spinnerMedida"
         android:layout_width="237dp"
         android:layout_height="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -38,42 +49,72 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.786"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerListaUsers"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerListaHabitaciones"
         app:layout_constraintVertical_bias="0.634"
         tools:ignore="SpeakableTextPresentCheck" />
-
-    <TextView
-        android:id="@+id/textFechaInicio"
-        android:layout_width="161dp"
-        android:layout_height="40dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.848"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.813" />
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="302dp"
-        android:layout_height="172dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.266"
-        tools:srcCompat="@drawable/test1" />
 
     <Button
         android:id="@+id/botonVerInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
         android:text="VER INFORMES"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.857"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/MostrarGrafica"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:text="Ver Grafica"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/botonVerInfo"
+        app:layout_constraintHorizontal_bias="0.568"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textFechaInicio" />
+        app:layout_constraintTop_toBottomOf="@+id/fecha_introducida"
+        app:layout_constraintVertical_bias="0.972" />
+
+    <EditText
+        android:id="@+id/fecha_introducida"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="date"
+        app:layout_constraintBottom_toTopOf="@+id/botonVerInfo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.81"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerPeriodo"
+        app:layout_constraintVertical_bias="0.25" />
+
+    <TextView
+        android:id="@+id/mensajeErrorFecha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#F31F1F"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/botonVerInfo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.892"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fecha_introducida"
+        app:layout_constraintVertical_bias="0.937" />
+
+    <TextView
+        android:id="@+id/textFechaEst"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="163dp"
+        android:layout_marginBottom="48dp"
+        android:text="Fecha inicio: \n yyyy-mm-dd"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/MostrarGrafica"
+        app:layout_constraintEnd_toStartOf="@+id/fecha_introducida"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/grafico"
+        app:layout_constraintVertical_bias="0.38" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
