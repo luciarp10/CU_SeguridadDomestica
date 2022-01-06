@@ -59,8 +59,6 @@ public class Habitaciones extends AppCompatActivity {
         this.listHabitacion = new ArrayList<>();
 
 
-
-
         spinnerHabitac.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {

@@ -112,7 +112,6 @@ public class Estadisticas extends AppCompatActivity {
                 periodo_seleccionado=spinnerPeriodo.getSelectedItem().toString();
                 fecha_introducida= fechainicio.getText().toString();
 
-                Log.i(tag, ""+idHab+medida_seleccionada+periodo_seleccionado+fecha_introducida);
                 if(!comprobarFormatoFecha(fecha_introducida)){
                     mensajeError.setText("El formato es incorrecto. Recuerda: yyyy-mm-dd");
                 }
