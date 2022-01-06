@@ -21,11 +21,13 @@ import com.example.lmdl_app.data.Sensor;
 import com.example.lmdl_app.tasks.TaskEstadisticas;
 import com.example.lmdl_app.tasks.TaskSelectHabitacion;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.IMarker;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.utils.MPPointF;
 
@@ -83,10 +85,14 @@ public class Estadisticas extends AppCompatActivity {
         spinnerMedidas.setAdapter(new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, arrayMedidas));
         String[] arrayPeriodos={"Dia", "Semana", "Mes", "Año"};
         spinnerPeriodo.setAdapter(new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, arrayPeriodos));
+
+        //Poner gráfico vacío
         lineChart = this.findViewById(R.id.grafico);
-        LineData datosVacios = new LineData();
-        lineChart.setData(datosVacios);
+        lineChart.setPinchZoom(true);
+        lineChart.setNoDataText ("Pulsa Ver gráfica para cargar datos.");
         lineChart.getDescription().setEnabled(false);
+
+        //Cargar habitaciones disponibles
         loadHabitaciones();
 
         botonInformes.setOnClickListener(new View.OnClickListener() {
@@ -173,6 +179,8 @@ public class Estadisticas extends AppCompatActivity {
     }
 
     public void representarResultados(JSONArray jsonSensores, JSONArray jsonRegistros){
+        ArrayList<String> fechas_horas=new ArrayList<>();
+
         Log.e(tag,"Loading sensores " + jsonSensores);
         Log.e(tag,"Loading registros " + jsonRegistros);
         int id_sensor=-1;
@@ -196,6 +204,8 @@ public class Estadisticas extends AppCompatActivity {
                     registro_recibido.setId_sensor_sensor(jsonObject.getInt("id_sensor_sensor"));
                     registro_recibido.setValor(jsonObject.getDouble("valor"));
                     registros_estadisticos.add(registro_recibido);
+                    String[] hora_separada = hora.toString().split(" ");
+                    fechas_horas.add(""+date+"\n"+hora_separada[1]);
                 }
             }
 
@@ -209,7 +219,21 @@ public class Estadisticas extends AppCompatActivity {
         lineChart = this.findViewById(R.id.grafico);
         XAxis xAxis = lineChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setEnabled(false);
+        //xAxis.setEnabled(false);
+        // the labels that should be drawn on the XAxis
+
+        ValueFormatter formatter = new ValueFormatter() {
+            @Override
+            public String getAxisLabel(float value, AxisBase axis) {
+                return fechas_horas.get((int) value);
+            }
+        };
+        xAxis = lineChart.getXAxis();
+        xAxis.setLabelRotationAngle(45);
+        xAxis.setGranularity(1f); // minimum axis-step (interval) is 1
+        xAxis.setTextSize(8f);
+        xAxis.setValueFormatter(formatter);
+
 
         // Rellenamos datos+
         Log.i(tag, ""+registros_estadisticos);
@@ -223,9 +247,25 @@ public class Estadisticas extends AppCompatActivity {
 
         // Asociamos al gráfico
         LineData lineData = new LineData();
-        lineData.addDataSet(lineDataSet);
-        lineChart.setData(lineData);
-        lineChart.getDescription().setEnabled(false);
+
+        if (lineEntries.isEmpty()){
+            lineChart.setData(lineData);
+            lineChart.getDescription().setEnabled(true);
+            lineChart.getDescription().setText("No hay datos para el intervalo seleccionado");
+            lineChart.invalidate();
+        }
+        else {
+            lineData.addDataSet(lineDataSet);
+            lineChart.setData(lineData);
+            lineChart.getDescription().setEnabled(false);
+            lineChart.setDragEnabled(true); //Zoom
+            lineChart.setExtraBottomOffset(20f);
+            lineChart.setExtraRightOffset(30f);
+            lineChart.setExtraLeftOffset (10f); // Espaciado
+            lineChart.invalidate();
+        }
+
+
     }
 
     private boolean comprobarFormatoFecha(String fecha){
@@ -240,6 +280,7 @@ public class Estadisticas extends AppCompatActivity {
             else if((Integer.parseInt(fecha_separada[1]) > 12 || Integer.parseInt(fecha_separada[2])>31)){
                 return false;
             }
+
         }
         return true;
     }

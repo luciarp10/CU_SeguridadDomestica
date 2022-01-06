@@ -83,7 +83,6 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="date"
-        android:text="yyyy-mm-dd"
         app:layout_constraintBottom_toTopOf="@+id/botonVerInfo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.81"
@@ -103,5 +102,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fecha_introducida"
         app:layout_constraintVertical_bias="0.937" />
+
+    <TextView
+        android:id="@+id/textFechaEst"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="163dp"
+        android:layout_marginBottom="48dp"
+        android:text="Fecha inicio: \n yyyy-mm-dd"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/MostrarGrafica"
+        app:layout_constraintEnd_toStartOf="@+id/fecha_introducida"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/grafico"
+        app:layout_constraintVertical_bias="0.38" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
