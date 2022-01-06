@@ -15,7 +15,7 @@ public class MenuSistemaAdmin extends AppCompatActivity {
     private Button botonAdminUsers;
 
     private String codigoSist = ""; //parametro que pasa main
-
+    private String usuariologin = ""; //Parametro que pasa main
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +29,7 @@ public class MenuSistemaAdmin extends AppCompatActivity {
         this.botonAdminUsers = this.findViewById(R.id.botonAdminUser);
 
         codigoSist = getIntent().getStringExtra("cod_sistema");
+        usuariologin = getIntent().getStringExtra("usuario");
 
         botonHabitaciones.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,6 +46,8 @@ public class MenuSistemaAdmin extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MenuSistemaAdmin.this, Seguridad.class);
+                i.putExtra("cod_sistema", codigoSist);
+                i.putExtra("usuario", usuariologin);
                 startActivity(i);
                 //finish();
             }
@@ -54,6 +57,7 @@ public class MenuSistemaAdmin extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MenuSistemaAdmin.this, Estadisticas.class);
+                i.putExtra("cod_sistema", codigoSist);
                 startActivity(i);
                 //finish();
             }
