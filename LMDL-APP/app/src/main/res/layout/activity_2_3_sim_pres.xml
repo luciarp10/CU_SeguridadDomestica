@@ -10,7 +10,7 @@
         android:id="@+id/botonVerRegSim"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="VER REGISTROS SIMULACIONES"
+        android:text="VER REGISTROS ACTUADORES"
         app:layout_constraintBottom_toTopOf="@+id/botonProgSim"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

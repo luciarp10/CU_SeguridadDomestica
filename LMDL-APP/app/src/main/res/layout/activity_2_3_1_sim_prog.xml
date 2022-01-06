@@ -9,7 +9,7 @@
         android:id="@+id/textoSimProg"
         android:layout_width="261dp"
         android:layout_height="25dp"
-        android:text="REGISTRO SIMULACIONES"
+        android:text="REGISTRO ACTUADORES"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textStyle="bold"
