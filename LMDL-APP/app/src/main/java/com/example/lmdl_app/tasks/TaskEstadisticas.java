@@ -4,13 +4,8 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.example.lmdl_app.Estadisticas;
-import com.example.lmdl_app.Habitaciones;
-import com.example.lmdl_app.MenuSistema;
-import com.example.lmdl_app.MenuSistemaAdmin;
 
 import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -19,7 +14,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 
 /**
  * Task to connect with the API to request the list of cities and stations

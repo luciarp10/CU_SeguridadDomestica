@@ -16,6 +16,7 @@ public class Seguridad extends AppCompatActivity {
     private Button botonEstadoAlarma;
     private Button botonVerQR;
 
+    private String cod_sistema = ""; //Parametro que recibe de menuSistema o menuSistemaAdmin
     private String usuariologin = ""; //Parametro que recibe de menuSistema o menuSistemaAdmin
 
     @Override
@@ -24,6 +25,7 @@ public class Seguridad extends AppCompatActivity {
         setContentView(R.layout.activity_2_seguridad);
 
         usuariologin = getIntent().getStringExtra("usuario");
+        cod_sistema = getIntent().getStringExtra("cod_sistema");
 
         this.botonRegistros = this.findViewById(R.id.botonReg);
         this.botonCamaras = this.findViewById(R.id.botonCam);
@@ -35,6 +37,7 @@ public class Seguridad extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Seguridad.this, Registros.class);
+                i.putExtra("cod_sistema", cod_sistema );
                 startActivity(i);
                 //finish();
             }
