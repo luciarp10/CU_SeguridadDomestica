@@ -56,6 +56,8 @@ public class Seguridad extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Seguridad.this, SimulacionPresencia.class);
+                i.putExtra("cod_sistema", cod_sistema );
+                i.putExtra("usuario", usuariologin);
                 startActivity(i);
                 //finish();
             }
@@ -65,6 +67,8 @@ public class Seguridad extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Seguridad.this, EstadoAlarma.class);
+                i.putExtra("cod_sistema", cod_sistema );
+                i.putExtra("usuario", usuariologin);
                 startActivity(i);
                 //finish();
             }
