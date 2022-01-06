@@ -46,39 +46,59 @@ public class ComprobarQR extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            int codigo_leido = Integer.parseInt(request.getParameter("codigo"));
+            int codigo_leido;
             int codigo_sistema = Integer.parseInt(request.getParameter("id_sistema"));
-            String usuario = Logic.getUsuarioQR(codigo_leido, codigo_sistema);
-            String jsonUsuario = new Gson().toJson(usuario);
-            Log.log.info("JSON value => {}", jsonUsuario);
-            //Registrar alerta en la base de datos
-            if(!usuario.equals("")){
-                Log.log.info("Insertar en alerta registro de entrada de: "+usuario);
-                Alerta alerta_nueva=new Alerta();
-                alerta_nueva.setId_alerta(Logic.getUltimaAlerta(codigo_sistema)+1);
-                alerta_nueva.setInfo("Alarma desconectada por "+usuario+" mediante código QR.");
-                alerta_nueva.setCod_sistema_sistema_seguridad(codigo_sistema);
-                Logic.insertarAlerta(alerta_nueva);
-                //Cambiar el estado de la alarma en la base de datos
-                Logic.cambiarEstadoSistema(0, codigo_sistema);
-                //Publicar topic para que los sensores de la alarma se apaguen (desconecten) 
-                MqttBroker broker = new MqttBroker();
-                MqttPublisher.publish(broker, "SistSeg"+codigo_sistema+"/Alerta", "Desactivar");
+            
+            try{
+                codigo_leido = Integer.parseInt(request.getParameter("codigo"));
             }
-            else{
+            catch (Exception e){
+                codigo_leido=-1;
+            }
+            
+            if(codigo_leido!=-1){
+                String usuario = Logic.getUsuarioQR(codigo_leido, codigo_sistema);
+                String jsonUsuario = new Gson().toJson(usuario);
+                Log.log.info("JSON value => {}", jsonUsuario);
+                //Registrar alerta en la base de datos
+                if(!usuario.equals("")){ //El usuario está registrado
+                    Log.log.info("Insertar en alerta registro de entrada de: "+usuario);
+                    Alerta alerta_nueva=new Alerta();
+                    alerta_nueva.setId_alerta(Logic.getUltimaAlerta(codigo_sistema)+1);
+                    alerta_nueva.setInfo("Alarma desconectada por "+usuario+" mediante código QR.");
+                    alerta_nueva.setCod_sistema_sistema_seguridad(codigo_sistema);
+                    Logic.insertarAlerta(alerta_nueva);
+                    //Cambiar el estado de la alarma en la base de datos
+                    Logic.cambiarEstadoSistema(0, codigo_sistema);
+                    //Publicar topic para que los sensores de la alarma se apaguen (desconecten) 
+                    MqttBroker broker = new MqttBroker();
+                    MqttPublisher.publish(broker, "SistSeg"+codigo_sistema+"/Alerta", "Desactivar");
+                }
+                else{ //El usuario no está registrado en la bd o no en ese sistema de seguridad
+                    Log.log.info("Insertar en Alerta registro de entrada incorrecto.");
+                    Alerta alerta_nueva = new Alerta();
+                    alerta_nueva.setId_alerta(Logic.getUltimaAlerta(codigo_sistema)+1);
+                    alerta_nueva.setInfo("Intento de desconexión de alarma incorrecto. Código QR desconocido.");
+                    alerta_nueva.setCod_sistema_sistema_seguridad(codigo_sistema);
+                    Logic.insertarAlerta(alerta_nueva);
+                }
+                out.println(jsonUsuario);
+            }
+            else { //El codigo QR no es solo numeros así que seguro que es un codigo que no pertenece a la app LMDL-APP
                 Log.log.info("Insertar en Alerta registro de entrada incorrecto.");
-                Alerta alerta_nueva = new Alerta();
-                alerta_nueva.setId_alerta(Logic.getUltimaAlerta(codigo_sistema)+1);
-                alerta_nueva.setInfo("Intento de desconexión de alarma incorrecto. Código QR desconocido.");
-                alerta_nueva.setCod_sistema_sistema_seguridad(codigo_sistema);
-                Logic.insertarAlerta(alerta_nueva);
+                    Alerta alerta_nueva = new Alerta();
+                    alerta_nueva.setId_alerta(Logic.getUltimaAlerta(codigo_sistema)+1);
+                    alerta_nueva.setInfo("Intento de desconexión de alarma incorrecto. Código QR desconocido.");
+                    alerta_nueva.setCod_sistema_sistema_seguridad(codigo_sistema);
+                    Logic.insertarAlerta(alerta_nueva);
+                    out.println(-1);
             }
-            out.println(jsonUsuario);
+
         }
         catch (NumberFormatException nfe) 
         {
             out.println("-1");
-            Log.log.error("Number Format Exception: {}", nfe);
+            //Log.log.error("Number Format Exception: {}", nfe);
 	} catch (IndexOutOfBoundsException iobe) 
         {
             out.println("-1");
