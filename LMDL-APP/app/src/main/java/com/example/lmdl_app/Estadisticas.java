@@ -53,6 +53,7 @@ public class Estadisticas extends AppCompatActivity {
     private String medida_seleccionada;
     private String periodo_seleccionado;
     private String fecha_introducida;
+    private ArrayList<Registro_sensor> registros_estadisticos = new ArrayList<>();
 
     public Estadisticas() {
         super();
@@ -86,13 +87,19 @@ public class Estadisticas extends AppCompatActivity {
 
         //Cargar habitaciones disponibles
         loadHabitaciones();
-
+        botonInformes.setEnabled(false);
         botonInformes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Estadisticas.this, Informes.class);
+                i.putExtra("media", ""+calcularMedia());
+                i.putExtra("max", ""+buscarMax());
+                i.putExtra("min", ""+buscarMin());
+                i.putExtra("medida", medida_seleccionada);
+                i.putExtra("periodo", periodo_seleccionado);
+                i.putExtra("fecha", fecha_introducida);
                 startActivity(i);
-                //finish();
+
             }
         });
 
@@ -109,6 +116,7 @@ public class Estadisticas extends AppCompatActivity {
                 }
                 else{
                     try {
+                        botonInformes.setEnabled(true);
                         loadRegistrosEstadisticos();
                     } catch (ParseException e) {
                         e.printStackTrace();
@@ -118,8 +126,34 @@ public class Estadisticas extends AppCompatActivity {
         });
 
 
+    }
 
-
+    private double calcularMedia() {
+        int cont=0;
+        double suma=0;
+        for(int i=0; i<registros_estadisticos.size();i++){
+            cont++;
+            suma+=registros_estadisticos.get(i).getValor();
+        }
+        return suma/cont;
+    }
+    private double buscarMax() {
+        double max=registros_estadisticos.get(0).getValor();
+        for(int i=0; i<registros_estadisticos.size();i++){
+            if(registros_estadisticos.get(i).getValor()>max){
+                max=registros_estadisticos.get(i).getValor();
+            }
+        }
+        return max;
+    }
+    private double buscarMin(){
+        double min=registros_estadisticos.get(0).getValor();
+        for(int i=0; i<registros_estadisticos.size();i++){
+            if(registros_estadisticos.get(i).getValor()<min){
+                min=registros_estadisticos.get(i).getValor();
+            }
+        }
+        return min;
     }
 
     private void loadHabitaciones() {
@@ -175,11 +209,12 @@ public class Estadisticas extends AppCompatActivity {
         Log.e(tag,"Loading sensores " + jsonSensores);
         Log.e(tag,"Loading registros " + jsonRegistros);
         int id_sensor=-1;
-        ArrayList<Registro_sensor> registros_estadisticos = new ArrayList<>();
+        registros_estadisticos = new ArrayList<>();
         try {
-
+            Log.i(tag, "medida seleccionada: "+medida_seleccionada);
             for (int i = 0; i < jsonSensores.length(); i++) { //Guardar el id del sensor de la medida que se ha seleccionado
                 JSONObject jsonobject = jsonSensores.getJSONObject(i);
+
                 if(jsonobject.getString("tipo").contains(medida_seleccionada)){
                     id_sensor = jsonobject.getInt("id_sensor");
                 }
@@ -210,8 +245,7 @@ public class Estadisticas extends AppCompatActivity {
         lineChart = this.findViewById(R.id.grafico);
         XAxis xAxis = lineChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        //xAxis.setEnabled(false);
-        // the labels that should be drawn on the XAxis
+
 
         ValueFormatter formatter = new ValueFormatter() {
             @Override
@@ -226,9 +260,9 @@ public class Estadisticas extends AppCompatActivity {
         xAxis.setValueFormatter(formatter);
 
 
-        // Rellenamos datos+
-        Log.i(tag, ""+registros_estadisticos);
-        ArrayList<Entry> lineEntries = new ArrayList<Entry>();
+        // Rellenamos datos
+        Log.i(tag, "Tamaño: "+registros_estadisticos.size());
+        ArrayList<Entry> lineEntries = new ArrayList<>();
         for (int i = 0; i<registros_estadisticos.size(); i++){
             lineEntries.add(new Entry((float) i, (float) registros_estadisticos.get(i).getValor()));
         }
@@ -239,7 +273,7 @@ public class Estadisticas extends AppCompatActivity {
         // Asociamos al gráfico
         LineData lineData = new LineData();
 
-        if (lineEntries.isEmpty()){
+        if (lineEntries.isEmpty() || lineEntries.size()<2){
             lineChart.setData(lineData);
             lineChart.getDescription().setEnabled(true);
             lineChart.getDescription().setText("No hay datos para el intervalo seleccionado");
@@ -254,6 +288,7 @@ public class Estadisticas extends AppCompatActivity {
             lineChart.setExtraRightOffset(30f);
             lineChart.setExtraLeftOffset (10f); // Espaciado
             lineChart.invalidate();
+
         }
 
 

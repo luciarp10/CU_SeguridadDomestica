@@ -26,7 +26,7 @@
         android:text="Temperatura:"
         android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/textoPeriodo"
-        app:layout_constraintEnd_toStartOf="@+id/espacioTemperatura"
+        app:layout_constraintEnd_toStartOf="@+id/espacioMedida"
         app:layout_constraintHorizontal_bias="0.525"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -37,10 +37,10 @@
         android:layout_marginTop="60dp"
         android:text="Humedad:"
         android:textColor="@color/black"
-        app:layout_constraintEnd_toStartOf="@+id/espacioHumedad"
+        app:layout_constraintEnd_toStartOf="@+id/espacioPeriodo"
         app:layout_constraintHorizontal_bias="0.628"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/espacioTemperatura" />
+        app:layout_constraintTop_toBottomOf="@+id/espacioMedida" />
 
     <TextView
         android:id="@+id/textoFechaInformes"
@@ -49,7 +49,7 @@
         android:layout_marginTop="64dp"
         android:text="Luminosidad:"
         android:textColor="@color/black"
-        app:layout_constraintEnd_toStartOf="@+id/espacioLuminosidad"
+        app:layout_constraintEnd_toStartOf="@+id/espacioFecha"
         app:layout_constraintHorizontal_bias="0.467"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textoPeriodo" />
@@ -69,7 +69,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <EditText
-        android:id="@+id/espacioTemperatura"
+        android:id="@+id/espacioMedida"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="60dp"
@@ -77,12 +77,12 @@
         android:ems="10"
         android:inputType="numberDecimal"
         android:minHeight="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/espacioHumedad"
+        app:layout_constraintBottom_toTopOf="@+id/espacioPeriodo"
         app:layout_constraintEnd_toEndOf="parent"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <EditText
-        android:id="@+id/espacioHumedad"
+        android:id="@+id/espacioPeriodo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="60dp"
@@ -90,12 +90,12 @@
         android:ems="10"
         android:inputType="numberDecimal"
         android:minHeight="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/espacioLuminosidad"
+        app:layout_constraintBottom_toTopOf="@+id/espacioFecha"
         app:layout_constraintEnd_toEndOf="parent"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <EditText
-        android:id="@+id/espacioLuminosidad"
+        android:id="@+id/espacioFecha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="56dp"
@@ -131,7 +131,7 @@
         android:id="@+id/spinnerHabitac"
         android:layout_width="337dp"
         android:layout_height="50dp"
-        app:layout_constraintBottom_toTopOf="@+id/espacioTemperatura"
+        app:layout_constraintBottom_toTopOf="@+id/espacioMedida"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"

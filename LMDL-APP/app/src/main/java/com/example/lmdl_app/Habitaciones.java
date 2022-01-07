@@ -10,7 +10,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -24,9 +23,7 @@ import org.json.JSONObject;
 
 import java.sql.Date;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class Habitaciones extends AppCompatActivity {
 
@@ -160,15 +157,15 @@ public class Habitaciones extends AppCompatActivity {
             for (int i=0;i<ultimosRegistros.size();i++){
 
                 if(sensoresHabitacion.get(i).getTipo().contains("Temperatura")){
-                    EditText espacioTemp = (EditText) this.findViewById(R.id.espacioTemperatura);
+                    EditText espacioTemp = (EditText) this.findViewById(R.id.espacioMedida);
                     espacioTemp.setText(""+ultimosRegistros.get(i).getValor()+" ºC");
                 }
                 else if(sensoresHabitacion.get(i).getTipo().contains("Humedad")){
-                    EditText espacioHum = (EditText) this.findViewById(R.id.espacioHumedad);
+                    EditText espacioHum = (EditText) this.findViewById(R.id.espacioPeriodo);
                     espacioHum.setText(""+ultimosRegistros.get(i).getValor()+ " %RH");
                 }
                 else if(sensoresHabitacion.get(i).getTipo().contains("Luminosidad")){
-                    EditText espacioLum = (EditText) this.findViewById(R.id.espacioLuminosidad);
+                    EditText espacioLum = (EditText) this.findViewById(R.id.espacioFecha);
                     espacioLum.setText(""+ultimosRegistros.get(i).getValor()+" lum");
                 }
                 else if(sensoresHabitacion.get(i).getTipo().contains("Humo")){
@@ -242,9 +239,9 @@ public class Habitaciones extends AppCompatActivity {
     }
 
     private void borrarRegistros(){
-        EditText espacioTemp = (EditText) this.findViewById(R.id.espacioTemperatura);
-        EditText espacioHum = (EditText) this.findViewById(R.id.espacioHumedad);
-        EditText espacioLum = (EditText) this.findViewById(R.id.espacioLuminosidad);
+        EditText espacioTemp = (EditText) this.findViewById(R.id.espacioMedida);
+        EditText espacioHum = (EditText) this.findViewById(R.id.espacioPeriodo);
+        EditText espacioLum = (EditText) this.findViewById(R.id.espacioFecha);
         EditText espacioCAire = (EditText) this.findViewById(R.id.espacioCAire);
         espacioTemp.setText(" ");
         espacioTemp.setFocusable(false);
