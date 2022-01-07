@@ -264,4 +264,8 @@ public class ConexionBD {
     public static PreparedStatement InsertarRegistroCamara (Connection con){
         return getStatement(con, "INSERT INTO LMDL_BD.registro_camara VALUES (?,?,?,?)");
     }
+    
+    public static PreparedStatement GetUltimoQrReg (Connection con){
+        return getStatement(con, "SELECT codigo_qr FROM LMDL_BD.identificacion order by codigo_qr desc limit 1");
+    }
 }
