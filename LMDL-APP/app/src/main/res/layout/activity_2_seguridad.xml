@@ -7,57 +7,62 @@
 
     <Button
         android:id="@+id/botonReg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="231dp"
+        android:layout_height="48dp"
         android:text="VER REGISTROS ALERTAS"
-        app:layout_constraintBottom_toTopOf="@+id/botonCam"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.551" />
+        app:layout_constraintVertical_bias="0.117" />
 
     <Button
         android:id="@+id/botonCam"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="231dp"
+        android:layout_height="48dp"
         android:layout_marginBottom="64dp"
         android:text="CÁMARAS"
         app:layout_constraintBottom_toTopOf="@+id/botonSimPres"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.988" />
 
     <Button
         android:id="@+id/botonSimPres"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="231dp"
+        android:layout_height="48dp"
         android:layout_marginBottom="64dp"
         android:text="REGISTROS ACTUADORES"
         app:layout_constraintBottom_toTopOf="@+id/botonEstAlar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/botonEstAlar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="231dp"
+        android:layout_height="48dp"
         android:layout_marginBottom="48dp"
         android:text="ESTADO DE ALARMA"
         app:layout_constraintBottom_toTopOf="@+id/botonMiQR"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/botonMiQR"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="84dp"
+        android:layout_width="231dp"
+        android:layout_height="48dp"
         android:text="VER MI QR"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.888" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,14 +8,15 @@
 
     <Button
         android:id="@+id/botonVerFotos"
-        android:layout_width="137dp"
-        android:layout_height="49dp"
-        android:layout_marginBottom="208dp"
+        android:layout_width="150dp"
+        android:layout_height="55dp"
         android:text="VER FOTOS"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.77"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.784"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.651" />
 
     <Spinner
         android:id="@+id/spinnerListaCamaras"
@@ -30,27 +31,28 @@
 
     <Button
         android:id="@+id/botonHacFot"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="55dp"
         android:text="HACER FOTO"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.759"
+        app:layout_constraintHorizontal_bias="0.791"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/botonVerFotos"
-        app:layout_constraintVertical_bias="0.155" />
+        app:layout_constraintVertical_bias="0.164" />
 
     <EditText
         android:id="@+id/editTextDate"
         android:layout_width="191dp"
         android:layout_height="48dp"
         android:layout_marginTop="28dp"
-        android:layout_marginEnd="28dp"
         android:layout_marginBottom="126dp"
         android:ems="10"
         android:inputType="date"
         app:layout_constraintBottom_toTopOf="@+id/botonVerFotos"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.872"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerListaCamaras"
         app:layout_constraintVertical_bias="0.0"
         tools:ignore="SpeakableTextPresentCheck" />
@@ -69,8 +71,10 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/editTextDate"
+        app:layout_constraintHorizontal_bias="0.166"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerListaCamaras" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerListaCamaras"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/textViewSelCam"

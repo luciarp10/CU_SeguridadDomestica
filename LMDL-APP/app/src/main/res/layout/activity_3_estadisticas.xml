@@ -31,7 +31,7 @@
 
     <Spinner
         android:id="@+id/spinnerMedida"
-        android:layout_width="237dp"
+        android:layout_width="249dp"
         android:layout_height="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -43,8 +43,8 @@
 
     <Spinner
         android:id="@+id/spinnerPeriodo"
-        android:layout_width="233dp"
-        android:layout_height="52dp"
+        android:layout_width="249dp"
+        android:layout_height="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.786"
@@ -55,27 +55,28 @@
 
     <Button
         android:id="@+id/botonVerInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
+        android:layout_width="138dp"
+        android:layout_height="51dp"
         android:text="VER INFORMES"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.857"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.845"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.947" />
 
     <Button
         android:id="@+id/MostrarGrafica"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="138dp"
+        android:layout_height="51dp"
         android:layout_marginBottom="24dp"
         android:text="Ver Grafica"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/botonVerInfo"
-        app:layout_constraintHorizontal_bias="0.568"
+        app:layout_constraintHorizontal_bias="0.565"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fecha_introducida"
-        app:layout_constraintVertical_bias="0.972" />
+        app:layout_constraintVertical_bias="0.842" />
 
     <EditText
         android:id="@+id/fecha_introducida"
@@ -83,12 +84,12 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="date"
-        app:layout_constraintBottom_toTopOf="@+id/botonVerInfo"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.81"
+        app:layout_constraintHorizontal_bias="0.83"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerPeriodo"
-        app:layout_constraintVertical_bias="0.25" />
+        app:layout_constraintVertical_bias="0.081" />
 
     <TextView
         android:id="@+id/mensajeErrorFecha"
@@ -110,11 +111,12 @@
         android:layout_marginTop="163dp"
         android:layout_marginBottom="48dp"
         android:text="Fecha inicio: \n yyyy-mm-dd"
+        android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/MostrarGrafica"
         app:layout_constraintEnd_toStartOf="@+id/fecha_introducida"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/grafico"
-        app:layout_constraintVertical_bias="0.38" />
+        app:layout_constraintVertical_bias="0.571" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

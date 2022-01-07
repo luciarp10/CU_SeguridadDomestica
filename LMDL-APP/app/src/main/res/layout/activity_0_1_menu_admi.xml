@@ -7,45 +7,50 @@
 
     <Button
         android:id="@+id/botonHab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="226dp"
+        android:layout_height="45dp"
         android:text="HABITACIONES"
-        app:layout_constraintBottom_toTopOf="@+id/botonSeg"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.596" />
+        app:layout_constraintVertical_bias="0.131" />
 
     <Button
         android:id="@+id/botonSeg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="226dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="58dp"
         android:layout_marginBottom="60dp"
         android:text="SEGURIDAD"
         app:layout_constraintBottom_toTopOf="@+id/botonEst"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/botonHab" />
 
     <Button
         android:id="@+id/botonEst"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="226dp"
+        android:layout_height="45dp"
         android:layout_marginBottom="68dp"
         android:text="ESTADISTICAS"
         app:layout_constraintBottom_toTopOf="@+id/botonAdminUser"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/botonAdminUser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="140dp"
+        android:layout_width="226dp"
+        android:layout_height="45dp"
         android:text="ADMINISTRAR USUARIOS"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.759" />
 </androidx.constraintlayout.widget.ConstraintLayout>

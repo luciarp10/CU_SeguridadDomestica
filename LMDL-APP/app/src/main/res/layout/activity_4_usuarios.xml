@@ -8,14 +8,15 @@
 
     <Button
         android:id="@+id/botonAñadirU"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="248dp"
+        android:layout_width="169dp"
+        android:layout_height="54dp"
         android:text="AÑADIR USUARIO"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.542" />
 
     <Spinner
         android:id="@+id/spinnerListaCamaras"
@@ -30,8 +31,8 @@
 
     <Button
         android:id="@+id/botonBorrUser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="169dp"
+        android:layout_height="54dp"
         android:text="BORRAR USUARIO"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -69,8 +70,8 @@
 
     <Button
         android:id="@+id/botonRecargar"
-        android:layout_width="164dp"
-        android:layout_height="46dp"
+        android:layout_width="169dp"
+        android:layout_height="54dp"
         android:text="Actualizar "
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
