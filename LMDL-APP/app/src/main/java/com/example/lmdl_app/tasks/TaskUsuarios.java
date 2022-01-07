@@ -4,11 +4,11 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.example.lmdl_app.Habitaciones;
+import com.example.lmdl_app.NuevoUsuario;
 import com.example.lmdl_app.RegistrarSimulacion;
+import com.example.lmdl_app.Usuarios;
 
 import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -22,18 +22,18 @@ import java.util.ArrayList;
 /**
  * Task to connect with the API to request the list of cities and stations
  */
-public class TaskSelectHabitacion extends AsyncTask<String,Void, String>
+public class TaskUsuarios extends AsyncTask<String,Void, String>
 {
-    private String tag = "TaskSelectHabitacion";
-    private Habitaciones activity=null;
-    private RegistrarSimulacion activityRegSim=null;
+    private String tag = "TaskRegistrarSimulacion";
+    private Usuarios activity;
+    private NuevoUsuario activityNewUser;
     private String urlStr = "";
 
-    public TaskSelectHabitacion(Habitaciones activity)
+    public TaskUsuarios(Usuarios activity)
     {
         this.activity = activity;
     }
-    public TaskSelectHabitacion(RegistrarSimulacion activityRegSim){ this.activityRegSim = activityRegSim;}
+    public TaskUsuarios(NuevoUsuario activityNewUser){ this.activityNewUser = activityNewUser;}
 
     @Override
     protected String doInBackground(String... uri) {
@@ -62,28 +62,16 @@ public class TaskSelectHabitacion extends AsyncTask<String,Void, String>
             Log.d(tag, "get json: " + response);
 
             //Read Responses and fill the spinner
-            if(urlStr.contains("GetHabitacionesSistema"))
+            if(urlStr.contains("GetUsuariosSistema"))
             {
-                JSONArray jsonarrayHabs = new JSONArray(response);
-                if(activity!=null){
-                    activity.setListHabitacion(jsonarrayHabs);
-                }
-                else {
-                    activityRegSim.setListHabitacion(jsonarrayHabs);
-                }
-
+                JSONArray jsonarrayUsuarios = new JSONArray(response);
+                activity.setListUsuarios(jsonarrayUsuarios);
             }
-            else {
-                if (urlStr.contains("GetUltRegistrosEstadisticosHabitacion"))
-                {
-                    String[] response_separada;
-                    response_separada=response.split("]");
-                    response_separada[0]=response_separada[0]+"]";
-                    response_separada[1]=response_separada[1]+"]";
-                    JSONArray jsonSensores = new JSONArray(response_separada[0]);
-                    JSONArray jsonRegistros = new JSONArray(response_separada[1]);
-                    activity.setUltimosRegistros(jsonSensores, jsonRegistros);
-                }
+            else if (urlStr.contains("BorrarUsuarioSistema")){
+                activity.actualizar();
+            }
+            else if (urlStr.contains("InsertarUsuarioSistema")){
+                activityNewUser.comprobarResultadoRegistro(response);
             }
         }catch (Exception e)
         {

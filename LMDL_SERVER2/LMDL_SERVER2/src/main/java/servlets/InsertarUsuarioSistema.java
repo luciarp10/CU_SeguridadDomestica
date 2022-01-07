@@ -59,7 +59,8 @@ public class InsertarUsuarioSistema extends HttpServlet {
                 out.println(json);
             }
             else{
-                usuario_nuevo.setCodigo_qr(Integer.parseInt(request.getParameter("cod_qr")));
+                int cod_qr = Logic.getUltimoQr()+1;
+                usuario_nuevo.setCodigo_qr(cod_qr);
                 usuario_nuevo.setNombre(request.getParameter("nombre_usuario"));
                 usuario_nuevo.setPassword(request.getParameter("password"));
                 usuario_nuevo.setCod_sistema_sistema_seguridad(Integer.parseInt(request.getParameter("cod_sistema")));

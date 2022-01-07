@@ -2,11 +2,9 @@ package com.example.lmdl_app;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Canvas;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,19 +15,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.lmdl_app.data.Habitacion;
 import com.example.lmdl_app.data.Registro_sensor;
-import com.example.lmdl_app.data.Sensor;
 import com.example.lmdl_app.tasks.TaskEstadisticas;
-import com.example.lmdl_app.tasks.TaskSelectHabitacion;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
-import com.github.mikephil.charting.components.IMarker;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.ValueFormatter;
-import com.github.mikephil.charting.highlight.Highlight;
-import com.github.mikephil.charting.utils.MPPointF;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -37,7 +30,6 @@ import org.json.JSONObject;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -74,7 +66,7 @@ public class Estadisticas extends AppCompatActivity {
 
         cod_sistema =getIntent().getStringExtra("cod_sistema");
         this.botonInformes = this.findViewById(R.id.botonVerInfo);
-        this.spinnerHabitaciones=this.findViewById(R.id.spinnerListaHabitaciones);
+        this.spinnerHabitaciones=this.findViewById(R.id.spinnerListaUsuarios);
         this.spinnerMedidas=this.findViewById(R.id.spinnerMedida);
         this.spinnerPeriodo=this.findViewById(R.id.spinnerPeriodo);
         this.fechainicio = this.findViewById(R.id.fecha_introducida);
@@ -112,7 +104,6 @@ public class Estadisticas extends AppCompatActivity {
                 periodo_seleccionado=spinnerPeriodo.getSelectedItem().toString();
                 fecha_introducida= fechainicio.getText().toString();
 
-                Log.i(tag, ""+idHab+medida_seleccionada+periodo_seleccionado+fecha_introducida);
                 if(!comprobarFormatoFecha(fecha_introducida)){
                     mensajeError.setText("El formato es incorrecto. Recuerda: yyyy-mm-dd");
                 }

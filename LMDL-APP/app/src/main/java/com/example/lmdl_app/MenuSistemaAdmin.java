@@ -66,6 +66,8 @@ public class MenuSistemaAdmin extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MenuSistemaAdmin.this, Usuarios.class);
+                i.putExtra("cod_sistema", codigoSist);
+                i.putExtra("usuario", usuariologin);
                 startActivity(i);
                 //finish();
             }

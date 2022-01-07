@@ -1562,5 +1562,44 @@ public class Logic
             conector.closeConnection(con);
 	}	
     }
+    
+    /**
+     * Devuelve el último codigo qr introducido en la base de datos
+     * @return 
+     */
+    public static int getUltimoQr(){
+        int ultimoCod=-1;
+	ConexionBD conector = new ConexionBD();
+	Connection con = null;
+        try
+        {
+            con = conector.obtainConnection(true);
+            Log.log.debug("Database Connected");
+		
+            PreparedStatement ps = ConexionBD.GetUltimoQrReg(con);
+            Log.log.info("Query=> {}", ps.toString());
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                ultimoCod=rs.getInt("codigo_qr");
+            }
+             
+        } catch (SQLException e)
+	{
+            Log.log.error("Error: {}", e);
+            return -1; 
+        } catch (NullPointerException e)
+        {
+            Log.log.error("Error: {}", e);
+            return -1;
+        } catch (Exception e)
+        {
+            Log.log.error("Error:{}", e);
+            return -1; 
+        } finally
+        {
+            conector.closeConnection(con);
+	}
+        return ultimoCod;
+    }
 	
 }

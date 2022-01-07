@@ -20,7 +20,7 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <Spinner
-        android:id="@+id/spinnerListaHabitaciones"
+        android:id="@+id/spinnerListaUsuarios"
         android:layout_width="355dp"
         android:layout_height="55dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -37,7 +37,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerListaHabitaciones"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerListaUsuarios"
         app:layout_constraintVertical_bias="0.18"
         tools:ignore="SpeakableTextPresentCheck" />
 
