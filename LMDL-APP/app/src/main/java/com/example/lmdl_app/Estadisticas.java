@@ -66,7 +66,7 @@ public class Estadisticas extends AppCompatActivity {
 
         cod_sistema =getIntent().getStringExtra("cod_sistema");
         this.botonInformes = this.findViewById(R.id.botonVerInfo);
-        this.spinnerHabitaciones=this.findViewById(R.id.spinnerListaUsuarios);
+        this.spinnerHabitaciones=this.findViewById(R.id.spinnerListaCamaras);
         this.spinnerMedidas=this.findViewById(R.id.spinnerMedida);
         this.spinnerPeriodo=this.findViewById(R.id.spinnerPeriodo);
         this.fechainicio = this.findViewById(R.id.fecha_introducida);

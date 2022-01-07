@@ -120,14 +120,23 @@ public class MqttSuscriber implements MqttCallback {
             }
             else if (topicRecibido.contains("Alarma")){ //SistSeg1/Alarma
                 //Registrar que ha saltado la alarma o que se ha desconectado desde el pinpad 
-                if(message.toString().equals("intrusion")){
+                if(message.toString().equals("MovimientoDetectado")){
                     Alerta alerta_nueva = new Alerta();
                     alerta_nueva.setId_alerta(Logic.getUltimaAlerta(Integer.parseInt(topics[0].replace("SistSeg", "")))+1);
-                    alerta_nueva.setInfo("Se ha detectado una intrusion");
+                    alerta_nueva.setInfo("Se ha detectado un movimiento");
                     alerta_nueva.setCod_sistema_sistema_seguridad(Integer.parseInt(topics[0].replace("SistSeg", "")));
                     Logic.insertarAlerta(alerta_nueva);
                 }
-                else if (message.toString().equals("desconectada")){
+                else if(message.toString().equals("VentanaAbierta")){
+                    
+                }
+                else if (message.toString().equals("VentanaCerrada")){
+                    
+                }
+                else if (message.toString().equals("Activada")){
+                    //alarma sonando
+                }
+                else if (message.toString().equals("Desconectada")){
                     Alerta alerta_nueva = new Alerta();
                     alerta_nueva.setId_alerta(Logic.getUltimaAlerta(Integer.parseInt(topics[0].replace("SistSeg", "")))+1);
                     alerta_nueva.setInfo("La alarma se ha desconectado desde el pinpad");
@@ -135,16 +144,7 @@ public class MqttSuscriber implements MqttCallback {
                     Logic.cambiarEstadoSistema(0, Integer.parseInt(topics[0].replace("SistSeg", "")));
                     Logic.insertarAlerta(alerta_nueva);
                 }
-                else if (message.toString().equals("conectada")){
-                    Alerta alerta_nueva = new Alerta();
-                    alerta_nueva.setId_alerta(Logic.getUltimaAlerta(Integer.parseInt(topics[0].replace("SistSeg", "")))+1);
-                    alerta_nueva.setInfo("La alarma se ha conectado desde el pinpad");
-                    alerta_nueva.setCod_sistema_sistema_seguridad(Integer.parseInt(topics[0].replace("SistSeg", "")));
-                    Logic.cambiarEstadoSistema(1, Integer.parseInt(topics[0].replace("SistSeg", "")));
-                    Logic.insertarAlerta(alerta_nueva);
-                }
             }
-            
         }
     }
 

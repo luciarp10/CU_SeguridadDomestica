@@ -18,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Spinner
-        android:id="@+id/spinnerListaUsuarios"
+        android:id="@+id/spinnerListaCamaras"
         android:layout_width="319dp"
         android:layout_height="55dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -47,7 +47,7 @@
         android:text="Usuarios del sistema"
         android:textColor="@color/black"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/spinnerListaUsuarios"
+        app:layout_constraintBottom_toTopOf="@+id/spinnerListaCamaras"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.175"
         app:layout_constraintStart_toStartOf="parent"
@@ -64,7 +64,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.659"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerListaUsuarios"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerListaCamaras"
         app:layout_constraintVertical_bias="0.182" />
 
     <Button

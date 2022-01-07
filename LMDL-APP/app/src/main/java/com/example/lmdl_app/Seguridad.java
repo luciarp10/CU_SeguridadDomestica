@@ -47,6 +47,8 @@ public class Seguridad extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Seguridad.this, Camaras.class);
+                i.putExtra("cod_sistema", cod_sistema);
+                i.putExtra("usuario", usuariologin);
                 startActivity(i);
                 //finish();
             }

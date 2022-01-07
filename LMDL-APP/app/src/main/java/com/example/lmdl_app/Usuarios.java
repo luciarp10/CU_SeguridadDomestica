@@ -48,7 +48,7 @@ public class Usuarios extends AppCompatActivity {
         this.botonCreaUser = this.findViewById(R.id.botonAñadirU);
         this.botonBorraUser = this.findViewById(R.id.botonBorrUser);
         this.botonActualizar = this.findViewById(R.id.botonRecargar);
-        this.usuariosSistema = this.findViewById(R.id.spinnerListaUsuarios);
+        this.usuariosSistema = this.findViewById(R.id.spinnerListaCamaras);
         this.mensajeSinUsuarios = this.findViewById(R.id.textViewSinUsuarios);
 
         this.cod_sistema = getIntent().getStringExtra("cod_sistema");

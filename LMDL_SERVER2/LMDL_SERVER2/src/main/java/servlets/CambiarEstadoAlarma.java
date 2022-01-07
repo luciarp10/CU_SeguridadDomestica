@@ -56,7 +56,7 @@ public class CambiarEstadoAlarma extends HttpServlet {
                 Logic.cambiarEstadoSistema(1,Integer.parseInt(request.getParameter("cod_sistema")));
                 //Publicar topic para que los sensores de la alarma se activen 
                 MqttBroker broker = new MqttBroker();
-                MqttPublisher.publish(broker, "SistSeg"+request.getParameter("cod_sistema")+"/Alerta", "Activar");
+                MqttPublisher.publish(broker, "SistSeg"+request.getParameter("cod_sistema")+"/Sistema", "Activar");
             }
             else{
                 Log.log.info("-- Desactivando sistema de seguridad "+request.getParameter("cod_sistema")+" --");
@@ -68,7 +68,7 @@ public class CambiarEstadoAlarma extends HttpServlet {
                 Logic.cambiarEstadoSistema(0,Integer.parseInt(request.getParameter("cod_sistema")));
                 //Publicar topic para que los sensores de la alarma se apaguen (desconecten) 
                 MqttBroker broker = new MqttBroker();
-                MqttPublisher.publish(broker, "SistSeg"+request.getParameter("cod_sistema")+"/Alerta", "Desactivar");
+                MqttPublisher.publish(broker, "SistSeg"+request.getParameter("cod_sistema")+"/Sistema", "Desactivar");
             }
 
             String json = new Gson().toJson("1");
