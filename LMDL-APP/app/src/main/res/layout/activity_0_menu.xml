@@ -12,32 +12,31 @@
         android:text="ESTADISTICAS"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.697" />
+        app:layout_constraintVertical_bias="0.75" />
 
     <Button
         android:id="@+id/botonSeguri"
         android:layout_width="158dp"
         android:layout_height="54dp"
-        android:layout_marginBottom="68dp"
         android:text="SEGURIDAD"
-        app:layout_constraintBottom_toTopOf="@+id/botonEstadi"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.961" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/botonHabi"
         android:layout_width="158dp"
         android:layout_height="54dp"
-        android:layout_marginTop="44dp"
         android:text="HABITACIONES"
-        app:layout_constraintBottom_toTopOf="@+id/botonSeguri"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.256" />
 </androidx.constraintlayout.widget.ConstraintLayout>

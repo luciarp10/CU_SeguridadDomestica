@@ -21,38 +21,33 @@
         android:id="@+id/botonCam"
         android:layout_width="231dp"
         android:layout_height="48dp"
-        android:layout_marginBottom="64dp"
         android:text="CÁMARAS"
-        app:layout_constraintBottom_toTopOf="@+id/botonSimPres"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.988" />
+        app:layout_constraintVertical_bias="0.317" />
 
     <Button
         android:id="@+id/botonSimPres"
         android:layout_width="231dp"
         android:layout_height="48dp"
-        android:layout_marginBottom="64dp"
         android:text="REGISTROS ACTUADORES"
-        app:layout_constraintBottom_toTopOf="@+id/botonEstAlar"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/botonEstAlar"
         android:layout_width="231dp"
         android:layout_height="48dp"
-        android:layout_marginBottom="48dp"
         android:text="ESTADO DE ALARMA"
-        app:layout_constraintBottom_toTopOf="@+id/botonMiQR"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.704" />
 
     <Button
         android:id="@+id/botonMiQR"
@@ -61,8 +56,7 @@
         android:text="VER MI QR"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.888" />
+        app:layout_constraintVertical_bias="0.913" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,97 +8,89 @@
 
     <ImageView
         android:id="@+id/imageEstado"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="334dp"
+        android:layout_height="140dp"
+        android:contentDescription="TODO"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.139"
-        app:srcCompat="@drawable/logo_lmdl"
-        android:contentDescription="TODO" />
+        app:srcCompat="@drawable/logo_lmdl" />
 
     <TextView
         android:id="@+id/textoUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="44dp"
-        android:layout_marginTop="48dp"
         android:text="Usuario:"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/textoContrasena"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/espacioUsuario"
-        app:layout_constraintHorizontal_bias="0.461"
+        app:layout_constraintHorizontal_bias="0.45"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageEstado"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.43" />
 
     <EditText
         android:id="@+id/espacioUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="11dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="36dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:textSize="20sp"
         android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/espacioCAire"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textoUsuario"
-        app:layout_constraintTop_toBottomOf="@+id/imageEstado"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.788"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.43"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <EditText
         android:id="@+id/espacioCAire"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="6dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="33dp"
-        android:layout_marginBottom="257dp"
         android:ems="10"
         android:inputType="textPassword"
         android:textSize="20sp"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textoContrasena"
-        app:layout_constraintTop_toBottomOf="@+id/espacioUsuario"
+        app:layout_constraintHorizontal_bias="0.777"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.54"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/textoContrasena"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="267dp"
         android:text="Contraseña:"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/espacioCAire"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.062"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textoUsuario" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.538" />
 
     <Button
         android:id="@+id/botonIniSesion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="222dp"
-        android:layout_marginTop="31dp"
         android:layout_marginEnd="39dp"
-        android:layout_marginBottom="170dp"
         android:text="INICIAR SESION"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/espacioCAire"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.726" />
 
     <TextView
         android:id="@+id/mensajeError"
@@ -106,10 +98,10 @@
         android:layout_height="wrap_content"
         android:textColor="#EC1919"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/botonIniSesion"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.33"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/espacioCAire"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.628" />
 </androidx.constraintlayout.widget.ConstraintLayout>

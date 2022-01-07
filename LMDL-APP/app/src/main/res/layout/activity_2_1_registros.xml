@@ -25,9 +25,9 @@
     <ScrollView
         android:layout_width="358dp"
         android:layout_height="516dp"
-        android:layout_marginTop="12dp"
         android:layout_weight="1"
         android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,6 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
             android:fadeScrollbars="false">
+
             <TableLayout
                 android:id="@+id/tablaRegistros"
                 android:layout_width="fill_parent"

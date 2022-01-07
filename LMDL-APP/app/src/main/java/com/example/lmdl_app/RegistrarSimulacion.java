@@ -158,6 +158,7 @@ public class RegistrarSimulacion extends AppCompatActivity {
             mensajeError.setText("Error al registrar la simulación.");
         }
         else {
+            selectorTiempo.setText("");
             mensajeExito.setText("Simulación registrada correctamente");
         }
     }

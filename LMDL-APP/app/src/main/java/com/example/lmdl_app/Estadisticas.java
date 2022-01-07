@@ -106,6 +106,7 @@ public class Estadisticas extends AppCompatActivity {
         botonGraficas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                botonInformes.setEnabled(false);
                 idHab=listHabitacion.get(spinnerHabitaciones.getSelectedItemPosition()).getId_habitacion();
                 medida_seleccionada=spinnerMedidas.getSelectedItem().toString();
                 periodo_seleccionado=spinnerPeriodo.getSelectedItem().toString();
@@ -116,7 +117,6 @@ public class Estadisticas extends AppCompatActivity {
                 }
                 else{
                     try {
-                        botonInformes.setEnabled(true);
                         loadRegistrosEstadisticos();
                     } catch (ParseException e) {
                         e.printStackTrace();
@@ -218,11 +218,22 @@ public class Estadisticas extends AppCompatActivity {
         registros_estadisticos = new ArrayList<>();
         try {
             Log.i(tag, "medida seleccionada: "+medida_seleccionada);
-            for (int i = 0; i < jsonSensores.length(); i++) { //Guardar el id del sensor de la medida que se ha seleccionado
-                JSONObject jsonobject = jsonSensores.getJSONObject(i);
+            if(medida_seleccionada.equals("Calidad del aire")){
+                for (int i = 0; i < jsonSensores.length(); i++) { //Guardar el id del sensor de la medida que se ha seleccionado
+                    JSONObject jsonobject = jsonSensores.getJSONObject(i);
 
-                if(jsonobject.getString("tipo").contains(medida_seleccionada)){
-                    id_sensor = jsonobject.getInt("id_sensor");
+                    if(jsonobject.getString("tipo").contains("Humo")){
+                        id_sensor = jsonobject.getInt("id_sensor");
+                    }
+                }
+            }
+            else{
+                for (int i = 0; i < jsonSensores.length(); i++) { //Guardar el id del sensor de la medida que se ha seleccionado
+                    JSONObject jsonobject = jsonSensores.getJSONObject(i);
+
+                    if(jsonobject.getString("tipo").contains(medida_seleccionada)){
+                        id_sensor = jsonobject.getInt("id_sensor");
+                    }
                 }
             }
             for (int i=0; i<jsonRegistros.length();i++){
@@ -286,6 +297,7 @@ public class Estadisticas extends AppCompatActivity {
             lineChart.invalidate();
         }
         else {
+            botonInformes.setEnabled(true);
             lineData.addDataSet(lineDataSet);
             lineChart.setData(lineData);
             lineChart.getDescription().setEnabled(false);

@@ -10,28 +10,26 @@
         android:id="@+id/botonEstadist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:layout_marginBottom="56dp"
         android:text="Estadisticas"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.781"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/espacioCAire" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.893" />
 
     <TextView
         android:id="@+id/textoMedida"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="68dp"
         android:text="Temperatura:"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/textoPeriodo"
-        app:layout_constraintEnd_toStartOf="@+id/espacioMedida"
-        app:layout_constraintHorizontal_bias="0.525"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.112"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.251" />
 
     <TextView
         android:id="@+id/textoPeriodo"
@@ -40,40 +38,37 @@
         android:text="Humedad:"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/espacioPeriodo"
-        app:layout_constraintHorizontal_bias="0.641"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.164"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.4" />
+        app:layout_constraintVertical_bias="0.397" />
 
     <TextView
         android:id="@+id/textoFechaInformes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
         android:text="Luminosidad:"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/espacioFecha"
-        app:layout_constraintHorizontal_bias="0.517"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.113"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textoPeriodo"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.57" />
 
     <TextView
         android:id="@+id/textoEstadisticas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="20dp"
         android:text="Calidad del aire:"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/espacioCAire"
-        app:layout_constraintHorizontal_bias="0.636"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.067"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textoFechaInformes"
-        app:layout_constraintVertical_bias="0.167" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.751" />
 
     <EditText
         android:id="@+id/espacioMedida"
@@ -94,32 +89,30 @@
         android:id="@+id/espacioPeriodo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="36dp"
         android:ems="10"
         android:inputType="numberDecimal"
         android:minHeight="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/espacioFecha"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.706"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.915"
+        app:layout_constraintVertical_bias="0.387"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <EditText
         android:id="@+id/espacioFecha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
         android:ems="10"
         android:inputType="numberDecimal"
         android:minHeight="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/espacioCAire"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.706"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.909"
+        app:layout_constraintVertical_bias="0.574"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <EditText
@@ -148,11 +141,11 @@
         android:id="@+id/spinnerHabitac"
         android:layout_width="337dp"
         android:layout_height="50dp"
-        app:layout_constraintBottom_toTopOf="@+id/espacioMedida"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.072"
         tools:ignore="SpeakableTextPresentCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

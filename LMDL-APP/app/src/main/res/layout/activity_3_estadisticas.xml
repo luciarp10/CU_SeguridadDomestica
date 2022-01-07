@@ -10,12 +10,12 @@
         android:id="@+id/grafico"
         android:layout_width="344dp"
         android:layout_height="188dp"
-        app:layout_constraintBottom_toTopOf="@+id/spinnerMedida"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintHorizontal_bias="0.477"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerListaCamaras"
-        app:layout_constraintVertical_bias="0.481" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.269" />
 
     <Spinner
         android:id="@+id/spinnerListaCamaras"
@@ -60,36 +60,35 @@
         android:text="VER INFORMES"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.845"
+        app:layout_constraintHorizontal_bias="0.871"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.947" />
+        app:layout_constraintVertical_bias="0.971" />
 
     <Button
         android:id="@+id/MostrarGrafica"
         android:layout_width="138dp"
         android:layout_height="51dp"
-        android:layout_marginBottom="24dp"
         android:text="Ver Grafica"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/botonVerInfo"
-        app:layout_constraintHorizontal_bias="0.565"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.245"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fecha_introducida"
-        app:layout_constraintVertical_bias="0.842" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.971" />
 
     <EditText
         android:id="@+id/fecha_introducida"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="225dp"
+        android:layout_height="46dp"
         android:ems="10"
         android:inputType="date"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.83"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerPeriodo"
-        app:layout_constraintVertical_bias="0.081" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.795" />
 
     <TextView
         android:id="@+id/mensajeErrorFecha"
@@ -97,26 +96,25 @@
         android:layout_height="wrap_content"
         android:textColor="#F31F1F"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/botonVerInfo"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.892"
+        app:layout_constraintHorizontal_bias="0.377"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fecha_introducida"
-        app:layout_constraintVertical_bias="0.937" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.858" />
 
     <TextView
         android:id="@+id/textFechaEst"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="163dp"
-        android:layout_marginBottom="48dp"
         android:text="Fecha inicio: \n yyyy-mm-dd"
         android:textColor="@color/black"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/MostrarGrafica"
-        app:layout_constraintEnd_toStartOf="@+id/fecha_introducida"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.098"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/grafico"
-        app:layout_constraintVertical_bias="0.571" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.795" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
