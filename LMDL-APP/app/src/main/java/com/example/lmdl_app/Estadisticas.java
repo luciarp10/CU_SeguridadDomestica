@@ -204,6 +204,12 @@ public class Estadisticas extends AppCompatActivity {
     }
 
     public void representarResultados(JSONArray jsonSensores, JSONArray jsonRegistros){
+        LineData lineData = new LineData();
+        lineChart.setData(lineData);
+        lineChart.getDescription().setEnabled(true);
+        lineChart.getDescription().setText("No hay datos para el intervalo seleccionado");
+        lineChart.invalidate();
+
         ArrayList<String> fechas_horas=new ArrayList<>();
 
         Log.e(tag,"Loading sensores " + jsonSensores);
@@ -271,7 +277,7 @@ public class Estadisticas extends AppCompatActivity {
         lineDataSet = new LineDataSet(lineEntries, medida_seleccionada);
 
         // Asociamos al gráfico
-        LineData lineData = new LineData();
+        lineData = new LineData();
 
         if (lineEntries.isEmpty() || lineEntries.size()<2){
             lineChart.setData(lineData);
