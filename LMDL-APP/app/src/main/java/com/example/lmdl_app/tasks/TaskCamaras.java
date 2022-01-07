@@ -11,6 +11,7 @@ import com.example.lmdl_app.RegistrosCamaras;
 import com.example.lmdl_app.Usuarios;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -26,7 +27,7 @@ import java.util.ArrayList;
  */
 public class TaskCamaras extends AsyncTask<String,Void, String>
 {
-    private String tag = "TaskRegistrarSimulacion";
+    private String tag = "TaskCamaras";
     private Camaras activity;
     private RegistrosCamaras activityRegCam;
     private String urlStr = "";
@@ -68,6 +69,16 @@ public class TaskCamaras extends AsyncTask<String,Void, String>
             {
                 JSONArray jsonarrayCamaras = new JSONArray(response);
                 activity.setListCamaras(jsonarrayCamaras);
+            }
+            else if (urlStr.contains("GetRegistrosImagenes")){
+                JSONArray jsonRegistros = new JSONArray(response);
+                activityRegCam.setListImagenes(jsonRegistros);
+            }
+            else if (urlStr.contains("GetImagen")){
+                activityRegCam.transformarFoto(response);
+            }
+            else if (urlStr.contains("HacerFoto")){
+                activity.mostrarUltimaFoto(response);
             }
 
         }catch (Exception e)

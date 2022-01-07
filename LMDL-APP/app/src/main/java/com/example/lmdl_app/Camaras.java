@@ -2,6 +2,7 @@ package com.example.lmdl_app;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.lmdl_app.data.Identificacion;
@@ -21,6 +23,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Camaras extends AppCompatActivity {
@@ -53,28 +56,35 @@ public class Camaras extends AppCompatActivity {
         this.fecha_introducida = this.findViewById(R.id.editTextDate);
         this.mensajeErrorFecha = this.findViewById(R.id.mensajeErrorFechaFoto);
 
+
         cod_sistema = getIntent().getStringExtra("cod_sistema");
         usuariologin = getIntent().getStringExtra("usuario");
 
         botonVerFotos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mensajeErrorFecha.setText("");
                 String fecha_intro = fecha_introducida.getText().toString();
                 if(!comprobarFormatoFecha(fecha_intro)){
-                    Log.i(tag, "HOLA");
                     mensajeErrorFecha.setText("El formato es incorrecto. Recuerda: yyyy-mm-dd");
                 }
                 else {
                     Intent i = new Intent(Camaras.this, RegistrosCamaras.class);
                     i.putExtra("cod_sistema", cod_sistema);
-                    i.putExtra("usuario", usuariologin);
                     i.putExtra("fecha_introducida", fecha_introducida.getText().toString());
                     String id_camara=camarasDisponibles.getSelectedItem().toString();
-                    id_camara.charAt(id_camara.length()-1); //solo nos interesa el identificador
+                    id_camara=""+id_camara.charAt(id_camara.length()-1); //solo nos interesa el identificador
                     i.putExtra("camara_seleccionada", id_camara);
                     startActivity(i);
                 }
 
+            }
+        });
+
+        botonHacerFoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                solicitarFoto();
             }
         });
 
@@ -87,6 +97,14 @@ public class Camaras extends AppCompatActivity {
                 execute("http://192.168.1.109:8080/LMDL_SERVER2/GetCamarasDisponibles?cod_sistema="+cod_sistema);
     }
 
+    private void solicitarFoto() {
+        String id_camara=camarasDisponibles.getSelectedItem().toString();
+        id_camara=""+id_camara.charAt(id_camara.length()-1);
+        new TaskCamaras(this).
+                execute("http://192.168.1.109:8080/LMDL_SERVER2/HacerFoto?cod_sistema="+cod_sistema+"&usuario="+usuariologin+"&id_camara="+id_camara);
+    }
+
+
     public void setListCamaras(JSONArray jsonCamaras) {
         Log.e(tag,"Loading camaras disponibles " + jsonCamaras);
         ArrayList<String>camaras = new ArrayList<>();
@@ -96,7 +114,6 @@ public class Camaras extends AppCompatActivity {
                 String camara_recibida = ""+jsonCamaras.get(i);
                 camaras.add(camara_recibida);
             }
-
             camarasDisponibles.setAdapter(new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, camaras));
         }catch (Exception e)
         {
@@ -120,4 +137,28 @@ public class Camaras extends AppCompatActivity {
         }
         return true;
     }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void mostrarUltimaFoto(String response){
+        if(!response.contains("-1")){
+            new Thread(new Runnable() {
+                public void run() {
+                    try {
+                        synchronized (this) {
+                            wait(3000);
+                            Intent i = new Intent(Camaras.this, RegistrosCamaras.class);
+                            i.putExtra("cod_sistema", cod_sistema);
+                            i.putExtra("fecha_introducida", LocalDate.now().toString());
+                            String id_camara=camarasDisponibles.getSelectedItem().toString();
+                            id_camara=""+id_camara.charAt(id_camara.length()-1); //solo nos interesa el identificador
+                            i.putExtra("camara_seleccionada", id_camara);
+                            startActivity(i);
+                        }
+                    } catch (InterruptedException e) { }
+                }
+            }).start();
+
+        }
+    }
+
 }

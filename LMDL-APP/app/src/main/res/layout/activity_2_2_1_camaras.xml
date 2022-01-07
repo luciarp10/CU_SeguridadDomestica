@@ -7,71 +7,74 @@
     tools:context=".MainActivity">
 
     <Spinner
-        android:id="@+id/spinnerListaUsers"
-        android:layout_width="355dp"
-        android:layout_height="55dp"
+        android:id="@+id/spinnerListaFotos"
+        android:layout_width="289dp"
+        android:layout_height="47dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.195"
+        app:layout_constraintVertical_bias="0.214"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/textDateCam"
         android:layout_width="288dp"
         android:layout_height="33dp"
-        app:layout_constraintBottom_toTopOf="@+id/spinnerListaUsers"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/spinnerListaFotos"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.293" />
 
     <ImageView
-        android:id="@+id/image_view"
+        android:id="@+id/image_view_foto"
         android:layout_width="293dp"
         android:layout_height="209dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.483"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.474"
+        app:layout_constraintVertical_bias="0.588"
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/text_view"
-        android:layout_width="220dp"
-        android:layout_height="33dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.742" />
-
-    <Button
-        android:id="@+id/bt_encode"
+        android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="76dp"
-        android:text="ENCODE"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/bt_decode"
+        android:layout_marginStart="62dp"
+        android:layout_marginTop="23dp"
+        android:layout_marginEnd="216dp"
+        android:layout_marginBottom="16dp"
+        android:text="Selecciona la hora:"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/spinnerListaFotos"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.877" />
+        app:layout_constraintTop_toBottomOf="@+id/textDateCam" />
 
-    <Button
-        android:id="@+id/bt_decode"
-        android:layout_width="120dp"
-        android:layout_height="41dp"
-        android:layout_marginEnd="52dp"
-        android:text="DECODE"
+    <TextView
+        android:id="@+id/mensajeErrorNoFotos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="204dp"
+        android:layout_marginTop="181dp"
+        android:layout_marginEnd="207dp"
+        android:layout_marginBottom="403dp"
+        android:textColor="#F31A1A"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.854" />
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
