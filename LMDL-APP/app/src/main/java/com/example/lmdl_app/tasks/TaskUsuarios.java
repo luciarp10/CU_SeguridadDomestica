@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.example.lmdl_app.Habitaciones;
+import com.example.lmdl_app.NuevoUsuario;
 import com.example.lmdl_app.RegistrarSimulacion;
 import com.example.lmdl_app.Usuarios;
 
@@ -25,12 +26,14 @@ public class TaskUsuarios extends AsyncTask<String,Void, String>
 {
     private String tag = "TaskRegistrarSimulacion";
     private Usuarios activity;
+    private NuevoUsuario activityNewUser;
     private String urlStr = "";
 
     public TaskUsuarios(Usuarios activity)
     {
         this.activity = activity;
     }
+    public TaskUsuarios(NuevoUsuario activityNewUser){ this.activityNewUser = activityNewUser;}
 
     @Override
     protected String doInBackground(String... uri) {
@@ -66,6 +69,9 @@ public class TaskUsuarios extends AsyncTask<String,Void, String>
             }
             else if (urlStr.contains("BorrarUsuarioSistema")){
                 activity.actualizar();
+            }
+            else if (urlStr.contains("InsertarUsuarioSistema")){
+                activityNewUser.comprobarResultadoRegistro(response);
             }
         }catch (Exception e)
         {

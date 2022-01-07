@@ -10,10 +10,11 @@
         android:id="@+id/botonAñadirU"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="192dp"
+        android:layout_marginBottom="248dp"
         android:text="AÑADIR USUARIO"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Spinner
@@ -34,9 +35,10 @@
         android:text="BORRAR USUARIO"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/botonAñadirU" />
+        app:layout_constraintTop_toBottomOf="@+id/botonAñadirU"
+        app:layout_constraintVertical_bias="0.104" />
 
     <TextView
         android:id="@+id/textViewUsuariosSist"
@@ -64,5 +66,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerListaUsuarios"
         app:layout_constraintVertical_bias="0.182" />
+
+    <Button
+        android:id="@+id/botonRecargar"
+        android:layout_width="164dp"
+        android:layout_height="46dp"
+        android:text="Actualizar "
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/botonBorrUser"
+        app:layout_constraintVertical_bias="0.121" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

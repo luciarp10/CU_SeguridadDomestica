@@ -28,6 +28,7 @@ public class Usuarios extends AppCompatActivity {
     private Button botonCreaUser;
     private Button botonBorraUser;
     private Spinner usuariosSistema;
+    private Button botonActualizar;
     private String cod_sistema = ""; //parametro que pasa main
     private String usuariologin = "";
     private final Context context;
@@ -46,6 +47,7 @@ public class Usuarios extends AppCompatActivity {
 
         this.botonCreaUser = this.findViewById(R.id.botonAñadirU);
         this.botonBorraUser = this.findViewById(R.id.botonBorrUser);
+        this.botonActualizar = this.findViewById(R.id.botonRecargar);
         this.usuariosSistema = this.findViewById(R.id.spinnerListaUsuarios);
         this.mensajeSinUsuarios = this.findViewById(R.id.textViewSinUsuarios);
 
@@ -66,6 +68,13 @@ public class Usuarios extends AppCompatActivity {
             public void onClick(View v) {
                 String nombre_seleccionado = usuarios.get(usuariosSistema.getSelectedItemPosition());
                 borrarUsuarioSistema(nombre_seleccionado);
+            }
+        });
+
+        botonActualizar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadUsuariosSistema();
             }
         });
         loadUsuariosSistema();

@@ -154,11 +154,11 @@ public class RegistrarSimulacion extends AppCompatActivity {
 
     public void simulacionRegistrada(String resultado){
         Log.i(tag, "Resultado: "+resultado);
-        if (resultado.contains("1")){
-            mensajeExito.setText("Simulación registrada correctamente");
+        if (resultado.contains("-1")){
+            mensajeError.setText("Error al registrar la simulación.");
         }
         else {
-            mensajeError.setText("Error al registrar la simulación.");
+            mensajeExito.setText("Simulación registrada correctamente");
         }
     }
 }
