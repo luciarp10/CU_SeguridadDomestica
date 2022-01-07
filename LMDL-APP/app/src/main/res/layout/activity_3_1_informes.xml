@@ -12,19 +12,23 @@
         android:layout_height="18dp"
         android:layout_marginBottom="60dp"
         android:text="Médida:"
+        android:textColor="@color/black"
+        android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/textoPeriodo"
         app:layout_constraintEnd_toStartOf="@+id/espacioTemperatura"
-        app:layout_constraintHorizontal_bias="0.637"
+        app:layout_constraintHorizontal_bias="0.824"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textoPeriodo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="52dp"
         android:text="Período:"
+        android:textColor="@color/black"
+        android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/espacioHumedad"
-        app:layout_constraintHorizontal_bias="0.719"
+        app:layout_constraintHorizontal_bias="0.728"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/espacioTemperatura" />
 
@@ -34,8 +38,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
         android:text="Fecha:"
+        android:textColor="@color/black"
+        android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/espacioLuminosidad"
-        app:layout_constraintHorizontal_bias="0.768"
+        app:layout_constraintHorizontal_bias="0.656"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textoPeriodo" />
 
@@ -54,7 +60,7 @@
         android:id="@+id/espacioTemperatura"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="36dp"
         android:layout_marginBottom="32dp"
         android:ems="10"
         android:inputType="numberDecimal"
@@ -62,15 +68,15 @@
         app:layout_constraintBottom_toTopOf="@+id/espacioHumedad"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.947"
+        app:layout_constraintVertical_bias="1.0"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <EditText
         android:id="@+id/espacioHumedad"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="36dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="40dp"
         android:ems="10"
         android:inputType="numberDecimal"
         android:minHeight="48dp"
@@ -116,7 +122,7 @@
         android:id="@+id/textMin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="28dp"
         android:text="MIN:"
         app:layout_constraintBottom_toTopOf="@+id/textView5"
         app:layout_constraintEnd_toEndOf="parent"
@@ -127,13 +133,13 @@
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="EVALUCIÓN GLOBAL"
+        android:text="EVALUACIÓN GLOBAL"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.128"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/espacioMin"
-        app:layout_constraintVertical_bias="0.448" />
+        app:layout_constraintVertical_bias="0.337" />
 
     <TextView
         android:id="@+id/espacioMedia"
@@ -141,38 +147,39 @@
         android:layout_height="30dp"
         app:layout_constraintBottom_toTopOf="@+id/espacioMax"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintHorizontal_bias="0.514"
         app:layout_constraintStart_toEndOf="@+id/textMedia"
         app:layout_constraintTop_toBottomOf="@+id/textoEstadisticas"
-        app:layout_constraintVertical_bias="0.837" />
+        app:layout_constraintVertical_bias="0.797" />
 
     <TextView
         android:id="@+id/espacioMax"
         android:layout_width="174dp"
         android:layout_height="30dp"
-        android:layout_marginBottom="44dp"
+        android:layout_marginBottom="52dp"
         app:layout_constraintBottom_toBottomOf="@+id/espacioMin"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
         app:layout_constraintStart_toEndOf="@+id/textMax" />
 
     <TextView
         android:id="@+id/espacioMin"
         android:layout_width="174dp"
         android:layout_height="30dp"
-        android:layout_marginBottom="92dp"
+        android:layout_marginBottom="104dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintHorizontal_bias="0.514"
         app:layout_constraintStart_toEndOf="@+id/textMin" />
 
     <TextView
         android:id="@+id/espacioEvalGlo"
         android:layout_width="174dp"
         android:layout_height="30dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="56dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintHorizontal_bias="0.514"
         app:layout_constraintStart_toEndOf="@+id/textMin" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
