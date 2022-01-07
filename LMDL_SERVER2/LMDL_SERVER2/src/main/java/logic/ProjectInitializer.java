@@ -33,7 +33,7 @@ public class ProjectInitializer implements ServletContextListener
 		suscriber.searchTopicsToSuscribe(broker);
 
 		Log.log.info("-->Iniciando el sistema<--");
-		//new ThreadWeatherForecast();
+		
 		
 	}	
 }

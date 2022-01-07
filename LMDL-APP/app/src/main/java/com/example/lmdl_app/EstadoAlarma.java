@@ -49,16 +49,16 @@ public class EstadoAlarma extends AppCompatActivity {
     }
 
     private void cambiarEstadoAlarma(String estado_actual){
-        if (estado_actual.equals("0")){
+        if (estado_actual.contains("0")){
+            setEstado_actual("1");
             new TaskEstadoAlarma(this).
                     execute("http://192.168.1.109:8080/LMDL_SERVER2/CambiarEstadoAlarma?cod_sistema="+cod_sistema+"&usuario="+usuario+"&estado="+1);
-            setEstado_actual("1");
         }
         else {
+            setEstado_actual("0");
             new TaskEstadoAlarma(this).
                     execute("http://192.168.1.109:8080/LMDL_SERVER2/CambiarEstadoAlarma?cod_sistema="+cod_sistema+"&usuario="+usuario+"&estado="+0);
 
-            setEstado_actual("0");
         }
     }
 
@@ -68,7 +68,7 @@ public class EstadoAlarma extends AppCompatActivity {
     }
 
     public void cambiarFoto (){
-        if (estado_actual.equals("0")){
+        if (estado_actual.contains("0")){
             candado.setImageResource(R.drawable.abierto);
         }
         else {

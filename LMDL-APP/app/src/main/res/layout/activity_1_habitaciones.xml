@@ -141,6 +141,7 @@
         android:id="@+id/spinnerHabitac"
         android:layout_width="337dp"
         android:layout_height="50dp"
+        android:hapticFeedbackEnabled="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

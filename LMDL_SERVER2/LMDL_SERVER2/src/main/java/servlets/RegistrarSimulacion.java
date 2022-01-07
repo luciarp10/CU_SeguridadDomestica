@@ -18,6 +18,7 @@ import logic.Log;
 import logic.Logic;
 import mqtt.MqttBroker;
 import mqtt.MqttPublisher;
+import mqtt.MqttSuscriber;
 
 /**
  * Dados como parámetros el codigo del sistema, el usuario que activa el actuador, el actuador que se quiere activar y el tiempo en segundos,
@@ -57,8 +58,11 @@ public class RegistrarSimulacion extends HttpServlet {
             
             //Publicar topic para que el sensor se active 
             MqttBroker broker = new MqttBroker();
-            MqttPublisher.publish(broker, "SistSeg"+request.getParameter("cod_sistema")+"/Actuador"+request.getParameter("id_actuador"), request.getParameter("tiempo"));
-
+            MqttPublisher.publish(broker, "ServidorSistema"+request.getParameter("cod_sistema")+"/Actuador"+request.getParameter("id_actuador"), request.getParameter("tiempo"));
+            MqttSuscriber suscriber = new MqttSuscriber();
+            suscriber.searchTopicsToSuscribe(broker);
+            
+            
             String json = new Gson().toJson(1);
             Log.log.info("JSON value => {}", json);
             out.println(json);

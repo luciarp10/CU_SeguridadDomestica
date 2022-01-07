@@ -63,9 +63,7 @@ public class TaskEstadoAlarma extends AsyncTask<String,Void, String>
             if(urlStr.contains("GetEstadoAlarma"))
             {
                 activity.setEstado_actual(response);
-                activity.cambiarFoto();
             }
-
 
         }catch (Exception e)
         {

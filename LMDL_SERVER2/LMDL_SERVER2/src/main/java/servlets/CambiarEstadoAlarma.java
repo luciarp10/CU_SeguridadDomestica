@@ -18,6 +18,7 @@ import logic.Log;
 import logic.Logic;
 import mqtt.MqttBroker;
 import mqtt.MqttPublisher;
+import mqtt.MqttSuscriber;
 
 /**
  * Como parámetros se reciben el código del sistema, el nombre de usuario y el estado. (1=activar y 0=Desactivar) y el servidor envía un topic a los 
@@ -56,7 +57,9 @@ public class CambiarEstadoAlarma extends HttpServlet {
                 Logic.cambiarEstadoSistema(1,Integer.parseInt(request.getParameter("cod_sistema")));
                 //Publicar topic para que los sensores de la alarma se activen 
                 MqttBroker broker = new MqttBroker();
-                MqttPublisher.publish(broker, "SistSeg"+request.getParameter("cod_sistema")+"/Sistema", "Activar");
+                MqttPublisher.publish(broker, "ServidorSistema"+request.getParameter("cod_sistema")+"/Sistema", "Conectar");
+                MqttSuscriber suscriber = new MqttSuscriber();
+                suscriber.searchTopicsToSuscribe(broker);
             }
             else{
                 Log.log.info("-- Desactivando sistema de seguridad "+request.getParameter("cod_sistema")+" --");
@@ -68,7 +71,9 @@ public class CambiarEstadoAlarma extends HttpServlet {
                 Logic.cambiarEstadoSistema(0,Integer.parseInt(request.getParameter("cod_sistema")));
                 //Publicar topic para que los sensores de la alarma se apaguen (desconecten) 
                 MqttBroker broker = new MqttBroker();
-                MqttPublisher.publish(broker, "SistSeg"+request.getParameter("cod_sistema")+"/Sistema", "Desactivar");
+                MqttPublisher.publish(broker, "ServidorSistema"+request.getParameter("cod_sistema")+"/Sistema", "Desconectar");
+                MqttSuscriber suscriber = new MqttSuscriber();
+                suscriber.searchTopicsToSuscribe(broker);
             }
 
             String json = new Gson().toJson("1");

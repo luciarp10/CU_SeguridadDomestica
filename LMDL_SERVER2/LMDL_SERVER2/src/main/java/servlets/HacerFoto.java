@@ -17,6 +17,7 @@ import logic.Log;
 import logic.Logic;
 import mqtt.MqttBroker;
 import mqtt.MqttPublisher;
+import mqtt.MqttSuscriber;
 
 /**
  * Se recibe como parámetro el id_actuador de la cámara con la que se quiere hacer la foto, el nombre de usuario que la solicita y el codigo del sistema
@@ -52,7 +53,9 @@ public class HacerFoto extends HttpServlet {
         Logic.insertarAlerta(alerta_nueva);
         //Publicar topic para que los sensores de la alarma se activen 
         MqttBroker broker = new MqttBroker();
-        MqttPublisher.publish(broker, "SistSeg"+request.getParameter("cod_sistema")+"/Camara"+request.getParameter("id_camara"), "Hacer foto");
+        MqttPublisher.publish(broker, "ServidorSistema"+request.getParameter("cod_sistema")+"/Camara"+request.getParameter("id_camara"), "Hacer foto");
+        MqttSuscriber suscriber = new MqttSuscriber();
+        suscriber.searchTopicsToSuscribe(broker);
  
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();

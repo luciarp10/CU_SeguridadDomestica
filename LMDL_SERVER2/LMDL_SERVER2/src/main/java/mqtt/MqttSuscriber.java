@@ -128,13 +128,26 @@ public class MqttSuscriber implements MqttCallback {
                     Logic.insertarAlerta(alerta_nueva);
                 }
                 else if(message.toString().equals("VentanaAbierta")){
-                    
+                    Alerta alerta_nueva = new Alerta();
+                    alerta_nueva.setId_alerta(Logic.getUltimaAlerta(Integer.parseInt(topics[0].replace("SistSeg", "")))+1);
+                    alerta_nueva.setInfo("Se ha abierto la ventana");
+                    alerta_nueva.setCod_sistema_sistema_seguridad(Integer.parseInt(topics[0].replace("SistSeg", "")));
+                    Logic.insertarAlerta(alerta_nueva);
                 }
                 else if (message.toString().equals("VentanaCerrada")){
-                    
+                    Alerta alerta_nueva = new Alerta();
+                    alerta_nueva.setId_alerta(Logic.getUltimaAlerta(Integer.parseInt(topics[0].replace("SistSeg", "")))+1);
+                    alerta_nueva.setInfo("Se ha cerrado la ventana");
+                    alerta_nueva.setCod_sistema_sistema_seguridad(Integer.parseInt(topics[0].replace("SistSeg", "")));
+                    Logic.insertarAlerta(alerta_nueva);
                 }
                 else if (message.toString().equals("Activada")){
                     //alarma sonando
+                    Alerta alerta_nueva = new Alerta();
+                    alerta_nueva.setId_alerta(Logic.getUltimaAlerta(Integer.parseInt(topics[0].replace("SistSeg", "")))+1);
+                    alerta_nueva.setInfo("Ha saltado la alarma");
+                    alerta_nueva.setCod_sistema_sistema_seguridad(Integer.parseInt(topics[0].replace("SistSeg", "")));
+                    Logic.insertarAlerta(alerta_nueva);
                 }
                 else if (message.toString().equals("Desconectada")){
                     Alerta alerta_nueva = new Alerta();
