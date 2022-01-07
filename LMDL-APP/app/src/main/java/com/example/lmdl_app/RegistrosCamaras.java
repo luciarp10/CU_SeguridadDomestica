@@ -1,37 +1,20 @@
 package com.example.lmdl_app;
 
-import android.Manifest;
-import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.content.pm.PackageManager;
+
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
-import com.squareup.picasso.Picasso;
-
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
+
 
 public class RegistrosCamaras extends AppCompatActivity {
 
@@ -55,21 +38,36 @@ public class RegistrosCamaras extends AppCompatActivity {
         imageView = findViewById(R.id.image_view);
 
         btEncode.setOnClickListener(new View.OnClickListener() {
+
+            /*
+            //Este es la funcion
+            //imgBytes->array de bytes recibida
+                Bitmap bitmap = BitmapFactory.decodeByteArray(imgBytes, 0
+                        , bytes.length);
+                imageView.setImageBitmap(bitmap);
+            */
+            //Todo esto va fuera simplemente era para hacer pruebas
             @Override
             public void onClick(View view) {
 
-                Picasso.get().load("\"http://i.imgur.com/DvpvklR.png\"").into(imageView);
-                /*
-                File imgFile =  new File("/sdcard/temp.png");
-                if (imgFile.exists()) {
-                    Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-                    ImageView myImage = (ImageView) findViewById(R.id.image_view);
-                    myImage.setImageBitmap(myBitmap);
+                Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.drawable.foto);
+                try {
+                    //Initialize bitmap
+                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver()
+                            , uri);
+                    //Initialize bute stream
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    //Compress bitmap
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                    //Initialize byte array
+                    byte[] bytes = stream.toByteArray();
+                    //Getbase 64 encoded string
+                    sImage = Base64.encodeToString(bytes, Base64.DEFAULT);
+                    //Set encoded text on text view
+                    textView.setText(sImage);
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-                sImage = Base64.encodeToString(imgBytes, Base64.DEFAULT);
-                textView.setText(sImage);
-
-*/
             }
         });
 
@@ -85,7 +83,9 @@ public class RegistrosCamaras extends AppCompatActivity {
                 imageView.setImageBitmap(bitmap);
             }
         });
-
-
+        //HAsta aqui
     }
+
+
 }
+
