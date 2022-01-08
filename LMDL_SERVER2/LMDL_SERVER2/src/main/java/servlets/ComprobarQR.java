@@ -17,6 +17,7 @@ import logic.Log;
 import logic.Logic;
 import mqtt.MqttBroker;
 import mqtt.MqttPublisher;
+import mqtt.MqttSuscriber;
 
 /**
  *
@@ -72,7 +73,9 @@ public class ComprobarQR extends HttpServlet {
                     Logic.cambiarEstadoSistema(0, codigo_sistema);
                     //Publicar topic para que los sensores de la alarma se apaguen (desconecten) 
                     MqttBroker broker = new MqttBroker();
-                    MqttPublisher.publish(broker, "SistSeg"+codigo_sistema+"/Alerta", "Desactivar");
+                    MqttPublisher.publish(broker, "SistSeg"+codigo_sistema+"/Sistema", "Desconectar");
+                    MqttSuscriber suscriber = new MqttSuscriber();
+                    suscriber.searchTopicsToSuscribe(broker);
                 }
                 else{ //El usuario no está registrado en la bd o no en ese sistema de seguridad
                     Log.log.info("Insertar en Alerta registro de entrada incorrecto.");
