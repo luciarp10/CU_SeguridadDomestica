@@ -141,6 +141,8 @@ public class Camaras extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void mostrarUltimaFoto(String response){
         if(!response.contains("-1")){
+            botonVerFotos.setEnabled(false);
+            botonHacerFoto.setText("Solicitando...");
             new Thread(new Runnable() {
                 public void run() {
                     try {
@@ -153,6 +155,7 @@ public class Camaras extends AppCompatActivity {
                             id_camara=""+id_camara.charAt(id_camara.length()-1); //solo nos interesa el identificador
                             i.putExtra("camara_seleccionada", id_camara);
                             startActivity(i);
+                            Camaras.super.finish();
                         }
                     } catch (InterruptedException e) { }
                 }

@@ -131,7 +131,16 @@ public class Registros extends AppCompatActivity {
         String[] hora_dividida = hora.split(" ");
         String fecha = hora_dividida[0]+" "+hora_dividida[1]+" "+hora_dividida[2];
         fecha=transformarFecha(fecha);
-        hora_modificada=hora_dividida[3];
+        String[] hh_mm_ss = hora_dividida[3].split(":");
+        if(hora_dividida[4].contains("PM")){
+            hora_modificada=(Integer.parseInt(hh_mm_ss[0])+12)+":"+hh_mm_ss[1]+":"+hh_mm_ss[2];
+        }
+        else if (hh_mm_ss[0].contains("12")){
+            hora_modificada="00:"+hh_mm_ss[1]+":"+hh_mm_ss[2];
+        }
+        else {
+            hora_modificada=hora_dividida[3];
+        }
         hora_modificada=fecha+" "+hora_modificada;
         return hora_modificada;
     }
