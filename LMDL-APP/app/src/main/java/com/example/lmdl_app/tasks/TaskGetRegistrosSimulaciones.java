@@ -3,9 +3,6 @@ package com.example.lmdl_app.tasks;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.example.lmdl_app.Estadisticas;
-import com.example.lmdl_app.Registros;
-import com.example.lmdl_app.SimulacionPresencia;
 import com.example.lmdl_app.SimulacionesProgramadas;
 
 import org.json.JSONArray;

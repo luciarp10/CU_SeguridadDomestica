@@ -57,7 +57,7 @@ public class Seguridad extends AppCompatActivity {
         botonSimuladorPres.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Seguridad.this, SimulacionPresencia.class);
+                Intent i = new Intent(Seguridad.this, RegistrosActuadores.class);
                 i.putExtra("cod_sistema", cod_sistema );
                 i.putExtra("usuario", usuariologin);
                 startActivity(i);

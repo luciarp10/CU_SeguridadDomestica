@@ -7,7 +7,7 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class SimulacionPresencia extends AppCompatActivity {
+public class RegistrosActuadores extends AppCompatActivity {
 
     private Button botonVerReg;
     private Button botonProgSim;
@@ -27,7 +27,7 @@ public class SimulacionPresencia extends AppCompatActivity {
         botonVerReg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(SimulacionPresencia.this, SimulacionesProgramadas.class);
+                Intent i = new Intent(RegistrosActuadores.this, SimulacionesProgramadas.class);
                 i.putExtra("cod_sistema", cod_sistema );
                 i.putExtra("usuario", usuariologin);
                 startActivity(i);
@@ -38,7 +38,7 @@ public class SimulacionPresencia extends AppCompatActivity {
         botonProgSim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(SimulacionPresencia.this, RegistrarSimulacion.class);
+                Intent i = new Intent(RegistrosActuadores.this, RegistrarSimulacion.class);
                 i.putExtra("cod_sistema", cod_sistema );
                 i.putExtra("usuario", usuariologin);
                 startActivity(i);

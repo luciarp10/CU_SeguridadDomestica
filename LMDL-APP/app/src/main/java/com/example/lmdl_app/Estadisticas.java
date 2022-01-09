@@ -167,7 +167,7 @@ public class Estadisticas extends AppCompatActivity {
         String fecha_fin= calcularFecha(fecha_introducida, periodo_seleccionado);
         String[] fecha_fin_div = fecha_fin.split(" ");
         fecha_fin = fecha_fin_div[1]+" "+fecha_fin_div[2]+" "+fecha_fin_div[5];
-        fecha_fin = transformarFecha(fecha_fin);
+        fecha_fin = Comun.transformarFecha(fecha_fin);
 
         Log.e(tag, fecha_fin);
         new TaskEstadisticas(this).
@@ -240,8 +240,8 @@ public class Estadisticas extends AppCompatActivity {
             for (int i=0; i<jsonRegistros.length();i++){
                 JSONObject jsonObject = jsonRegistros.getJSONObject(i);
                 if(jsonObject.getInt("id_sensor_sensor")==id_sensor){
-                    java.sql.Date date = Date.valueOf(transformarFecha(jsonObject.getString("fecha")));
-                    java.sql.Time hora = Time.valueOf(transformarHora(jsonObject.getString("hora")));
+                    java.sql.Date date = Date.valueOf(Comun.transformarFecha(jsonObject.getString("fecha")));
+                    java.sql.Time hora = Time.valueOf(Comun.transformarHora(jsonObject.getString("hora")));
                     Registro_sensor registro_recibido = new Registro_sensor();
                     registro_recibido.setFecha((Date) date);
                     registro_recibido.setHora(hora);
@@ -342,72 +342,8 @@ public class Estadisticas extends AppCompatActivity {
         }
         java.sql.Date date = Date.valueOf(fecha_introducida);
 
-        return sumarDiasAFecha(date, dias);
+        return Comun.sumarDiasAFecha(date, dias);
     }
 
-    public String sumarDiasAFecha(Date fecha, int dias){
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(fecha);
-        calendar.add(Calendar.DAY_OF_YEAR, dias);
-        Log.i(tag, ""+calendar.getTime());
-        return ""+calendar.getTime();
-    }
 
-    private String transformarFecha(String fecha){
-        String fecha_modificada=fecha;
-        if(fecha.contains("Jan")){
-            fecha_modificada=fecha.replace("Jan","01");
-        }
-        else if (fecha.contains("Feb")){
-            fecha_modificada=fecha.replace("Feb","02");
-        }
-        else if (fecha.contains("Mar")){
-            fecha_modificada=fecha.replace("Mar","03");
-        }
-        else if (fecha.contains("Apr")){
-            fecha_modificada=fecha.replace("Apr","04");
-        }
-        else if (fecha.contains("May")){
-            fecha_modificada=fecha.replace("May","05");
-        }
-        else if (fecha.contains("Jun")){
-            fecha_modificada=fecha.replace("Jun","06");
-        }
-        else if (fecha.contains("Jul")){
-            fecha_modificada=fecha.replace("Jul","07");
-        }
-        else if (fecha.contains("Aug")){
-            fecha_modificada=fecha.replace("Aug","08");
-        }
-        else if (fecha.contains("Sep")){
-            fecha_modificada=fecha.replace("Sep","09");
-        }
-        else if (fecha.contains("Oct")){
-            fecha_modificada=fecha.replace("Oct","10");
-        }
-        else if (fecha.contains("Nov")){
-            fecha_modificada=fecha.replace("Nov","11");
-        }
-        else if (fecha.contains("Dec")){
-            fecha_modificada=fecha.replace("Dec","12");
-        }
-        fecha_modificada=fecha_modificada.replace(" ","-");
-        fecha_modificada=fecha_modificada.replace(",","");
-        String[] fecha_dividida = fecha_modificada.split("-");
-        fecha_modificada=fecha_dividida[2]+"-"+fecha_dividida[0]+"-"+fecha_dividida[1];
-        return fecha_modificada;
-    }
-
-    private String transformarHora(String hora){
-        String hora_modificada;
-        String[] hora_dividida = hora.split(":");
-        String[] am_pm = hora_dividida[2].split(" ");
-        if(am_pm[1].contains("PM")){
-            hora_modificada=(Integer.parseInt(hora_dividida[0])+12)+":"+hora_dividida[1]+":"+am_pm[0];
-        }
-        else {
-            hora_modificada=hora_dividida[0]+":"+hora_dividida[1]+":"+am_pm[0];
-        }
-        return hora_modificada;
-    }
 }

@@ -106,8 +106,8 @@ public class RegistrosCamaras extends AppCompatActivity {
             for (int i = 0; i < jsonRegistros.length(); i++) {
                 JSONObject jsonobject = jsonRegistros.getJSONObject(i);
 
-                java.sql.Date date = Date.valueOf(transformarFecha(jsonobject.getString("fecha")));
-                Time hora = Time.valueOf(transformarHora(jsonobject.getString("hora")));
+                java.sql.Date date = Date.valueOf(Comun.transformarFecha(jsonobject.getString("fecha")));
+                Time hora = Time.valueOf(Comun.transformarHora(jsonobject.getString("hora")));
 
                 Registro_camara registro_recibido = new Registro_camara();
                 registro_recibido.setFecha(date);
@@ -159,63 +159,6 @@ public class RegistrosCamaras extends AppCompatActivity {
 
     }
 
-    private String transformarFecha(String fecha){
-        String fecha_modificada=fecha;
-        if(fecha.contains("Jan")){
-            fecha_modificada=fecha.replace("Jan","01");
-        }
-        else if (fecha.contains("Feb")){
-            fecha_modificada=fecha.replace("Feb","02");
-        }
-        else if (fecha.contains("Mar")){
-            fecha_modificada=fecha.replace("Mar","03");
-        }
-        else if (fecha.contains("Apr")){
-            fecha_modificada=fecha.replace("Apr","04");
-        }
-        else if (fecha.contains("May")){
-            fecha_modificada=fecha.replace("May","05");
-        }
-        else if (fecha.contains("Jun")){
-            fecha_modificada=fecha.replace("Jun","06");
-        }
-        else if (fecha.contains("Jul")){
-            fecha_modificada=fecha.replace("Jul","07");
-        }
-        else if (fecha.contains("Aug")){
-            fecha_modificada=fecha.replace("Aug","08");
-        }
-        else if (fecha.contains("Sep")){
-            fecha_modificada=fecha.replace("Sep","09");
-        }
-        else if (fecha.contains("Oct")){
-            fecha_modificada=fecha.replace("Oct","10");
-        }
-        else if (fecha.contains("Nov")){
-            fecha_modificada=fecha.replace("Nov","11");
-        }
-        else if (fecha.contains("Dec")){
-            fecha_modificada=fecha.replace("Dec","12");
-        }
-        fecha_modificada=fecha_modificada.replace(" ","-");
-        fecha_modificada=fecha_modificada.replace(",","");
-        String[] fecha_dividida = fecha_modificada.split("-");
-        fecha_modificada=fecha_dividida[2]+"-"+fecha_dividida[0]+"-"+fecha_dividida[1];
-        return fecha_modificada;
-    }
-
-    private String transformarHora(String hora){
-        String hora_modificada;
-        String[] hora_dividida = hora.split(":");
-        String[] am_pm = hora_dividida[2].split(" ");
-        if(am_pm[1].contains("PM")){
-            hora_modificada=(Integer.parseInt(hora_dividida[0])+12)+":"+hora_dividida[1]+":"+am_pm[0];
-        }
-        else {
-            hora_modificada=hora_dividida[0]+":"+hora_dividida[1]+":"+am_pm[0];
-        }
-        return hora_modificada;
-    }
 
 
 }
