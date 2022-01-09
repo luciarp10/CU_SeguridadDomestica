@@ -415,7 +415,7 @@ public class Logic
             while (rs.next())
             {
                 Registro_actuador registroAct = new Registro_actuador();
-		registroAct.setHora_on(rs.getTimestamp("hora_on"));
+		registroAct.setHora_on(rs.getTime("hora_on"));
                 registroAct.setFecha_on(rs.getDate("fecha_on"));
                 registroAct.setDuracion(rs.getFloat("duracion"));
                 registroAct.setId_actuador_actuador(rs.getInt("id_actuador_actuador"));
@@ -461,7 +461,7 @@ public class Logic
                 Registro_camara registroCam = new Registro_camara();
 		registroCam.setFecha(rs.getDate("fecha"));
                 registroCam.setEnlace_foto(rs.getString("foto"));
-                registroCam.setHora(rs.getTimestamp("hora"));
+                registroCam.setHora(rs.getTime("hora"));
                 registroCam.setId_sensor_sensor(rs.getInt("id_sensor_sensor"));
                 registros_camaras.add(registroCam);
             }	
@@ -509,7 +509,7 @@ public class Logic
                 Registro_camara registroCam = new Registro_camara();
 		registroCam.setFecha(rs.getDate("fecha"));
                 registroCam.setEnlace_foto(rs.getString("foto"));
-                registroCam.setHora(rs.getTimestamp("hora"));
+                registroCam.setHora(rs.getTime("hora"));
                 registroCam.setId_sensor_sensor(rs.getInt("id_sensor_sensor"));
                 registros_camaras.add(registroCam);
             }	
@@ -690,7 +690,7 @@ public class Logic
                 Registro_sensor registro = new Registro_sensor();
 		registro.setFecha(rs.getDate("fecha"));
                 registro.setValor(rs.getFloat("valor"));
-                registro.setHora(rs.getTimestamp("hora"));
+                registro.setHora(rs.getTime("hora"));
                 registro.setId_sensor_sensor(rs.getInt("id_sensor_sensor"));
                 registros.add(registro);
             }	
@@ -738,7 +738,7 @@ public class Logic
                 Registro_actuador registro = new Registro_actuador();
 		registro.setFecha_on(rs.getDate("fecha_on"));
                 registro.setDuracion(rs.getFloat("duracion"));
-                registro.setHora_on(rs.getTimestamp("hora_on"));
+                registro.setHora_on(rs.getTime("hora_on"));
                 registro.setId_actuador_actuador(rs.getInt("id_actuador_actuador"));
                 registros.add(registro);
             }	
@@ -788,7 +788,7 @@ public class Logic
                 Registro_sensor registro = new Registro_sensor();
 		registro.setFecha(rs.getDate("fecha"));
                 registro.setValor(rs.getFloat("valor"));
-                registro.setHora(rs.getTimestamp("hora"));
+                registro.setHora(rs.getTime("hora"));
                 registro.setId_sensor_sensor(rs.getInt("id_sensor_sensor"));
                 registros.add(registro);
             }	
@@ -828,7 +828,7 @@ public class Logic
             {
 		ultimo_registro.setFecha(rs.getDate("fecha"));
                 ultimo_registro.setValor(rs.getFloat("valor"));
-                ultimo_registro.setHora(rs.getTimestamp("hora"));
+                ultimo_registro.setHora(rs.getTime("hora"));
                 ultimo_registro.setId_sensor_sensor(rs.getInt("id_sensor_sensor"));
             }	
         } catch (SQLException e)
@@ -874,7 +874,7 @@ public class Logic
                 Alerta alerta = new Alerta();
 		alerta.setId_alerta(rs.getInt("id_alerta"));
                 alerta.setFecha(rs.getDate("fecha"));
-                alerta.setHora(rs.getTimestamp("hora"));
+                alerta.setHora(rs.getTime("hora"));
                 alerta.setInfo(rs.getString("info"));
                 alerta.setCod_sistema_sistema_seguridad(rs.getInt("cod_sistema_sistema_seguridad"));
 
@@ -1183,7 +1183,7 @@ public class Logic
             while (rs.next())
             {
                 Registro_actuador registroAct = new Registro_actuador();
-		registroAct.setHora_on(rs.getTimestamp("hora_on"));
+		registroAct.setHora_on(rs.getTime("hora_on"));
                 registroAct.setFecha_on(rs.getDate("fecha_on"));
                 registroAct.setDuracion(rs.getFloat("duracion"));
                 registroAct.setId_actuador_actuador(rs.getInt("id_actuador_actuador"));
@@ -1234,7 +1234,7 @@ public class Logic
                 Registro_camara registroCam = new Registro_camara();
 		registroCam.setFecha(rs.getDate("fecha"));
                 registroCam.setEnlace_foto(rs.getString("foto"));
-                registroCam.setHora(rs.getTimestamp("hora"));
+                registroCam.setHora(rs.getTime("hora"));
                 registroCam.setId_sensor_sensor(rs.getInt("id_sensor_sensor"));
                 registros.add(registroCam);
             }	

@@ -28,6 +28,7 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.sql.Date;
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
@@ -106,7 +107,7 @@ public class RegistrosCamaras extends AppCompatActivity {
                 JSONObject jsonobject = jsonRegistros.getJSONObject(i);
 
                 java.sql.Date date = Date.valueOf(transformarFecha(jsonobject.getString("fecha")));
-                java.sql.Timestamp hora = Timestamp.valueOf(transformarHora(jsonobject.getString("hora")));
+                Time hora = Time.valueOf(transformarHora(jsonobject.getString("hora")));
 
                 Registro_camara registro_recibido = new Registro_camara();
                 registro_recibido.setFecha(date);
@@ -114,8 +115,7 @@ public class RegistrosCamaras extends AppCompatActivity {
                 registro_recibido.setId_sensor_sensor(jsonobject.getInt("id_sensor_sensor"));
                 registro_recibido.setEnlace_foto(jsonobject.getString("enlace_foto"));
 
-                String[] hora_dividida=registro_recibido.getHora().toString().split(" ");
-                arrayHoras.add(hora_dividida[1]);
+                arrayHoras.add(""+hora);
                 registro_camaras.add(registro_recibido);
             }
             if(arrayHoras.size()==0){
@@ -206,11 +206,14 @@ public class RegistrosCamaras extends AppCompatActivity {
 
     private String transformarHora(String hora){
         String hora_modificada;
-        String[] hora_dividida = hora.split(" ");
-        String fecha = hora_dividida[0]+" "+hora_dividida[1]+" "+hora_dividida[2];
-        fecha=transformarFecha(fecha);
-        hora_modificada=hora_dividida[3];
-        hora_modificada=fecha+" "+hora_modificada;
+        String[] hora_dividida = hora.split(":");
+        String[] am_pm = hora_dividida[2].split(" ");
+        if(am_pm[1].contains("PM")){
+            hora_modificada=(Integer.parseInt(hora_dividida[0])+12)+":"+hora_dividida[1]+":"+am_pm[0];
+        }
+        else {
+            hora_modificada=hora_dividida[0]+":"+hora_dividida[1]+":"+am_pm[0];
+        }
         return hora_modificada;
     }
 

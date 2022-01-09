@@ -19,6 +19,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.sql.Date;
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
@@ -43,7 +44,7 @@ public class Registros extends AppCompatActivity {
     }
 
     public void setTablaRegistros(JSONArray jsonarrayRegs) throws JSONException {
-        Log.i(tag, "Registros recibidos: "+jsonarrayRegs);
+        Log.i(tag, "Registros recibidos: "+jsonarrayRegs.length());
         tabla_registros.setStretchAllColumns(true);
         tabla_registros.bringToFront();
         ArrayList<Alerta> registros_leidos = new ArrayList<Alerta>();
@@ -53,24 +54,21 @@ public class Registros extends AppCompatActivity {
             Alerta alerta_recibida = new Alerta();
             alerta_recibida.setInfo(jsonobject.getString("info"));
             java.sql.Date date = Date.valueOf(transformarFecha(jsonobject.getString("fecha")));
-            java.sql.Timestamp hora = Timestamp.valueOf(transformarHora(jsonobject.getString("hora")));
             alerta_recibida.setFecha(date);
-            alerta_recibida.setHora(hora);
+            alerta_recibida.setHora(Time.valueOf(transformarHora(jsonobject.getString("hora"))));
             alerta_recibida.setCod_sistema_sistema_seguridad(jsonobject.getInt("cod_sistema_sistema_seguridad"));
 
             registros_leidos.add(alerta_recibida);
 
         }
 
-        String[] hora_dividida;
 
         for(int i = 0; i < registros_leidos.size(); i++){
             TableRow tr =  new TableRow(this);
             TextView c1 = new TextView(this);
             c1.setText(registros_leidos.get(i).getFecha().toString());
             TextView c2 = new TextView(this);
-            hora_dividida = String.valueOf(registros_leidos.get(i).getHora()).split(" ");
-            c2.setText(hora_dividida[1]);
+            c2.setText(""+registros_leidos.get(i).getHora());
             TextView c3 = new TextView(this);
             String columna_info = String.valueOf(registros_leidos.get(i).getInfo());
             c3.setText(columna_info);
@@ -128,20 +126,14 @@ public class Registros extends AppCompatActivity {
 
     private String transformarHora(String hora){
         String hora_modificada;
-        String[] hora_dividida = hora.split(" ");
-        String fecha = hora_dividida[0]+" "+hora_dividida[1]+" "+hora_dividida[2];
-        fecha=transformarFecha(fecha);
-        String[] hh_mm_ss = hora_dividida[3].split(":");
-        if(hora_dividida[4].contains("PM")){
-            hora_modificada=(Integer.parseInt(hh_mm_ss[0])+12)+":"+hh_mm_ss[1]+":"+hh_mm_ss[2];
-        }
-        else if (hh_mm_ss[0].contains("12")){
-            hora_modificada="00:"+hh_mm_ss[1]+":"+hh_mm_ss[2];
+        String[] hora_dividida = hora.split(":");
+        String[] am_pm = hora_dividida[2].split(" ");
+        if(am_pm[1].contains("PM")){
+            hora_modificada=(Integer.parseInt(hora_dividida[0])+12)+":"+hora_dividida[1]+":"+am_pm[0];
         }
         else {
-            hora_modificada=hora_dividida[3];
+            hora_modificada=hora_dividida[0]+":"+hora_dividida[1]+":"+am_pm[0];
         }
-        hora_modificada=fecha+" "+hora_modificada;
         return hora_modificada;
     }
 }

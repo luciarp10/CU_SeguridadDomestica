@@ -1,15 +1,16 @@
 package bbdd;
 
 import java.sql.Date;
+import java.sql.Time;
 import java.sql.Timestamp;
 
 public class Registro_actuador{
-    private Timestamp hora_on;
+    private Time hora_on;
     private Date fecha_on;
     private float duracion;
     private int id_actuador_actuador;
 
-    public Registro_actuador(Timestamp hora_on, Date fecha_on, float duracion, int id_actuador_actuador) {
+    public Registro_actuador(Time hora_on, Date fecha_on, float duracion, int id_actuador_actuador) {
         this.hora_on = hora_on;
         this.fecha_on = fecha_on;
         this.duracion = duracion;
@@ -21,11 +22,11 @@ public class Registro_actuador{
     
     
 
-    public Timestamp getHora_on() {
+    public Time getHora_on() {
         return hora_on;
     }
 
-    public void setHora_on(Timestamp hora_on) {
+    public void setHora_on(Time hora_on) {
         this.hora_on = hora_on;
     }
 

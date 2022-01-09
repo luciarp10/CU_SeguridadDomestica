@@ -12,6 +12,7 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.Date;
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -22,10 +23,10 @@ import java.time.ZoneId;
 public class Registro_camara {
     private Date fecha;
     private String enlace_foto;
-    private Timestamp hora;
+    private Time hora;
     private int id_sensor_sensor;
 
-    public Registro_camara(Date fecha, String enlace_foto, Timestamp hora, int id_sensor_sensor) {
+    public Registro_camara(Date fecha, String enlace_foto, Time hora, int id_sensor_sensor) {
         this.fecha = fecha;
         this.enlace_foto = enlace_foto;
         this.hora = hora;
@@ -53,11 +54,11 @@ public class Registro_camara {
         this.enlace_foto = enlace_foto;
     }
 
-    public Timestamp getHora() {
+    public Time getHora() {
         return hora;
     }
 
-    public void setHora(Timestamp hora) {
+    public void setHora(Time hora) {
         this.hora = hora;
     }
 

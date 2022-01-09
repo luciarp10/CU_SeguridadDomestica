@@ -17,6 +17,7 @@ import org.json.JSONObject;
 
 import java.sql.Array;
 import java.sql.Date;
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
@@ -64,7 +65,7 @@ public class SimulacionesProgramadas extends AppCompatActivity {
                 JSONObject jsonObject = jsonarrayRegs.getJSONObject(i);
 
                 java.sql.Date date = Date.valueOf(transformarFecha(jsonObject.getString("fecha_on")));
-                java.sql.Timestamp hora = Timestamp.valueOf(transformarHora(jsonObject.getString("hora_on")));
+                java.sql.Time hora = Time.valueOf(transformarHora(jsonObject.getString("hora_on")));
                 Registro_actuador registro_recibido = new Registro_actuador();
                 registro_recibido.setFecha_on((Date) date);
                 registro_recibido.setHora_on(hora);
@@ -86,8 +87,7 @@ public class SimulacionesProgramadas extends AppCompatActivity {
             TextView c1 = new TextView(this);
             c1.setText(registros_simulaciones.get(i).getFecha_on().toString());
             TextView c2 = new TextView(this);
-            hora_dividida = String.valueOf(registros_simulaciones.get(i).getHora_on()).split(" ");
-            c2.setText(hora_dividida[1]);
+            c2.setText(""+registros_simulaciones.get(i).getHora_on());
             TextView c3 = new TextView(this);
             c3.setText(buscarTipoActuador(registros_simulaciones.get(i).getId_actuador_actuador(), actuadores_sistema));
             TextView c4 = new TextView(this);
@@ -160,11 +160,14 @@ public class SimulacionesProgramadas extends AppCompatActivity {
 
     private String transformarHora(String hora){
         String hora_modificada;
-        String[] hora_dividida = hora.split(" ");
-        String fecha = hora_dividida[0]+" "+hora_dividida[1]+" "+hora_dividida[2];
-        fecha=transformarFecha(fecha);
-        hora_modificada=hora_dividida[3];
-        hora_modificada=fecha+" "+hora_modificada;
+        String[] hora_dividida = hora.split(":");
+        String[] am_pm = hora_dividida[2].split(" ");
+        if(am_pm[1].contains("PM")){
+            hora_modificada=(Integer.parseInt(hora_dividida[0])+12)+":"+hora_dividida[1]+":"+am_pm[0];
+        }
+        else {
+            hora_modificada=hora_dividida[0]+":"+hora_dividida[1]+":"+am_pm[0];
+        }
         return hora_modificada;
     }
 }

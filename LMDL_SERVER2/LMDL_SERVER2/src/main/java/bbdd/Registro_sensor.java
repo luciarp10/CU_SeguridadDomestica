@@ -1,15 +1,16 @@
 package bbdd;
 
 import java.sql.Date;
+import java.sql.Time;
 import java.sql.Timestamp;
 
 public class Registro_sensor{
     private Date fecha;
     private float valor;
-    private Timestamp hora;
+    private Time hora;
     private int id_sensor_sensor;
 
-    public Registro_sensor(Date fecha, float valor, Timestamp hora, int id_sensor_sensor) {
+    public Registro_sensor(Date fecha, float valor, Time hora, int id_sensor_sensor) {
         this.fecha = fecha;
         this.valor = valor;
         this.hora = hora;
@@ -35,11 +36,11 @@ public class Registro_sensor{
         this.valor = valor;
     }
 
-    public Timestamp getHora() {
+    public Time getHora() {
         return hora;
     }
 
-    public void setHora(Timestamp hora) {
+    public void setHora(Time hora) {
         this.hora = hora;
     }
 

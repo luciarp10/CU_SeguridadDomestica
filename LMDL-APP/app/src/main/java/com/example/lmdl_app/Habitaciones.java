@@ -22,6 +22,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.sql.Date;
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
@@ -142,7 +143,7 @@ public class Habitaciones extends AppCompatActivity {
                 JSONObject jsonObject = jsonRegistros.getJSONObject(i);
 
                 java.sql.Date date = Date.valueOf(transformarFecha(jsonObject.getString("fecha")));
-                java.sql.Timestamp hora = Timestamp.valueOf(transformarHora(jsonObject.getString("hora")));
+                java.sql.Time hora = Time.valueOf(transformarHora(jsonObject.getString("hora")));
                 Registro_sensor registro_recibido = new Registro_sensor();
                 registro_recibido.setFecha((Date) date);
                 registro_recibido.setHora(hora);
@@ -230,11 +231,14 @@ public class Habitaciones extends AppCompatActivity {
 
     private String transformarHora(String hora){
         String hora_modificada;
-        String[] hora_dividida = hora.split(" ");
-        String fecha = hora_dividida[0]+" "+hora_dividida[1]+" "+hora_dividida[2];
-        fecha=transformarFecha(fecha);
-        hora_modificada=hora_dividida[3];
-        hora_modificada=fecha+" "+hora_modificada;
+        String[] hora_dividida = hora.split(":");
+        String[] am_pm = hora_dividida[2].split(" ");
+        if(am_pm[1].contains("PM")){
+            hora_modificada=(Integer.parseInt(hora_dividida[0])+12)+":"+hora_dividida[1]+":"+am_pm[0];
+        }
+        else {
+            hora_modificada=hora_dividida[0]+":"+hora_dividida[1]+":"+am_pm[0];
+        }
         return hora_modificada;
     }
 

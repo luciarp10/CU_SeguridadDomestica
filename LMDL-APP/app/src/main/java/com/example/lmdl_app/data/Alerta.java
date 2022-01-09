@@ -1,5 +1,6 @@
 package com.example.lmdl_app.data;
 import java.sql.Date;
+import java.sql.Time;
 import java.sql.Timestamp;
 
 /**
@@ -9,11 +10,11 @@ import java.sql.Timestamp;
 public class Alerta {
     private int id_alerta;
     private Date fecha;
-    private Timestamp hora;
+    private Time hora;
     private String info;
     private int cod_sistema_sistema_seguridad;
 
-    public Alerta(int id_alerta, Date fecha, Timestamp hora, String info, int cod_sistema_sistema_seguridad) {
+    public Alerta(int id_alerta, Date fecha, Time hora, String info, int cod_sistema_sistema_seguridad) {
         this.id_alerta = id_alerta;
         this.fecha = fecha;
         this.hora = hora;
@@ -40,11 +41,11 @@ public class Alerta {
         this.fecha = fecha;
     }
 
-    public Timestamp getHora() {
+    public Time getHora() {
         return hora;
     }
 
-    public void setHora(Timestamp hora) {
+    public void setHora(Time hora) {
         this.hora = hora;
     }
 

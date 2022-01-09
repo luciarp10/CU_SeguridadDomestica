@@ -28,6 +28,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.sql.Date;
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -240,15 +241,14 @@ public class Estadisticas extends AppCompatActivity {
                 JSONObject jsonObject = jsonRegistros.getJSONObject(i);
                 if(jsonObject.getInt("id_sensor_sensor")==id_sensor){
                     java.sql.Date date = Date.valueOf(transformarFecha(jsonObject.getString("fecha")));
-                    java.sql.Timestamp hora = Timestamp.valueOf(transformarHora(jsonObject.getString("hora")));
+                    java.sql.Time hora = Time.valueOf(transformarHora(jsonObject.getString("hora")));
                     Registro_sensor registro_recibido = new Registro_sensor();
                     registro_recibido.setFecha((Date) date);
                     registro_recibido.setHora(hora);
                     registro_recibido.setId_sensor_sensor(jsonObject.getInt("id_sensor_sensor"));
                     registro_recibido.setValor(jsonObject.getDouble("valor"));
                     registros_estadisticos.add(registro_recibido);
-                    String[] hora_separada = hora.toString().split(" ");
-                    fechas_horas.add(""+date+"\n"+hora_separada[1]);
+                    fechas_horas.add(""+date+"\n"+hora);
                 }
             }
 
@@ -332,7 +332,7 @@ public class Estadisticas extends AppCompatActivity {
     private String calcularFecha(String fecha_introducida, String periodo_seleccionado) throws ParseException {
         int dias;
         if(periodo_seleccionado.equals("Dia")){
-            dias=1;
+            dias=0;
         } else if (periodo_seleccionado.equals("Semana")){
             dias=7;
         } else if (periodo_seleccionado.equals("Mes")){
@@ -400,11 +400,14 @@ public class Estadisticas extends AppCompatActivity {
 
     private String transformarHora(String hora){
         String hora_modificada;
-        String[] hora_dividida = hora.split(" ");
-        String fecha = hora_dividida[0]+" "+hora_dividida[1]+" "+hora_dividida[2];
-        fecha=transformarFecha(fecha);
-        hora_modificada=hora_dividida[3];
-        hora_modificada=fecha+" "+hora_modificada;
+        String[] hora_dividida = hora.split(":");
+        String[] am_pm = hora_dividida[2].split(" ");
+        if(am_pm[1].contains("PM")){
+            hora_modificada=(Integer.parseInt(hora_dividida[0])+12)+":"+hora_dividida[1]+":"+am_pm[0];
+        }
+        else {
+            hora_modificada=hora_dividida[0]+":"+hora_dividida[1]+":"+am_pm[0];
+        }
         return hora_modificada;
     }
 }
