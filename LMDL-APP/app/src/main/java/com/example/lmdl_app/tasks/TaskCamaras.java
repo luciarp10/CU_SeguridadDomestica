@@ -1,7 +1,10 @@
 package com.example.lmdl_app.tasks;
 
 import android.os.AsyncTask;
+import android.os.Build;
 import android.util.Log;
+
+import androidx.annotation.RequiresApi;
 
 import com.example.lmdl_app.Camaras;
 import com.example.lmdl_app.Habitaciones;
@@ -57,6 +60,7 @@ public class TaskCamaras extends AsyncTask<String,Void, String>
         return response;
     }
     //When the task is complete this method will be called to change the values in the UI
+    @RequiresApi(api = Build.VERSION_CODES.O)
     protected void onPostExecute(String response)
     {
         super.onPostExecute(response);
@@ -75,7 +79,12 @@ public class TaskCamaras extends AsyncTask<String,Void, String>
                 activityRegCam.setListImagenes(jsonRegistros);
             }
             else if (urlStr.contains("GetImagen")){
-                activityRegCam.transformarFoto(response);
+                if(response==null){
+                    activityRegCam.transformarFoto("");
+                }
+                else{
+                    activityRegCam.transformarFoto(response);
+                }
             }
             else if (urlStr.contains("HacerFoto")){
                 activity.mostrarUltimaFoto(response);

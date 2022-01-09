@@ -78,19 +78,19 @@ public class RegistrarSimulacion extends AppCompatActivity {
 
     private void loadActuadores() {
         new TaskRegistrarSimulacion(this).
-                execute("http://192.168.1.109:8080/LMDL_SERVER2/GetActuadoresSistema?cod_sistema="+cod_sistema);
+                execute(Comun.ruta_servlets+"GetActuadoresSistema?cod_sistema="+cod_sistema);
     }
 
     private void loadHabitaciones() {
         new TaskSelectHabitacion(this).
-                execute("http://192.168.1.109:8080/LMDL_SERVER2/GetHabitacionesSistema?cod_sistema="+cod_sistema);
+                execute(Comun.ruta_servlets+"GetHabitacionesSistema?cod_sistema="+cod_sistema);
 
 
     }
 
     private void sendRegistroSim(String idAct) {
         new TaskRegistrarSimulacion(this).
-                execute("http://192.168.1.109:8080/LMDL_SERVER2/RegistrarSimulacion?cod_sistema="+cod_sistema+"&usuario="+usuariologin+"&id_actuador="+idAct+"&tiempo="+tiempo);
+                execute(Comun.ruta_servlets+"RegistrarSimulacion?cod_sistema="+cod_sistema+"&usuario="+usuariologin+"&id_actuador="+idAct+"&tiempo="+tiempo);
     }
 
     public void setListActuadores(JSONArray jsonarrayActuadores) {

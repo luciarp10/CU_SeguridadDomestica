@@ -86,14 +86,14 @@ public class Habitaciones extends AppCompatActivity {
 
     private void loadHabitaciones() {
         new TaskSelectHabitacion(this).
-                execute("http://192.168.1.109:8080/LMDL_SERVER2/GetHabitacionesSistema?cod_sistema="+codigoSist);
+                execute(Comun.ruta_servlets+"GetHabitacionesSistema?cod_sistema="+codigoSist);
 
 
     }
 
     private void loadUltimosRegistros (){
         new TaskSelectHabitacion(this).
-            execute("http://192.168.1.109:8080/LMDL_SERVER2/GetUltRegistrosEstadisticosHabitacion?id_habitacion="+idHab);
+            execute(Comun.ruta_servlets+"GetUltRegistrosEstadisticosHabitacion?id_habitacion="+idHab);
 
     }
 

@@ -75,24 +75,25 @@ public class RegistrosCamaras extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 int reg_elegido= fotos_del_dia.getSelectedItemPosition();
+                mensajeError.setText("");
                 loadImagenSeleccionada(registro_camaras.get(reg_elegido).getEnlace_foto());
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-
+        mensajeError.setText("");
         loadRegistrosFecha();
     }
 
     private void loadRegistrosFecha() {
         new TaskCamaras(this).
-                execute("http://192.168.1.109:8080/LMDL_SERVER2/GetRegistrosImagenes?cod_sistema="+cod_sistema+"&fecha="+fecha_mostrar.getText());
+                execute(Comun.ruta_servlets+"GetRegistrosImagenes?cod_sistema="+cod_sistema+"&fecha="+fecha_mostrar.getText());
     }
 
     private void loadImagenSeleccionada(String ruta) {
         new TaskCamaras(this).
-                execute("http://192.168.1.109:8080/LMDL_SERVER2/GetImagen?enlace_foto="+ruta);
+                execute(Comun.ruta_servlets+"GetImagen?enlace_foto="+ruta);
     }
 
     public void setListImagenes(JSONArray jsonRegistros) {
@@ -128,27 +129,34 @@ public class RegistrosCamaras extends AppCompatActivity {
     }
 
     public void transformarFoto(String foto_bytes ) {
-        Log.i(tag, "Imagen: "+foto_bytes);
-        //Quitar corchetes a la cadena recibida
-        foto_bytes=foto_bytes.substring(1,foto_bytes.length()-2);
-        //separar por comas
-        String[] bytes = foto_bytes.split(",");
-
-        //ArrayList pasando cada cadena a tipo Byte
-        ArrayList<Byte> bytes_int=new ArrayList<>();
-        for (int i=0;i<bytes.length;i++){
-            bytes_int.add((byte) Integer.parseInt(bytes[i]));
+        if (foto_bytes.equals("")){
+            mensajeError.setText("Este registro corresponde a una simulación \nde carga masiva de la base de datos.");
+            imagen.setImageResource(R.drawable.logo_lmdl);
         }
-        //Pasar arrayList a array -> Byte[]
-        imgBytes= new byte[bytes_int.size()];
-        for (int i = 0; i < imgBytes.length; i++) {
-            imgBytes[i] = (byte) bytes_int.get(i);
+        else{
+            Log.i(tag, "Imagen: "+foto_bytes);
+            //Quitar corchetes a la cadena recibida
+            foto_bytes=foto_bytes.substring(1,foto_bytes.length()-2);
+            //separar por comas
+            String[] bytes = foto_bytes.split(",");
+
+            //ArrayList pasando cada cadena a tipo Byte
+            ArrayList<Byte> bytes_int=new ArrayList<>();
+            for (int i=0;i<bytes.length;i++){
+                bytes_int.add((byte) Integer.parseInt(bytes[i]));
+            }
+            //Pasar arrayList a array -> Byte[]
+            imgBytes= new byte[bytes_int.size()];
+            for (int i = 0; i < imgBytes.length; i++) {
+                imgBytes[i] = (byte) bytes_int.get(i);
+            }
+
+            //Decodificar la imagen
+            Bitmap bitmap = BitmapFactory.decodeByteArray(imgBytes, 0
+                    , imgBytes.length);
+            imagen.setImageBitmap(bitmap);
         }
 
-        //Decodificar la imagen
-        Bitmap bitmap = BitmapFactory.decodeByteArray(imgBytes, 0
-                , imgBytes.length);
-        imagen.setImageBitmap(bitmap);
     }
 
     private String transformarFecha(String fecha){

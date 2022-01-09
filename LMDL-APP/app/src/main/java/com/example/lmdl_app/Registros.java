@@ -39,7 +39,7 @@ public class Registros extends AppCompatActivity {
 
     private void loadRegistrosAlertas() {
         new TaskGetRegistrosAlertas(this).
-                execute("http://192.168.1.109:8080/LMDL_SERVER2/GetRegistrosAlertas?cod_sistema="+cod_sistema);
+                execute(Comun.ruta_servlets+"GetRegistrosAlertas?cod_sistema="+cod_sistema);
     }
 
     public void setTablaRegistros(JSONArray jsonarrayRegs) throws JSONException {

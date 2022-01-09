@@ -52,7 +52,7 @@ public class NuevoUsuario extends AppCompatActivity {
     }
     private void enviarDatosUsuarioNuevo() {
         new TaskUsuarios(this).
-                execute("http://192.168.1.109:8080/LMDL_SERVER2/InsertarUsuarioSistema?cod_sistema="+cod_sistema+"&nombre_usuario="+nombre_introducido.getText()+"&password="+pass_introducida.getText());
+                execute(Comun.ruta_servlets+"InsertarUsuarioSistema?cod_sistema="+cod_sistema+"&nombre_usuario="+nombre_introducido.getText()+"&password="+pass_introducida.getText());
     }
 
     private boolean comprobarDatosIntroducidos(){

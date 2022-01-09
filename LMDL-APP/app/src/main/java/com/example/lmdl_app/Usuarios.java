@@ -75,12 +75,12 @@ public class Usuarios extends AppCompatActivity {
 
     private void loadUsuariosSistema() {
         new TaskUsuarios(this).
-                execute("http://192.168.1.109:8080/LMDL_SERVER2/GetUsuariosSistema?cod_sistema="+cod_sistema);
+                execute(Comun.ruta_servlets+"GetUsuariosSistema?cod_sistema="+cod_sistema);
     }
 
     private void borrarUsuarioSistema(String nombre){
         new TaskUsuarios(this).
-                execute("http://192.168.1.109:8080/LMDL_SERVER2/BorrarUsuarioSistema?nombre_usuario="+nombre);
+                execute(Comun.ruta_servlets+"BorrarUsuarioSistema?nombre_usuario="+nombre);
     }
 
     public void setListUsuarios(JSONArray jsonUsuarios) {

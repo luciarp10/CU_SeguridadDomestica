@@ -44,7 +44,7 @@ public class EstadoAlarma extends AppCompatActivity {
 
     private void loadEstadoAlarma() {
         new TaskEstadoAlarma(this).
-                execute("http://192.168.1.109:8080/LMDL_SERVER2/GetEstadoAlarma?cod_sistema="+cod_sistema);
+                execute(Comun.ruta_servlets+"GetEstadoAlarma?cod_sistema="+cod_sistema);
 
     }
 
@@ -52,12 +52,12 @@ public class EstadoAlarma extends AppCompatActivity {
         if (estado_actual.contains("0")){
             setEstado_actual("1");
             new TaskEstadoAlarma(this).
-                    execute("http://192.168.1.109:8080/LMDL_SERVER2/CambiarEstadoAlarma?cod_sistema="+cod_sistema+"&usuario="+usuario+"&estado="+1);
+                    execute(Comun.ruta_servlets+"CambiarEstadoAlarma?cod_sistema="+cod_sistema+"&usuario="+usuario+"&estado="+1);
         }
         else {
             setEstado_actual("0");
             new TaskEstadoAlarma(this).
-                    execute("http://192.168.1.109:8080/LMDL_SERVER2/CambiarEstadoAlarma?cod_sistema="+cod_sistema+"&usuario="+usuario+"&estado="+0);
+                    execute(Comun.ruta_servlets+"CambiarEstadoAlarma?cod_sistema="+cod_sistema+"&usuario="+usuario+"&estado="+0);
 
         }
     }

@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void comprobarDatos() {
-        String urlStr = "http://192.168.1.109:8080/LMDL_SERVER2/InicioSesion?usuario=" + usuario.getText().toString() + "&password=" + password.getText().toString();
+        String urlStr = Comun.ruta_servlets+"InicioSesion?usuario=" + usuario.getText().toString() + "&password=" + password.getText().toString();
         ServerConnectionThread thread = new ServerConnectionThread(this, urlStr);
         try {
             thread.join();

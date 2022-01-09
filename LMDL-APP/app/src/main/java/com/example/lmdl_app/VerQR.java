@@ -42,7 +42,7 @@ public class VerQR extends AppCompatActivity {
 
     private void loadCodigoQR() {
         new TaskGetQR(this).
-                execute("http://192.168.1.109:8080/LMDL_SERVER2/GetCodQR?usuario="+nombre_usuario);
+                execute(Comun.ruta_servlets+"GetCodQR?usuario="+nombre_usuario);
 
     }
 

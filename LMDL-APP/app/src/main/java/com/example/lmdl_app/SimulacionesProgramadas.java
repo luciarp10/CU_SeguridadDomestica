@@ -41,7 +41,7 @@ public class SimulacionesProgramadas extends AppCompatActivity {
 
     private void loadRegistrosSimulaciones() {
         new TaskGetRegistrosSimulaciones(this).
-                execute("http://192.168.1.109:8080/LMDL_SERVER2/GetRegistrosActuadores?cod_sistema="+cod_sistema);
+                execute(Comun.ruta_servlets+"GetRegistrosActuadores?cod_sistema="+cod_sistema);
     }
 
     public void setTablaSimulaciones(JSONArray jsonActuadores, JSONArray jsonarrayRegs) {

@@ -158,7 +158,7 @@ public class Estadisticas extends AppCompatActivity {
 
     private void loadHabitaciones() {
         new TaskEstadisticas(this).
-                execute("http://192.168.1.109:8080/LMDL_SERVER2/GetHabitacionesSistema?cod_sistema="+cod_sistema);
+                execute(Comun.ruta_servlets+"GetHabitacionesSistema?cod_sistema="+cod_sistema);
 
     }
 
@@ -170,7 +170,7 @@ public class Estadisticas extends AppCompatActivity {
 
         Log.e(tag, fecha_fin);
         new TaskEstadisticas(this).
-                execute("http://192.168.1.109:8080/LMDL_SERVER2/GetRegistrosSensoresHabitacionFecha?id_habitacion="+idHab+"&fecha_ini="+fecha_introducida+"&fecha_fin="+fecha_fin);
+                execute(Comun.ruta_servlets+"GetRegistrosSensoresHabitacionFecha?id_habitacion="+idHab+"&fecha_ini="+fecha_introducida+"&fecha_fin="+fecha_fin);
     }
 
 

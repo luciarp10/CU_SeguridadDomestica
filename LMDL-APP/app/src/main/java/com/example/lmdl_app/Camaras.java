@@ -94,14 +94,14 @@ public class Camaras extends AppCompatActivity {
 
     private void loadCamarasDisponibles() {
         new TaskCamaras(this).
-                execute("http://192.168.1.109:8080/LMDL_SERVER2/GetCamarasDisponibles?cod_sistema="+cod_sistema);
+                execute(Comun.ruta_servlets+"GetCamarasDisponibles?cod_sistema="+cod_sistema);
     }
 
     private void solicitarFoto() {
         String id_camara=camarasDisponibles.getSelectedItem().toString();
         id_camara=""+id_camara.charAt(id_camara.length()-1);
         new TaskCamaras(this).
-                execute("http://192.168.1.109:8080/LMDL_SERVER2/HacerFoto?cod_sistema="+cod_sistema+"&usuario="+usuariologin+"&id_camara="+id_camara);
+                execute(Comun.ruta_servlets+"HacerFoto?cod_sistema="+cod_sistema+"&usuario="+usuariologin+"&id_camara="+id_camara);
     }
 
 
