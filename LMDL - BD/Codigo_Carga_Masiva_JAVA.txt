@@ -1,0 +1,175 @@
+package ejer1;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
+
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MaximizeAction;
+
+/*
+
+@author
+David Barreiro*/
+public class Ejer_1_bis {
+    public static String contenido = "";
+    /*
+     * @param
+     * args the
+     * command line arguments
+     */
+
+    public static void main(String[] args) throws IOException {
+
+        try {
+            String ruta = "C:\\UNI\\5.Computacion Ubicua\\LABO\\PL2\\DB\\HAB_3.txt";
+
+            File file = new File(ruta);
+            // Si el archivo no existe es creado
+
+            // Metodo crea sensores
+            String tipo[] = { "DHT22-Temperatura", "DHT22-Humedad", "TSL2561-Luminosidad", "Humo", "OV7670-Camara" };
+            for (int i = 10; i < 15; i++) {
+                int id_s = i + 1;
+                if (i > 4 && i < 10) {
+                    String tipo_sensor = tipo[i - 5];
+                    contenido += "insert into sensor(id_sensor,tipo,id_habitacion_habitacion)values("
+                            + id_s + ",'" + tipo_sensor + "'," + 2 + ");\n";
+                    CreaREgistrosDia(id_s, tipo_sensor);
+                } else if (i > 9) {
+                    String tipo_sensor = tipo[i - 10];
+                    contenido += "insert into sensor(id_sensor,tipo,id_habitacion_habitacion)values("
+                            + id_s + ",'" + tipo_sensor + "'," + 3 + ");\n";
+                    CreaREgistrosDia(id_s, tipo_sensor);
+                } else {
+                    String tipo_sensor = tipo[i];
+                    contenido += "insert into sensor(id_sensor,tipo,id_habitacion_habitacion)values("
+                            + (id_s) + ",'" + tipo_sensor + "'," + 1 + ");\n";
+                    CreaREgistrosDia(id_s, tipo_sensor);
+                }
+            }
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            FileWriter fw = new FileWriter(file);
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(contenido);
+            bw.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    // Metodo crea registros
+    public static void CreaREgistrosDia(int id, String tipoS) {
+        // bucle por dias
+        for (int dia = 1; dia <= 365; dia++) {
+            if (dia <= 31) {// Enero
+                CreaREgistrosHora(23, 18, "2021-01-" + dia, 50, 110, id, tipoS);// int maxT, int minT, String fecha, int
+                                                                                // minA, int maxAi, int id, String tipoS
+            } else if (dia <= 59) {// Febrero
+                CreaREgistrosHora(23, 19, "2021-02-" + (dia - 31), 50, 100, id, tipoS);// int maxT, int minT, String
+                                                                                       // fecha, int minA, int maxAi,
+                                                                                       // int id, String tipoS
+            } else if (dia <= 90) {// Marzo
+                CreaREgistrosHora(24, 18, "2021-03-" + (dia - 59), 55, 100, id, tipoS);// int maxT, int minT, String
+                                                                                       // fecha, int minA, int maxAi,
+                                                                                       // int id, String tipoS
+            } else if (dia <= 120) {// Abril
+                CreaREgistrosHora(24, 19, "2021-04-" + (dia - 90), 60, 110, id, tipoS);// int maxT, int minT, String
+                                                                                       // fecha, int minA, int maxAi,
+                                                                                       // int id, String tipoS
+            } else if (dia <= 151) {// Mayo
+                CreaREgistrosHora(25, 19, "2021-05-" + (dia - 120), 65, 110, id, tipoS);// int maxT, int minT, String
+                                                                                        // fecha, int minA, int maxAi,
+                                                                                        // int id, String tipoS
+            } else if (dia <= 181) {// Junio
+                CreaREgistrosHora(26, 21, "2021-06-" + (dia - 151), 60, 120, id, tipoS);// int maxT, int minT, String
+                                                                                        // fecha, int minA, int maxAi,
+                                                                                        // int id, String tipoS
+            } else if (dia <= 212) {// Julio
+                CreaREgistrosHora(26, 22, "2021-07-" + (dia - 181), 70, 125, id, tipoS);// int maxT, int minT, String
+                                                                                        // fecha, int minA, int maxAi,
+                                                                                        // int id, String tipoS
+            } else if (dia <= 243) {// Agosto
+                CreaREgistrosHora(30, 23, "2021-08-" + (dia - 212), 80, 130, id, tipoS);// int maxT, int minT, String
+                                                                                        // fecha, int minA, int maxAi,
+                                                                                        // int id, String tipoS
+            } else if (dia <= 273) {// Septiembre
+                CreaREgistrosHora(25, 20, "2021-09-" + (dia - 243), 75, 120, id, tipoS);// int maxT, int minT, String
+                                                                                        // fecha, int minA, int maxAi,
+                                                                                        // int id, String tipoS
+            } else if (dia <= 304) {// Octubre
+                CreaREgistrosHora(24, 19, "2021-10-" + (dia - 273), 70, 115, id, tipoS);// int maxT, int minT, String
+                                                                                        // fecha, int minA, int maxAi,
+                                                                                        // int id, String tipoS
+            } else if (dia <= 334) {// Noviembre
+                CreaREgistrosHora(22, 17, "2021-11-" + (dia - 304), 60, 100, id, tipoS);// int maxT, int minT, String
+                                                                                        // fecha, int minA, int maxAi,
+                                                                                        // int id, String tipoS
+            } else {// Diciembre
+                CreaREgistrosHora(21, 17, "2021-12-" + (dia - 334), 50, 90, id, tipoS);// int maxT, int minT, String
+                                                                                       // fecha, int minA, int maxAi,
+                                                                                       // int id, String tipoS
+            }
+
+        }
+
+    }
+
+    public static void CreaREgistrosHora(int maxT, int minT, String fecha, int minA, int maxAi, int id, String tipoS) {
+        if (id % 5 != 0) {
+            for (int hora = 0; hora < 24; hora++) {
+                ThreadLocalRandom tlr = ThreadLocalRandom.current();
+                double random;
+                switch (tipoS) {
+                    case "DHT22-Temperatura":
+                        if (hora >= 0 && hora < 8 || hora > 18 && hora < 24) {
+                            random = tlr.nextInt(minT, maxT - 2);
+                        } else {
+                            random = tlr.nextInt(minT + 2, maxT + 1);
+                        }
+                        contenido += "insert into registro_estadistico(fecha,valor,hora,id_sensor_sensor)values("
+                                + "\"" + fecha + "\"," + random + ",\"" + hora + ":00:00\"," + id + ");\n";
+                        break;
+                    case "DHT22-Humedad":
+                        random = tlr.nextInt(50, 70); // En Enero hay mas humedad
+                        contenido += "insert into registro_estadistico(fecha,valor,hora,id_sensor_sensor)values("
+                                + "\"" + fecha + "\"," + random + ",\"" + hora + ":00:00\"," + id + ");\n";
+                        break;
+                    case "TSL2561-Luminosidad":
+                        if (hora >= 0 && hora < 7) {
+                            random = 200;// PoR la madrugada las luces estan apagadas
+                        } else if (hora > 7 && hora <= 19) {
+                            random = tlr.nextInt(1400, 1700);
+                        } else {
+                            random = tlr.nextInt(1000, 1400);
+                        }
+                        contenido += "insert into registro_estadistico(fecha,valor,hora,id_sensor_sensor)values("
+                                + "\"" + fecha + "\"," + random + ",\"" + hora + ":00:00\"," + id + ");\n";
+                        break;
+                    default:
+                        if (hora >= 0 && hora < 7) {
+                            random = tlr.nextInt(minA, maxAi - 30);
+                            ;// PoR la madrugada la contaminacion es minima
+                        } else if (hora > 7 && hora <= 19) { // Contaminac max
+                            random = tlr.nextInt(minA + 20, maxAi);
+                        } else {
+                            random = tlr.nextInt(minA + 10, maxAi - 20);// Conta media
+                        }
+                        contenido += "insert into registro_estadistico(fecha,valor,hora,id_sensor_sensor)values("
+                                + "\"" + fecha + "\"," + random + ",\"" + hora + ":00:00\"," + id + ");\n";
+                        break;
+                }
+            }
+        }
+
+    }
+
+}
