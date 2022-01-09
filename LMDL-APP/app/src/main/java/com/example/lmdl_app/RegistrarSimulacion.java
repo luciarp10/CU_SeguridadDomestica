@@ -90,7 +90,7 @@ public class RegistrarSimulacion extends AppCompatActivity {
 
     private void sendRegistroSim(String idAct) {
         new TaskRegistrarSimulacion(this).
-                execute(Comun.ruta_servlets+"RegistrarSimulacion?cod_sistema="+cod_sistema+"&usuario="+usuariologin+"&id_actuador="+idAct+"&tiempo="+tiempo);
+                execute(Comun.ruta_servlets+"RegistrarSimulacion?cod_sistema="+cod_sistema+"&usuario="+usuariologin+"&id_actuador="+idAct+"&tiempo="+tiempo+"&info="+selectorActuador.getSelectedItem());
     }
 
     public void setListActuadores(JSONArray jsonarrayActuadores) {
