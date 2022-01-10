@@ -77,30 +77,51 @@ public class Informes extends AppCompatActivity {
 
     private void calcularEvaluacionglobal() {
         if(medida.equals("Temperatura")){
-            if(Double.parseDouble(media)>=20 && Double.parseDouble(media)<=21){
-                evaluacion_text.setText("Muy buena");
+            if (Double.parseDouble(media)<=14){
+                evaluacion_text.setText("Demasiado baja.");
+            }
+            else if (Double.parseDouble(media)>14 && Double.parseDouble(media)<=18){
+                evaluacion_text.setText("Baja, pero no preocupante.");
+            }
+            else if (Double.parseDouble(media)>20 && Double.parseDouble(media)<=21){
+                evaluacion_text.setText("Ideal");
             }
             else if (Double.parseDouble(media)>=18 && Double.parseDouble(media)<=24){
-                evaluacion_text.setText("Normal");
+                evaluacion_text.setText("Buena");
             }
             else {
-                evaluacion_text.setText("Mala");
+                evaluacion_text.setText("Demasiado alta");
             }
         }
         else if (medida.equals("Humedad")){
-            if(Double.parseDouble(media)>=30 && Double.parseDouble(media)<=50){
-                evaluacion_text.setText("Muy buena");
+            if(Double.parseDouble(media)>=20 && Double.parseDouble(media)<30){
+                evaluacion_text.setText("Baja");
             }
-            else if (Double.parseDouble(media)>=25 && Double.parseDouble(media)<=55){
-                evaluacion_text.setText("Normal");
+            else if(Double.parseDouble(media)>=30 && Double.parseDouble(media)<=50){
+                evaluacion_text.setText("Adecuada");
+            }
+            else if (Double.parseDouble(media)>=25 && Double.parseDouble(media)<=60){
+                evaluacion_text.setText("Aceptable");
+            }
+            else if (Double.parseDouble(media)>60 && Double.parseDouble(media)<=75){
+                evaluacion_text.setText("Alta");
+            }
+            else if (Double.parseDouble(media)>75 && Double.parseDouble(media)<=80){
+                evaluacion_text.setText("Muy Alta");
+            }
+            else if (Double.parseDouble(media)>80 ) {
+                evaluacion_text.setText("Demasiado alta, favorece el desarrollo de hongos y gérmenes");
             }
             else {
-                evaluacion_text.setText("Mala");
+                evaluacion_text.setText("No adecuada");
             }
         }
 
         else if (medida.equals("Calidad del aire")){
             if(Double.parseDouble(media)>=0 && Double.parseDouble(media)<=50){
+                evaluacion_text.setText("Ideal");
+            }
+            else if(Double.parseDouble(media)>=0 && Double.parseDouble(media)<=50){
                 evaluacion_text.setText("Muy buena");
             }
             else if (Double.parseDouble(media)>=51 && Double.parseDouble(media)<=100){
@@ -118,14 +139,20 @@ public class Informes extends AppCompatActivity {
         }
 
         else if(medida.equals("Luminosidad")){
-            if(Double.parseDouble(media)>=300 && Double.parseDouble(media)<=500){
-                evaluacion_text.setText("Muy buena");
+            if (Double.parseDouble(media)>=100 && Double.parseDouble(media)<300){
+                evaluacion_text.setText("Baja, adecuada para un dormitorio");
+            }
+            else if(Double.parseDouble(media)>=300 && Double.parseDouble(media)<=500){
+                evaluacion_text.setText("Adecuada");
             }
             else if (Double.parseDouble(media)>=200 && Double.parseDouble(media)<=800){
                 evaluacion_text.setText("Normal");
             }
+            else if (Double.parseDouble(media)>800){
+                evaluacion_text.setText("Demasiado alta.");
+            }
             else {
-                evaluacion_text.setText("Mala");
+                evaluacion_text.setText("Demasiado baja");
             }
         }
     }
