@@ -18,6 +18,7 @@ public class RegistrosActuadores extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_2_3_sim_pres);
+        getSupportActionBar().setTitle("LMDL-ACTUADORES");
 
         usuariologin = getIntent().getStringExtra("usuario");
         cod_sistema = getIntent().getStringExtra("cod_sistema");

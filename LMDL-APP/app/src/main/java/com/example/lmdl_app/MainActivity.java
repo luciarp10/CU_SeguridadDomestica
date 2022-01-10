@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        getSupportActionBar().setTitle("LMDL-INICIO DE SESIÓN");
         //Inicializamos elementos
         this.botonIniSesion = this.findViewById(R.id.botonIniSesion);
         this.usuario = (EditText) this.findViewById(R.id.espacioUsuario);

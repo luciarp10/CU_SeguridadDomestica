@@ -34,6 +34,7 @@ public class SimulacionesProgramadas extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_2_3_1_sim_prog);
+        getSupportActionBar().setTitle("LMDL-PROGRAMAR SIMULACION");
 
         cod_sistema = getIntent().getStringExtra("cod_sistema");
         this.tabla_registros = this.findViewById(R.id.tabla_registros_sim);

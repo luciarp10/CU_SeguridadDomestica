@@ -28,6 +28,8 @@ public class VerQR extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_2_5_qr);
+        getSupportActionBar().setTitle("LMDL-CODIGO QR");
+
         nombre_usuario=getIntent().getStringExtra("usuario");
 
         //Se enlaza la imagen del layout

@@ -8,11 +8,11 @@
 #include <SPI.h>
 
 
-#define WIFI_SSID "Marixu"
-#define WIFI_PASSWORD "12345678"
-const char* mqtt_server = "172.20.10.2";
+#define WIFI_SSID "TRISKEL64"
+#define WIFI_PASSWORD "VOLVORETAjali2016"
+const char* mqtt_server = "192.168.1.109";
 const char* namehost="Localhost";
-
+int contador=0;
 WiFiClient espClient;
 PubSubClient client(espClient);
 
@@ -38,22 +38,20 @@ void setup() {
 
 
   //sensor de aire no es necesario
-
 }
 
 void loop() {
- 
-  
+  contador++;
   float temperatura = sensor_temp.detectar_temperatura();delay(1000);
 
   char buffer[16];
   sprintf(buffer,"%.2f", temperatura);
-  client.publish("SistSeg1/Hab1/Sensor1", buffer);
+  
   
   float humedad= sensor_hum.detectar_humedad();delay(1000);
   char buffer1[16];
   sprintf(buffer1,"%.2f", humedad);
-  client.publish("SistSeg1/Hab1/Sensor2", buffer1);
+  
 
   
   float luz = sensor_lum.detectar_luminosidad();delay(1000);
@@ -70,18 +68,22 @@ void loop() {
   }
   char buffer2[16];
   sprintf(buffer2,"%.2f", luz);
-  client.publish("SistSeg1/Hab1/Sensor3", buffer2);
+  
 
   /*float aire = sensor_aire.detectarValor();delay(1000);
   char buffer3[16];
   sprintf(buffer3,"%.2f", aire);
   client.publish("esp/viento", buffer3);
      */ 
+  if (contador==3){
+    client.publish("SistSeg1/Hab1/Sensor1", buffer);
+    client.publish("SistSeg1/Hab1/Sensor2", buffer1);
+    client.publish("SistSeg1/Hab1/Sensor3", buffer2);
+    contador=0;
+  }
   client.loop();
   delay(5000);
   
-  
-
 }
 
 void initSerial(){

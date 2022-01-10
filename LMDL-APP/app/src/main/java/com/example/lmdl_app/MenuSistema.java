@@ -21,6 +21,7 @@ public class MenuSistema  extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_0_menu);
+        getSupportActionBar().setTitle("LMDL-MENÚ SISTEMA");
 
         //Inicializamos botones y spinners
         this.botonHabitaciones = this.findViewById(R.id.botonHabi);

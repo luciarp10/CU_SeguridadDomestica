@@ -60,6 +60,7 @@ public class RegistrosCamaras extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_2_2_1_camaras);
+        getSupportActionBar().setTitle("LMDL-FOTOS");
 
         this.fecha_mostrar=this.findViewById(R.id.textDateCam);
         this.fotos_del_dia=this.findViewById(R.id.spinnerListaFotos);

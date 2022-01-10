@@ -10,9 +10,9 @@
 #include <string.h>
 #include <SPI.h>
 
-#define WIFI_SSID "Marixu"
-#define WIFI_PASSWORD "12345678"
-const char* mqtt_server = "172.20.10.2";
+#define WIFI_SSID "TRISKEL64"
+#define WIFI_PASSWORD "VOLVORETAjali2016"
+const char* mqtt_server = "192.168.1.109";
 const char* namehost="Localhost";
 
 WiFiClient espClient;

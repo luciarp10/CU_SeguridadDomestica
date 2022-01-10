@@ -43,6 +43,7 @@ public class Usuarios extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_4_usuarios);
+        getSupportActionBar().setTitle("LMDL-USUARIOS");
 
         this.botonCreaUser = this.findViewById(R.id.botonAñadirU);
         this.botonBorraUser = this.findViewById(R.id.botonBorrUser);

@@ -25,6 +25,7 @@ public class EstadoAlarma extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_2_4_estado_alarma);
+        getSupportActionBar().setTitle("LMDL-ESTADO ALARMA");
 
         this.botonCambiarEst = this.findViewById(R.id.botonCambiar);
         this.candado = this.findViewById(R.id.imageEstado);

@@ -23,6 +23,7 @@ public class Seguridad extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_2_seguridad);
+        getSupportActionBar().setTitle("LMDL-SEGURIDAD");
 
         usuariologin = getIntent().getStringExtra("usuario");
         cod_sistema = getIntent().getStringExtra("cod_sistema");
