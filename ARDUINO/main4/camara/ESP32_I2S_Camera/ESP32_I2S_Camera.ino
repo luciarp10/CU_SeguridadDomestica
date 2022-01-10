@@ -39,14 +39,14 @@ boolean foto = true;
 //DIN <- MOSI 23
 //CLK <- SCK 18
 
-#define ssid1        "Marixu"
-#define password1    "12345678"
+#define ssid1        "TRISKEL64"
+#define password1    "VOLVORETAjali2016"
 //#define ssid2        ""
 //#define password2    ""
 
-#define WIFI_SSID "Marixu"
-#define WIFI_PASSWORD "12345678"
-const char* mqtt_server = "172.20.10.2";
+#define WIFI_SSID "TRISKEL64"
+#define WIFI_PASSWORD "VOLVORETAjali2016"
+const char* mqtt_server = "192.168.1.109";
 const char* namehost="Localhost";
 
 WiFiClient espClient;
@@ -64,7 +64,7 @@ unsigned char bmpHeader[BMP::headerSize];
 
 void serve()
 {
-  client.loop();
+  //client.loop();
   
   WiFiClient client = server.available();
   if (client) 
@@ -113,8 +113,8 @@ void serve()
       }
     }
     // close the connection:
-    //client.stop();
-    //Serial.println("Client Disconnected.");
+    client.stop();
+    Serial.println("Client Disconnected.");
   }  
 }
 
@@ -178,7 +178,7 @@ void displayRGB565(unsigned char * frame, int xres, int yres)
 void loop()
 {
   
-  //client.loop();
+  client.loop();
   serve();
   //client.loop();
   
@@ -192,7 +192,7 @@ void hacer_foto(){
    //if (foto){ //me falta una variable para que solo se haga una vez
       camera->oneFrame();    
       displayRGB565(camera->frame, camera->xres, camera->yres);  
-      client.publish("SistSeg1/Hab1/Camara5", "http://172.20.10.13/camera?1641147311677"); //SistSeg1/Hab1/Camara1
+      client.publish("SistSeg1/Hab1/Camara5", "http://192.168.1.103/camera?1641839833782"); //SistSeg1/Hab1/Camara1
        
    //}
     
