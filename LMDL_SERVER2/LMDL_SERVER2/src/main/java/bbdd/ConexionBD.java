@@ -164,7 +164,7 @@ public class ConexionBD {
         return getStatement(con,"SELECT hora_on, fecha_on, duracion, id_actuador_actuador FROM LMDL_BD.registro_actuador "
                 + "INNER JOIN LMDL_BD.actuador on id_actuador_actuador=id_actuador INNER JOIN LMDL_BD.habitacion on "
                 + "id_habitacion_habitacion=id_habitacion  INNER JOIN "
-                + "LMDL_BD.sistema_seguridad on cod_sistema = cod_sistema_sistema_seguridad WHERE cod_sistema=? ORDER BY fecha_on desc" );
+                + "LMDL_BD.sistema_seguridad on cod_sistema = cod_sistema_sistema_seguridad WHERE cod_sistema=? ORDER BY fecha_on desc, hora_on desc" );
     }
     
     public static PreparedStatement GetRegistrosEstadisticosHabitacionFecha(Connection con){
@@ -232,7 +232,7 @@ public class ConexionBD {
     }
     
     public static PreparedStatement InsertarRegistroActuador(Connection con){
-        return getStatement(con, "INSERT INTO LMDL_BD.registro (hora_on, fecha_on, duracion, id_actuador_actuador) VALUES (?,?,?,?)");
+        return getStatement(con, "INSERT INTO LMDL_BD.registro_actuador (hora_on, fecha_on, duracion, id_actuador_actuador) VALUES (?,?,?,?)");
     }
     
     public static PreparedStatement InsertarAlerta(Connection con){

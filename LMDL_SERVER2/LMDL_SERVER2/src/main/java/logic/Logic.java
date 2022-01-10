@@ -898,7 +898,49 @@ public class Logic
 	}
         return registros_alertas;
     }
+    
+    /**
+     * Devuelve el último registro de alerta completo
+     * @param cod_sistema
+     * @return 
+     */
         
+    public static Alerta getUltimoRegAlerta(int cod_sistema){
+        Alerta alerta = new Alerta();
+	ConexionBD conector = new ConexionBD();
+	Connection con = null;
+        try
+        {
+            con = conector.obtainConnection(true);
+            Log.log.debug("Database Connected");
+		
+            PreparedStatement ps = ConexionBD.GetRegistrosAlertas(con);
+            ps.setInt(1, cod_sistema);
+            Log.log.info("Query=> {}", ps.toString());
+            ResultSet rs = ps.executeQuery();
+            if (rs.next())
+            {
+		alerta.setId_alerta(rs.getInt("id_alerta"));
+                alerta.setFecha(rs.getDate("fecha"));
+                alerta.setHora(rs.getTime("hora"));
+                alerta.setInfo(rs.getString("info"));
+                alerta.setCod_sistema_sistema_seguridad(rs.getInt("cod_sistema_sistema_seguridad"));
+            }	
+        } catch (SQLException e)
+	{
+            Log.log.error("Error: {}", e);
+        } catch (NullPointerException e)
+        {
+            Log.log.error("Error: {}", e);
+        } catch (Exception e)
+        {
+            Log.log.error("Error:{}", e);
+        } finally
+        {
+            conector.closeConnection(con);
+	}
+        return alerta;
+    }
     
         
     /**

@@ -81,6 +81,10 @@
         <servlet-name>GetCodQR</servlet-name>
         <servlet-class>servlets.GetCodQR</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GetUltimaAlerta</servlet-name>
+        <servlet-class>servlets.GetUltimaAlerta</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ComprobarQR</servlet-name>
         <url-pattern>/ComprobarQR</url-pattern>
@@ -160,6 +164,10 @@
     <servlet-mapping>
         <servlet-name>GetCodQR</servlet-name>
         <url-pattern>/GetCodQR</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetUltimaAlerta</servlet-name>
+        <url-pattern>/GetUltimaAlerta</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
