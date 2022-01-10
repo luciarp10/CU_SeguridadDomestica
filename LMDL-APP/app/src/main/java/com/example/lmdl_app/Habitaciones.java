@@ -50,6 +50,7 @@ public class Habitaciones extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_1_habitaciones);
+        getSupportActionBar().setTitle("LMDL-HABITACIONES");
 
         this.codigoSist= getIntent().getStringExtra("cod_sistema");
         this.botonEstadisticas = this.findViewById(R.id.botonEstadist);

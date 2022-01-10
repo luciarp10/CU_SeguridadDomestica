@@ -49,6 +49,7 @@ public class Camaras extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_2_2_camaras);
+        getSupportActionBar().setTitle("LMDL-CÁMARAS");
 
         this.botonVerFotos = this.findViewById(R.id.botonVerFotos);
         this.botonHacerFoto = this.findViewById(R.id.botonHacFot);

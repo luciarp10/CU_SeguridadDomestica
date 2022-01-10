@@ -32,6 +32,7 @@ public class Registros extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_2_1_registros);
+        getSupportActionBar().setTitle("LMDL-REGISTROS");
 
         cod_sistema = Integer.parseInt(getIntent().getStringExtra("cod_sistema"));
         this.tabla_registros = this.findViewById(R.id.tablaRegistros);

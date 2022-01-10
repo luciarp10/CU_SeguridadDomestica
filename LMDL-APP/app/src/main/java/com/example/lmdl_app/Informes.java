@@ -28,6 +28,7 @@ public class Informes extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_3_1_informes);
+        getSupportActionBar().setTitle("LMDL-INFORMES");
 
         this.media = getIntent().getStringExtra("media");
         this.maximo = getIntent().getStringExtra("max");

@@ -28,6 +28,7 @@ public class NuevoUsuario extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_4_1_new_user);
+        getSupportActionBar().setTitle("LMDL-USUARIOS");
 
         this.cod_sistema  = getIntent().getStringExtra("cod_sistema");
         this.nombre_introducido = this.findViewById(R.id.editTextTextPersonName);

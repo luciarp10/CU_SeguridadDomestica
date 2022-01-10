@@ -65,6 +65,7 @@ public class Estadisticas extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_3_estadisticas);
+        getSupportActionBar().setTitle("LMDL-ESTADÍSTICAS");
 
         cod_sistema =getIntent().getStringExtra("cod_sistema");
         this.botonInformes = this.findViewById(R.id.botonVerInfo);
