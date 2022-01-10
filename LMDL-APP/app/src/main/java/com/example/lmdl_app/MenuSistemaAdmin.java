@@ -1,5 +1,6 @@
 package com.example.lmdl_app;
 
+import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -16,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+import com.example.lmdl_app.data.Alerta;
 import com.example.lmdl_app.tasks.TaskNotificaciones;
 
 public class MenuSistemaAdmin extends AppCompatActivity {
@@ -30,6 +32,7 @@ public class MenuSistemaAdmin extends AppCompatActivity {
 
     private final static String CHANNEL_ID = "cod_sistema";
     private final static int NOTIFICATION_ID=0;
+    private Alerta ultima_alerta=new Alerta();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,14 +89,30 @@ public class MenuSistemaAdmin extends AppCompatActivity {
                 //finish();
             }
         });
-
-        /*new TaskNotificaciones(this).
-                execute(Comun.ruta_servlets+"GetUltimaAlerta?cod_sistema="+codigoSist);*/
+        ejecutarTask();
 
     }
+
+    public void ejecutarTask() {
+
+        new TaskNotificaciones(this).
+                execute(Comun.ruta_servlets + "GetUltimaAlerta?cod_sistema=" + codigoSist);
+    }
+
+    public Alerta getUltima_alerta() {
+        return ultima_alerta;
+    }
+
+    public void setUltima_alerta(Alerta ultima_alerta) {
+        this.ultima_alerta = ultima_alerta;
+    }
+
     public void creaNotificacion(String infoAlerta){
-        createNotificationChannel();
-        createNotification("Alert", infoAlerta);
+        //Si la ha generado él mismo, no se le muestra.
+        if(!infoAlerta.contains(usuariologin)){
+            createNotificationChannel();
+            createNotification("LMDL-ADVANCED SECURITY", infoAlerta);
+        }
     }
 
     //Method to create the notification channel in new versions
@@ -116,7 +135,7 @@ public class MenuSistemaAdmin extends AppCompatActivity {
         builder.setSmallIcon(R.drawable.logo_lmdl);
         builder.setContentTitle(title);
         builder.setContentText(msn);
-        builder.setColor(Color.RED);
+        builder.setColor(Color.YELLOW);
         builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
         builder.setLights(Color.BLUE, 1000, 1000);
         builder.setVibrate(new long[]{1000,1000,1000,1000,1000});

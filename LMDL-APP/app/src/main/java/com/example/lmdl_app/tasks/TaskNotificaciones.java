@@ -22,7 +22,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.Time;
-import java.sql.Timestamp;
 
 /**
  * Task to connect with the API to request the list of cities and stations
@@ -46,7 +45,13 @@ public class TaskNotificaciones extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... uri) {
 
         String response = "";
+        /*
         this.urlStr = uri[0];
+        try {
+            Thread.sleep(30000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }*/
         try {
             URL url = new URL(uri[0]);
             HttpURLConnection urlConnection = null;
@@ -59,6 +64,7 @@ public class TaskNotificaciones extends AsyncTask<String, Void, String> {
             e.printStackTrace();
             return null;
         }
+
         return response;
     }
 
@@ -76,32 +82,24 @@ public class TaskNotificaciones extends AsyncTask<String, Void, String> {
             java.sql.Time hora = Time.valueOf(Comun.transformarHora(jsonAlerta.getString("hora")));
             alerta_recibida.setFecha(date);
             alerta_recibida.setHora(hora);
-
-            while (true) { //BUCLE INFINITO HASTA QUE MUERE LA ACTIVIDAD MENU
-                Thread.sleep(10000); //Comprobamos cada 10 segundos
-                @SuppressLint("WrongThread")
-                String NuevaResp = this.doInBackground(urlStr);
-                //Volvemos a pedir el JSON
-                JSONObject nuevaJsonAlerta = new JSONObject(NuevaResp);
-
-                //Creamos un objeto Alerta para almacenar los nuevos datos
-                Alerta nueva_alerta_recibida = new Alerta();
-                nueva_alerta_recibida.setInfo(nuevaJsonAlerta.getString("info"));
-                java.sql.Date dateN = Date.valueOf(Comun.transformarFecha(nuevaJsonAlerta.getString("fecha")));
-                java.sql.Time horaN = Time.valueOf(Comun.transformarHora(nuevaJsonAlerta.getString("hora")));
-                nueva_alerta_recibida.setFecha(dateN);
-                nueva_alerta_recibida.setHora(horaN);
-
-                //Comparamos el nuevo con el ultimo
-                if (alerta_recibida.getFecha() != nueva_alerta_recibida.getFecha() &&
-                        alerta_recibida.getHora() != nueva_alerta_recibida.getHora()) {
-                    //if(activity){ ESTO } else{ activity2.creaNotificacion(nueva_alerta_recibida.getInfo());...}
-                    //Si son distintos creamos una alerta
-                    activity.creaNotificacion(nueva_alerta_recibida.getInfo());
-                    //En este caso la ultima alerta es igual a la nueva
-                    alerta_recibida = nueva_alerta_recibida;
+            //Comprobamos que la última sea diferente a la que hemos recibido ahora y si lo es, lanzamos la notificacion y actualizamos
+            if(activity!=null){
+                if(!alerta_recibida.getInfo().equals(activity.getUltima_alerta().getInfo())){
+                        activity.creaNotificacion(alerta_recibida.getInfo());
+                        activity.setUltima_alerta(alerta_recibida);
                 }
+                activity.ejecutarTask();
             }
+            else {
+                if(!alerta_recibida.getInfo().equals(activity2.getUltima_alerta().getInfo())){
+                    activity2.creaNotificacion(alerta_recibida.getInfo());
+                    activity2.setUltima_alerta(alerta_recibida);
+                }
+                activity2.ejecutarTask();
+            }
+
+
+
 
         } catch (Exception e) {
             Log.e(tag, "Error on comprobacion JSON:" + e);
