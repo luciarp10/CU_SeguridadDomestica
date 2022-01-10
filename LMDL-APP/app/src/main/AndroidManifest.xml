@@ -20,6 +20,7 @@
         <activity android:name=".MenuSistema" />
         <activity android:name=".NuevoUsuario" />
         <activity android:name=".Camaras" />
+        <activity android:name=".Consejos" />
         <activity android:name=".Estadisticas" />
         <activity android:name=".EstadoAlarma" />
         <activity android:name=".Habitaciones" />
