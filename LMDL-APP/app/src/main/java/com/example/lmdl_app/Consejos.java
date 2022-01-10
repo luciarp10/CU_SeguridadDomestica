@@ -5,18 +5,19 @@ import java.util.ArrayList;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 
 public class Consejos extends AppCompatActivity{
 
-    private String tag = "Consejo";
-    private String consejo = "consejo";
+    private String tag = "Consejos";
     private Button buttonSiguiente;
     private Button buttonVolver;
-    private EditText consejos_text;
+    private TextView consejos_text;
     private ArrayList <String> info = new ArrayList<String>();
+    private int i;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,27 +26,37 @@ public class Consejos extends AppCompatActivity{
 
 
         this.buttonSiguiente = this.findViewById(R.id.buttonSiguiente);
-        this.buttonVolver = this.findViewById(R.id.buttonVolver);
-        this.consejos_text = this.findViewById(R.id.espacioConsejos);
-        this.consejo = getIntent().getStringExtra("consejo");
+        this.buttonVolver = this.findViewById(R.id.buttonAnterior);
+        this.consejos_text = this.findViewById(R.id.ventanaConsejos);
         this.info = info;
 
-        int i = 0;
         info = lista();
-
+        consejos_text.setText(info.get(0));
         buttonSiguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i(tag, "Consejo: "+ consejo);
-                mostrarConsejo(i);
+                if (i==info.size()-1){
+                    i=0;
+                    consejos_text.setText(info.get(i));
+                }
+                else{
+                    i++;
+                    consejos_text.setText(info.get(i));
+                }
             }
         });
 
         buttonVolver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i(tag, "Volver: "+ buttonVolver);
-                finish();
+                if (i==0){
+                    i=info.size()-1;
+                    consejos_text.setText(info.get(i));
+                }
+                else{
+                    i--;
+                    consejos_text.setText(info.get(i));
+                }
             }
         });
 
@@ -79,7 +90,7 @@ public class Consejos extends AppCompatActivity{
                 "•\tMuy dañina a la salud: Color morado (ICA 201 a 300)\n"+
                 "•\tPeligrosa: Color marrón (ICA superior a 300)\n";
         String consejo8 = "Aunque algunos de los contaminantes del aire interior proceden del exterior, lo cierto es que la mayor parte se liberan dentro del propio edificio";
-        String consejo9 = "6 sebcillos pasos con los que puedes mejorar la calidad del aire de tu hogar:\n" +
+        String consejo9 = "6 sencillos pasos con los que puedes mejorar la calidad del aire de tu hogar:\n" +
                 "1.\tAbre las ventanas cada día para ventilar\n" +
                 "2.\tInstala sistemas de ventilación\n" +
                 "3.\tUtiliza aparatos de renovación del aire para mejorar la calidad\n" +
@@ -88,21 +99,21 @@ public class Consejos extends AppCompatActivity{
                 "6.\tTener plantas\n";
         String consejo10 = "Cada espacio de nuestro hogar tiene una iluminación concreta adecuada:\n"+
                 "•\tCocina:\n" +
-                "\uF0FC\tIluminación general 300 lux.\n" +
-                "\uF0FC\t En la zona de cortar y de preparado: 500-600.\n" +
+                "\t\t- Iluminación general 300 lux.\n" +
+                "\t\t- En la zona de cortar y de preparado:\n \t\t 500-600.\n" +
                 "•\tBaño: \n" +
-                "\uF0FC\tIluminación general 200 lux.\n" +
-                "\uF0FC\tPara maquillarse o afeitarse: 300-500.\n" +
+                "\t\t- Iluminación general 200 lux.\n" +
+                "\t\t- Para maquillarse o afeitarse: 300-500.\n" +
                 "•\tDormitorio: \n" +
-                "\uF0FC\tIluminación general: 100-200 lux\n" +
-                "\uF0FC\tPara leer: 500.\n" +
-                "•\tCuarto de los niños:\n" +
-                "\uF0FC\tIluminación general 200-300 lux.\n" +
-                "\uF0FC\tDonde hagan trabajos manuales:500-750 \n" +
+                "\t\t- Iluminación general: 100-200 lux\n" +
+                "•\tPara leer: 500.\n" +
+                "\t\t- Cuarto de los niños:\n" +
+                "\t\t- Iluminación general 200-300 lux.\n" +
+                "\t\t- Donde hagan trabajos manuales:500-750 \n" +
                 "•\tSala de estar: \n" +
-                "\uF0FC\tIluminación general: 100 lux.\n" +
-                "\uF0FC\tPara ver la tele: 50-70.\n" +
-                "\uF0FC\tPara leer: 500 lx.\n";
+                "\t\t- Iluminación general: 100 lux.\n" +
+                "\t\t- Para ver la tele: 50-70.\n" +
+                "\t\t- Para leer: 500 lx.\n";
         lista.add(consejo1);
         lista.add(consejo2);
         lista.add(consejo3);
@@ -117,12 +128,4 @@ public class Consejos extends AppCompatActivity{
         return lista;
     }
 
-    private void mostrarConsejo(int i){
-        if (i == info.size()){
-            i = 0;
-        } else {
-            i+= i;
-        }
-        consejos_text.setText(info.get(i));
-    }
 }

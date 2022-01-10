@@ -1,6 +1,9 @@
 package com.example.lmdl_app;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -23,6 +26,7 @@ public class Informes extends AppCompatActivity {
     private TextView max_text;
     private TextView min_text;
     private TextView evaluacion_text;
+    private Button boton_consejos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +48,7 @@ public class Informes extends AppCompatActivity {
         this.max_text = this.findViewById(R.id.espacioMax);
         this.min_text = this.findViewById(R.id.espacioMin);
         this.evaluacion_text = this.findViewById(R.id.espacioEvalGlo);
+        this.boton_consejos=this.findViewById(R.id.botonConsejos);
 
         medida_text.setFocusable(false);
         periodo_text.setFocusable(false);
@@ -57,6 +62,14 @@ public class Informes extends AppCompatActivity {
         max_text.setText(maximo);
         min_text.setText(minimo);
 
+        boton_consejos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Informes.this, Consejos.class);
+                startActivity(i);
+                //finish();
+            }
+        });
         //Evaluacion global
         calcularEvaluacionglobal();
 
