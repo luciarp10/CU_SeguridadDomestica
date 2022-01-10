@@ -117,6 +117,7 @@ public class Estadisticas extends AppCompatActivity {
                     mensajeError.setText("El formato es incorrecto. Recuerda: yyyy-mm-dd");
                 }
                 else{
+                    mensajeError.setText("");
                     try {
                         loadRegistrosEstadisticos();
                     } catch (ParseException e) {

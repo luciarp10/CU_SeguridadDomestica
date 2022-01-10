@@ -75,6 +75,7 @@ public class Camaras extends AppCompatActivity {
                     String id_camara=camarasDisponibles.getSelectedItem().toString();
                     id_camara=""+id_camara.charAt(id_camara.length()-1); //solo nos interesa el identificador
                     i.putExtra("camara_seleccionada", id_camara);
+                    mensajeErrorFecha.setText("");
                     startActivity(i);
                 }
 
