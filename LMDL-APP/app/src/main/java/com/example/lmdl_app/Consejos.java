@@ -106,8 +106,8 @@ public class Consejos extends AppCompatActivity{
                 "\t\t- Para maquillarse o afeitarse: 300-500.\n" +
                 "•\tDormitorio: \n" +
                 "\t\t- Iluminación general: 100-200 lux\n" +
-                "•\tPara leer: 500.\n" +
-                "\t\t- Cuarto de los niños:\n" +
+                "\t\t- Para leer: 500.\n" +
+                "•\tCuarto de los niños:\n" +
                 "\t\t- Iluminación general 200-300 lux.\n" +
                 "\t\t- Donde hagan trabajos manuales:500-750 \n" +
                 "•\tSala de estar: \n" +
