@@ -4,6 +4,7 @@ import bbdd.Alerta;
 import bbdd.ConexionBD;
 import bbdd.Registro_camara;
 import bbdd.Topic;
+import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
 import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
@@ -142,7 +143,7 @@ public class MqttSuscriber implements MqttCallback {
                     Logic.insertarAlerta(alerta_nueva);
                 }
             }
-            else if (topicRecibido.contains("Sonido")){
+            else if (topicRecibido.contains("Sonido")){ //SistSeg1/Sonido
                 
                 if (message.toString().equals("Desactivado")){
                     Alerta alerta_nueva = new Alerta();
@@ -151,6 +152,10 @@ public class MqttSuscriber implements MqttCallback {
                     alerta_nueva.setCod_sistema_sistema_seguridad(Integer.parseInt(topics[0].replace("SistSeg", "")));
                     Logic.cambiarEstadoSistema(0, Integer.parseInt(topics[0].replace("SistSeg", "")));
                     Logic.insertarAlerta(alerta_nueva);
+                    MqttBroker broker = new MqttBroker();
+                    MqttPublisher.publish(broker, "ServidorSistema"+Integer.parseInt(topics[0].replace("SistSeg", ""))+"/Sistema", "Desconectar");
+                    MqttSuscriber suscriber = new MqttSuscriber();
+                    suscriber.searchTopicsToSuscribe(broker);
                 }
                 /*
                 else if (message.toString().equals("Activado")){

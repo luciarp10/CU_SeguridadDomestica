@@ -127,7 +127,6 @@ public class MenuSistema  extends AppCompatActivity {
         builder.setLights(Color.BLUE, 1000, 1000);
         builder.setVibrate(new long[]{1000,1000,1000,1000,1000});
         builder.setDefaults(Notification.DEFAULT_SOUND);
-
         //Show the notification
         NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getApplicationContext());
         notificationManagerCompat.notify(NOTIFICATION_ID, builder.build());

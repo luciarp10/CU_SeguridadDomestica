@@ -135,7 +135,7 @@ public class MenuSistemaAdmin extends AppCompatActivity {
         builder.setSmallIcon(R.drawable.logo_lmdl);
         builder.setContentTitle(title);
         builder.setContentText(msn);
-        builder.setColor(Color.YELLOW);
+        //builder.setColor(Color.YELLOW);
         builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
         builder.setLights(Color.BLUE, 1000, 1000);
         builder.setVibrate(new long[]{1000,1000,1000,1000,1000});
