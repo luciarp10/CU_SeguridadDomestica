@@ -11,8 +11,10 @@ import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 import logic.Log;
 import logic.Logic;
 
@@ -80,8 +82,10 @@ public class MqttSuscriber implements MqttCallback {
         Log.logmqtt.info("{}: {}", topicRecibido, message.toString());
         String[] topics = topicRecibido.split("/");
         Topic newTopic = new Topic();
+        Random aleatorio = new Random(); 
+        float num_aleatorio=5.1f;
+        DecimalFormat formato = new DecimalFormat("#.##");
         
-     
         //Comprobar el topic en función de los nombres que les demos y según sea el topic, tomar una decisión u otra.
         if(topicRecibido.contains("Sensor")) //SistSeg1/Hab1/Sensor1
         {
@@ -94,6 +98,39 @@ public class MqttSuscriber implements MqttCallback {
             
             //Guardar la información en la base de datos
             Logic.guardarRegistroSensor(newTopic);
+            
+            
+            
+    
+            //Simular mismo topic para el resto de las habitaciones (prototipo)
+            Topic newTopicHab2 = new Topic();
+            newTopicHab2.setId_sistema(Integer.parseInt(topics[0].replace("SistSeg", "")));
+            newTopicHab2.setId_habitacion(2);
+            newTopicHab2.setId_sensor_actuador(Integer.parseInt(topics[2].replace("Sensor", ""))+5); //Por el orden de registro en la bd
+            num_aleatorio=aleatorio.nextFloat();//Numero aleatorio entre 0 y 1
+            newTopicHab2.setValor(Float.parseFloat(message.toString())+Float.parseFloat(formato.format(num_aleatorio)));
+            Logic.guardarRegistroSensor(newTopicHab2);
+            
+            Topic newTopicHab3 = new Topic();
+            newTopicHab3.setId_sistema(Integer.parseInt(topics[0].replace("SistSeg", "")));
+            newTopicHab3.setId_habitacion(2);
+            newTopicHab3.setId_sensor_actuador(Integer.parseInt(topics[2].replace("Sensor", ""))+10); //Por el orden de registro en la bd
+            num_aleatorio=aleatorio.nextFloat();//Numero aleatorio entre 0 y 1
+            newTopicHab3.setValor(Float.parseFloat(message.toString())+Float.parseFloat(formato.format(num_aleatorio)));
+            Logic.guardarRegistroSensor(newTopicHab3);
+            
+            
+            
+            //Para simular el sensor de calidad del aire suponemos buena calidad siempre (no tenemos sensor)
+            for (int i = 4; i<15;i+=5){ //Sensor de humo tiene id 4, 9 y 14
+                Topic newTopicCA = new Topic();
+                newTopicCA.setId_sistema(Integer.parseInt(topics[0].replace("SistSeg", "")));
+                newTopicCA.setId_habitacion(2);
+                newTopicCA.setId_sensor_actuador(i); //Por el orden de registro en la bd
+                num_aleatorio=45+aleatorio.nextInt(56-45);//Numero aleatorio entre 45 y 55 (valores normales)
+                newTopicCA.setValor(num_aleatorio);
+                Logic.guardarRegistroSensor(newTopicCA);
+            }
         }else
         {
     	    if(topicRecibido.contains("Actuador")) //SistSeg1/Hab1/Actuador1
@@ -107,6 +144,18 @@ public class MqttSuscriber implements MqttCallback {
             
                 //Guardar la información en la base de datos
                 Logic.guardarRegistroActuador(newTopic);
+                //Si el actuador es el irrigador (id_actuador=3), registramos mala calidad del aire (SIMULACION)
+                if(newTopic.getId_sensor_actuador()==3){
+                    for (int i = 4; i<15;i+=5){ //Sensor de humo tiene id 4, 9 y 14
+                        Topic newTopicCA = new Topic();
+                        newTopicCA.setId_sistema(Integer.parseInt(topics[0].replace("SistSeg", "")));
+                        newTopicCA.setId_habitacion(2);
+                        newTopicCA.setId_sensor_actuador(i); //Por el orden de registro en la bd
+                        num_aleatorio=aleatorio.nextInt(200)+101;//Numero aleatorio entre 101 y 301 (valores de riesgo)
+                        newTopicCA.setValor(num_aleatorio);
+                        Logic.guardarRegistroSensor(newTopicCA);
+                    }
+                }
             } 
             else if (topicRecibido.contains("Camara")){ //SistSeg1/Hab1/Camara1
                 newTopic.setId_sistema(Integer.parseInt(topics[0].replace("SistSeg", "")));

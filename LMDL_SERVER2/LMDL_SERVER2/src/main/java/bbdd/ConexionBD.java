@@ -176,7 +176,7 @@ public class ConexionBD {
     
     public static PreparedStatement GetUltimoRegistroSensor(Connection con){
         return getStatement(con, "SELECT * FROM LMDL_BD.registro_estadistico where"
-                + " id_sensor_sensor=? order by fecha desc limit 1");
+                + " id_sensor_sensor=? order by fecha desc, hora desc limit 1");
     }
     
     public static PreparedStatement GetRegistrosAlertas(Connection con){
