@@ -152,10 +152,11 @@ public class MqttSuscriber implements MqttCallback {
                     alerta_nueva.setCod_sistema_sistema_seguridad(Integer.parseInt(topics[0].replace("SistSeg", "")));
                     Logic.cambiarEstadoSistema(0, Integer.parseInt(topics[0].replace("SistSeg", "")));
                     Logic.insertarAlerta(alerta_nueva);
+                    /* Pendiente de probar desactivación directa desde arduino 
                     MqttBroker broker = new MqttBroker();
                     MqttPublisher.publish(broker, "ServidorSistema"+Integer.parseInt(topics[0].replace("SistSeg", ""))+"/Sistema", "Desconectar");
                     MqttSuscriber suscriber = new MqttSuscriber();
-                    suscriber.searchTopicsToSuscribe(broker);
+                    suscriber.searchTopicsToSuscribe(broker); */
                 }
                 /*
                 else if (message.toString().equals("Activado")){

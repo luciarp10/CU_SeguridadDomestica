@@ -23,6 +23,7 @@ public class Consejos extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_3_2_consejos);
 
+        getSupportActionBar().setTitle("LMDL-CONSEJOS");
 
         this.buttonSiguiente = this.findViewById(R.id.buttonSiguiente);
         this.buttonVolver = this.findViewById(R.id.buttonAnterior);

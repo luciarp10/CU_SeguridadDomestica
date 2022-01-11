@@ -244,6 +244,7 @@ void activarAlarma(boolean alarma_desactivada){
         alarma_desactivada = true;
         sensor_buzzer.parar_alarma();
         client.publish("SistSeg1/Sonido", "Desactivado");
+        activado=false;
       }
     }
 }
