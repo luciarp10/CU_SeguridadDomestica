@@ -98,7 +98,7 @@ class teclado{
     lcd.print("SISTEMA");
     lcd.setCursor(0,1);
     lcd.print("ACTIVADO");
-    delay(3000);
+    delay(1000);
     
   }
   public: void apagarSistema(){
@@ -107,8 +107,7 @@ class teclado{
     lcd.print("SISTEMA");
     lcd.setCursor(0,1);
     lcd.print("DESACTIVADO");
-    delay(3000);
-
+    delay(1000);
     
   }
 

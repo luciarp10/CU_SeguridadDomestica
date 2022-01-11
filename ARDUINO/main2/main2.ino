@@ -199,7 +199,7 @@ void callback(char *topic, byte *payload, unsigned int length)
       {
           if(content[i]==sistemaActivado[i]){
             activado =true;
-            //sensor_teclado.encenderSistema();
+            sensor_teclado.encenderSistema();
           }
 
       }
@@ -207,7 +207,7 @@ void callback(char *topic, byte *payload, unsigned int length)
       {
           if(content[i]==sistemaDesactivado[i]){
             activado=false;
-            //sensor_teclado.apagarSistema();
+            sensor_teclado.apagarSistema();
 
           }
       }
@@ -245,6 +245,7 @@ void activarAlarma(boolean alarma_desactivada){
         sensor_buzzer.parar_alarma();
         client.publish("SistSeg1/Sonido", "Desactivado");
         activado=false;
+        sensor_teclado.apagarSistema();
       }
     }
 }
