@@ -75,4 +75,22 @@ public class Comun {
         }
         return hora_modificada;
     }
+
+    public static boolean comprobarFormatoFecha(String fecha){
+        String[] fecha_separada = fecha.split("-");
+        if (fecha_separada.length!=3){
+            return false;
+        }
+        else{
+            if (fecha_separada[0].length()!=4 || fecha_separada[1].length()!=2 || fecha_separada[1].length()!=2){
+                return false;
+            }
+            else if(Integer.parseInt(fecha_separada[1]) > 12 || Integer.parseInt(fecha_separada[1])<1 || Integer.parseInt(fecha_separada[2])>31
+                    || Integer.parseInt(fecha_separada[2])<1){
+                return false;
+            }
+
+        }
+        return true;
+    }
 }

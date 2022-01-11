@@ -84,15 +84,19 @@ public class TaskNotificaciones extends AsyncTask<String, Void, String> {
             alerta_recibida.setHora(hora);
             //Comprobamos que la última sea diferente a la que hemos recibido ahora y si lo es, lanzamos la notificacion y actualizamos
             if(activity!=null){
-                if(!alerta_recibida.getInfo().equals(activity.getUltima_alerta().getInfo())){
+                if(!alerta_recibida.getInfo().equals(activity.getUltima_alerta().getInfo())) {
+                    if (activity.getUltima_alerta().getInfo() != null){ //Para que en la primera ejecución no haya notificacion
                         activity.creaNotificacion(alerta_recibida.getInfo());
+                    }
                         activity.setUltima_alerta(alerta_recibida);
                 }
                 activity.ejecutarTask();
             }
             else {
                 if(!alerta_recibida.getInfo().equals(activity2.getUltima_alerta().getInfo())){
-                    activity2.creaNotificacion(alerta_recibida.getInfo());
+                    if (activity2.getUltima_alerta().getInfo() != null){ //Para que en la primera ejecución no haya notificacion
+                        activity2.creaNotificacion(alerta_recibida.getInfo());
+                    }
                     activity2.setUltima_alerta(alerta_recibida);
                 }
                 activity2.ejecutarTask();
@@ -104,7 +108,7 @@ public class TaskNotificaciones extends AsyncTask<String, Void, String> {
         } catch (Exception e) {
             Log.e(tag, "Error on comprobacion JSON:" + e);
         }
-        //David
+
     }
 
     private String convertStreamToString(InputStream is) {
@@ -118,6 +122,12 @@ public class TaskNotificaciones extends AsyncTask<String, Void, String> {
             }
         } catch (IOException e) {
             e.printStackTrace();
+            if(activity!=null){
+                activity.ejecutarTask();
+            }
+            else{
+                activity2.ejecutarTask();
+            }
         } finally {
             try {
                 is.close();

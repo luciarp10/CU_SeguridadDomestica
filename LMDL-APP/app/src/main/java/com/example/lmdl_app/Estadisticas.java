@@ -114,7 +114,7 @@ public class Estadisticas extends AppCompatActivity {
                 periodo_seleccionado=spinnerPeriodo.getSelectedItem().toString();
                 fecha_introducida= fechainicio.getText().toString();
 
-                if(!comprobarFormatoFecha(fecha_introducida)){
+                if(!Comun.comprobarFormatoFecha(fecha_introducida)){
                     mensajeError.setText("El formato es incorrecto. Recuerda: yyyy-mm-dd");
                 }
                 else{
@@ -312,23 +312,6 @@ public class Estadisticas extends AppCompatActivity {
         }
 
 
-    }
-
-    private boolean comprobarFormatoFecha(String fecha){
-        String[] fecha_separada = fecha.split("-");
-        if (fecha_separada.length!=3){
-            return false;
-        }
-        else{
-            if (fecha_separada[0].length()!=4 || fecha_separada[1].length()!=2 || fecha_separada[1].length()!=2){
-                return false;
-            }
-            else if((Integer.parseInt(fecha_separada[1]) > 12 || Integer.parseInt(fecha_separada[2])>31)){
-                return false;
-            }
-
-        }
-        return true;
     }
 
     private String calcularFecha(String fecha_introducida, String periodo_seleccionado) throws ParseException {
