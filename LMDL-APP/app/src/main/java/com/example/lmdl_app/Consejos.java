@@ -2,7 +2,6 @@ package com.example.lmdl_app;
 
 import android.os.Bundle;
 import java.util.ArrayList;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -63,10 +62,10 @@ public class Consejos extends AppCompatActivity{
     }
     private ArrayList <String> lista () {
         ArrayList <String> lista = new ArrayList<String>();
-        String consejo1 = "· La temperatura más confortable para el ser humano en estado de reposo es de entre 18º y 20ºC. \n" +
+        String consejo1 = "· La temperatura más confortable para el ser humano en estado de reposo oscila entre los 18º y 20ºC. \n" +
                 "· Si está trabajando la cifra desciende al intervalo comprendido entre 15º y 18ºC, según el tipo de movimiento y la intensidad con la que se realiza.\n";
-        String consejo2 = "Un ambiente agradable debe tener una humedad relativa de 50-60% y se considera aceptable entre un 40% y un 70%. Un ambiente demasiado húmedo favorece el desarrollo de gérmenes nocivos y hongos.\n" +
-                "Es importante mantener los niveles de humedad dentro de un rango específico para que los extremos no te afecten. No solo se trata de mantener las alergias bajo control, sino también la seguridad.\n" +
+            String consejo2 = "Un ambiente agradable debe tener una humedad relativa de un 50-60% y se considera aceptable entre un 40% y un 70%. La humedad excesiva favorece el desarrollo de gérmenes nocivos y hongos.\n" +
+                "Es importante mantener los niveles de humedad dentro de un rango específico; No solo se trata de mantener las alergias bajo control, sino también la seguridad.\n" +
                 "Se recomienda más humedad en el interior cuanto más calor haga fuera y menos humedad en el interior más frío haga en el exterior.";
         String consejo3 = "Uno de los mecanismos clave de enfriamiento del cuerpo es la sudoración:\n"+
                 "La concentración de agua en el aire en relación con la temperatura determina la velocidad a la que el agua puede evaporarse de la piel.\n"+
