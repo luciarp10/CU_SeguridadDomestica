@@ -118,19 +118,19 @@ public class Informes extends AppCompatActivity {
         }
 
         else if (medida.equals("Calidad del aire")){
-            if(Double.parseDouble(media)>=0 && Double.parseDouble(media)<=50){
+            if(Double.parseDouble(media)>=0 && Double.parseDouble(media)<=30){
                 evaluacion_text.setText("Ideal");
             }
-            else if(Double.parseDouble(media)>=0 && Double.parseDouble(media)<=50){
+            else if(Double.parseDouble(media)>30 && Double.parseDouble(media)<=50){
                 evaluacion_text.setText("Muy buena");
             }
-            else if (Double.parseDouble(media)>=51 && Double.parseDouble(media)<=100){
+            else if (Double.parseDouble(media)>50 && Double.parseDouble(media)<=100){
                 evaluacion_text.setText("Normal");
             }
-            else if (Double.parseDouble(media)>=101 && Double.parseDouble(media)<=150){
+            else if (Double.parseDouble(media)>100 && Double.parseDouble(media)<=150){
                 evaluacion_text.setText("Mala");
             }
-            else if (Double.parseDouble(media)>=151 && Double.parseDouble(media)<=300){
+            else if (Double.parseDouble(media)>150 && Double.parseDouble(media)<=300){
                 evaluacion_text.setText("Dañina para la salud");
             }
             else {
