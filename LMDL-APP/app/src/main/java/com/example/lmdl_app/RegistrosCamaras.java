@@ -90,7 +90,7 @@ public class RegistrosCamaras extends AppCompatActivity {
 
     private void loadRegistrosFecha() {
         new TaskCamaras(this).
-                execute(Comun.ruta_servlets+"GetRegistrosImagenes?cod_sistema="+cod_sistema+"&fecha="+fecha_mostrar.getText());
+                execute(Comun.ruta_servlets+"GetRegistrosImagenes?cod_sistema="+cod_sistema+"&fecha="+fecha_mostrar.getText()+"&cam_select="+cam_seleccionada);
     }
 
     private void loadImagenSeleccionada(String ruta) {

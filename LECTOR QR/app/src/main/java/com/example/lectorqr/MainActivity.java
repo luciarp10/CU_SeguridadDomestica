@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
                 if (barcodes.size() > 0) {
                     // obtenemos el token
                     token = barcodes.valueAt(0).rawValue.toString();
-                    String tokenCodUsuario = token.substring(0,5);
+                    String tokenCodUsuario = token.substring(0,5); //Porque los siguientes números son aleatorios
                     // verificamos que el token anterior no se igual al actual
                     // esto es util para evitar multiples llamadas empleando el mismo token
                     if (!token.equals(tokenanterior)) {
