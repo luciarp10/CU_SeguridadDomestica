@@ -83,7 +83,7 @@ public class Informes extends AppCompatActivity {
             else if (Double.parseDouble(media)>14 && Double.parseDouble(media)<=18){
                 evaluacion_text.setText("Baja, pero no preocupante.");
             }
-            else if (Double.parseDouble(media)>20 && Double.parseDouble(media)<=21){
+            else if (Double.parseDouble(media)>=20 && Double.parseDouble(media)<=21){
                 evaluacion_text.setText("Ideal");
             }
             else if (Double.parseDouble(media)>=18 && Double.parseDouble(media)<=24){
