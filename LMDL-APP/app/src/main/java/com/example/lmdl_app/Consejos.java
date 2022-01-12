@@ -5,13 +5,11 @@ import java.util.ArrayList;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 
 public class Consejos extends AppCompatActivity{
 
-    private String tag = "Consejos";
     private Button buttonSiguiente;
     private Button buttonVolver;
     private TextView consejos_text;
@@ -22,13 +20,11 @@ public class Consejos extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_3_2_consejos);
-
         getSupportActionBar().setTitle("LMDL-CONSEJOS");
 
         this.buttonSiguiente = this.findViewById(R.id.buttonSiguiente);
         this.buttonVolver = this.findViewById(R.id.buttonAnterior);
         this.consejos_text = this.findViewById(R.id.ventanaConsejos);
-        this.info = info;
 
         info = lista();
         consejos_text.setText(info.get(0));
@@ -114,6 +110,7 @@ public class Consejos extends AppCompatActivity{
                 "\t\t- Iluminación general: 100 lux.\n" +
                 "\t\t- Para ver la tele: 50-70.\n" +
                 "\t\t- Para leer: 500 lx.\n";
+
         lista.add(consejo1);
         lista.add(consejo2);
         lista.add(consejo3);
