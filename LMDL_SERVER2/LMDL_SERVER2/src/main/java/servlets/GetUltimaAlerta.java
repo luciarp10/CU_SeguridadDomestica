@@ -36,13 +36,13 @@ public class GetUltimaAlerta extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Alerta alerta_registrada= new Alerta();
-        Log.log.info("-- Buscando ultima alerta del sistema de seguridad "+request.getParameter("cod_sistema")+" --");
+        //Log.log.info("-- Buscando ultima alerta del sistema de seguridad "+request.getParameter("cod_sistema")+" --");
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
             alerta_registrada=Logic.getUltimoRegAlerta(Integer.parseInt(request.getParameter("cod_sistema")));
             String jsonAlertas = new Gson().toJson(alerta_registrada);
-            Log.log.info("JSON value => {}", jsonAlertas);
+            //Log.log.info("JSON value => {}", jsonAlertas);
             out.println(jsonAlertas);
         }
         catch (NumberFormatException nfe) 
