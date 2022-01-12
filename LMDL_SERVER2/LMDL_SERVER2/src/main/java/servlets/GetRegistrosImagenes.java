@@ -43,13 +43,20 @@ public class GetRegistrosImagenes extends HttpServlet {
             throws ServletException, IOException {
         
         ArrayList<Registro_camara> registros_camaras = new ArrayList<>();
+        ArrayList<Registro_camara> registros_camaras_mostrar = new ArrayList<>();
         Log.log.info("-- Buscando registros de cámaras del sistema " + request.getParameter("cod_sistema")+" el día "+ request.getParameter("fecha")+ " --");
         
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
             registros_camaras=(Logic.getRegistrosCamarasFecha(request.getParameter("fecha"), Integer.parseInt(request.getParameter("cod_sistema"))));
-            String jsonRegistros = new Gson().toJson(registros_camaras);
+            int cam_select = Integer.parseInt(request.getParameter("cam_select"));
+            for (int i=0; i<registros_camaras.size();i++){
+                if(registros_camaras.get(i).getId_sensor_sensor()==cam_select){
+                    registros_camaras_mostrar.add(registros_camaras.get(i));
+                }
+            }
+            String jsonRegistros = new Gson().toJson(registros_camaras_mostrar);
             Log.log.info("JSON value => {}", jsonRegistros);
             out.println(jsonRegistros);
         }

@@ -43,7 +43,6 @@ public class BorrarUsuarioSistema extends HttpServlet {
             throws ServletException, IOException {
         Log.log.info("-- Borrando identificacion del sistema " + request.getParameter("cod_sistema")+" --");
         response.setContentType("text/html;charset=UTF-8");
-        Identificacion usuario_nuevo = new Identificacion();
         PrintWriter out = response.getWriter();
         try {           
             

@@ -20,7 +20,7 @@ import mqtt.MqttPublisher;
 import mqtt.MqttSuscriber;
 
 /**
- *
+ * Recibe como parámetros el código del sistema y el QR leido y comprueba si en ese sistema hay algún usuario con ese código qr
  * @author lucyr
  */
 public class ComprobarQR extends HttpServlet {
@@ -94,7 +94,7 @@ public class ComprobarQR extends HttpServlet {
                     alerta_nueva.setInfo("Intento de desconexión de alarma incorrecto. Código QR desconocido.");
                     alerta_nueva.setCod_sistema_sistema_seguridad(codigo_sistema);
                     Logic.insertarAlerta(alerta_nueva);
-                    out.println(-1);
+                    out.println("");
             }
 
         }

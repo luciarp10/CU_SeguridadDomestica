@@ -31,9 +31,8 @@ public class ProjectInitializer implements ServletContextListener
 		MqttBroker broker = new MqttBroker();
 		MqttSuscriber suscriber = new MqttSuscriber();
 		suscriber.searchTopicsToSuscribe(broker);
-
+                
 		Log.log.info("-->Iniciando el sistema<--");
-		
 		
 	}	
 }
