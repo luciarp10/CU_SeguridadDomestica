@@ -94,7 +94,10 @@ public class Informes extends AppCompatActivity {
             }
         }
         else if (medida.equals("Humedad")){
-            if(Double.parseDouble(media)>=20 && Double.parseDouble(media)<30){
+            if(Double.parseDouble(media)<20){
+                evaluacion_text.setText("Demasiado Baja");
+            }
+            else if(Double.parseDouble(media)>=20 && Double.parseDouble(media)<30){
                 evaluacion_text.setText("Baja");
             }
             else if(Double.parseDouble(media)>=30 && Double.parseDouble(media)<=50){

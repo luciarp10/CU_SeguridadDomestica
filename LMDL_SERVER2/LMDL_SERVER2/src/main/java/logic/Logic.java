@@ -1331,6 +1331,43 @@ public class Logic
         {
             conector.closeConnection(con);
 	}	
+        ArrayList<Sensor> sensores= getSensores();
+        for(int i=0; i<sensores.size();i++){
+            if(newTopic.getId_sensor_actuador()==sensores.get(i).getId_sensor()){ //buscar el sensor del tipo de registro que se está insertando
+                if(sensores.get(i).getTipo().contains("Temperatura")){
+                    if(newTopic.getValor()>=28){
+                        Alerta alerta_nueva = new Alerta();
+                        alerta_nueva.setId_alerta(Logic.getUltimaAlerta(newTopic.getId_sistema())+1);
+                        alerta_nueva.setInfo("Se ha registrado una temperatura demasiado alta: "+newTopic.getValor()+"º");
+                        alerta_nueva.setCod_sistema_sistema_seguridad(newTopic.getId_sistema());
+                        insertarAlerta(alerta_nueva);
+                    }
+                    else if(newTopic.getValor()<=14){
+                        Alerta alerta_nueva = new Alerta();
+                        alerta_nueva.setId_alerta(Logic.getUltimaAlerta(newTopic.getId_sistema())+1);
+                        alerta_nueva.setInfo("Se ha registrado una temperatura demasiado baja: "+newTopic.getValor()+"º");
+                        alerta_nueva.setCod_sistema_sistema_seguridad(newTopic.getId_sistema());
+                        insertarAlerta(alerta_nueva);
+                    }
+                }
+                else if(sensores.get(i).getTipo().contains("Humedad")){
+                    if(newTopic.getValor()>=75){
+                        Alerta alerta_nueva = new Alerta();
+                        alerta_nueva.setId_alerta(Logic.getUltimaAlerta(newTopic.getId_sistema())+1);
+                        alerta_nueva.setInfo("Se ha registrado un porcentaje de humedad demasiado alto: "+newTopic.getValor()+"%");
+                        alerta_nueva.setCod_sistema_sistema_seguridad(newTopic.getId_sistema());
+                        insertarAlerta(alerta_nueva);
+                    }
+                    else if(newTopic.getValor()<=20){
+                        Alerta alerta_nueva = new Alerta();
+                        alerta_nueva.setId_alerta(Logic.getUltimaAlerta(newTopic.getId_sistema())+1);
+                        alerta_nueva.setInfo("Se ha registrado un porcentaje de humedad demasiado alto: "+newTopic.getValor()+"%");
+                        alerta_nueva.setCod_sistema_sistema_seguridad(newTopic.getId_sistema());
+                        insertarAlerta(alerta_nueva);
+                    }
+                }
+            }
+        }
     }
     
     /**
