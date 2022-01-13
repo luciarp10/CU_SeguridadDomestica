@@ -51,7 +51,7 @@ public class HacerFoto extends HttpServlet {
         alerta_nueva.setInfo("Usuario "+ request.getParameter("usuario") + " solicita foto de la cámara con id: "+ request.getParameter("id_camara"));
         alerta_nueva.setCod_sistema_sistema_seguridad(Integer.parseInt(request.getParameter("cod_sistema")));
         Logic.insertarAlerta(alerta_nueva);
-        //Publicar topic para que los sensores de la alarma se activen 
+        //Publicar topic para que la camara haga la foto 
         MqttBroker broker = new MqttBroker();
         MqttPublisher.publish(broker, "ServidorSistema"+request.getParameter("cod_sistema")+"/Camara"+request.getParameter("id_camara"), "Hacer foto");
         MqttSuscriber suscriber = new MqttSuscriber();

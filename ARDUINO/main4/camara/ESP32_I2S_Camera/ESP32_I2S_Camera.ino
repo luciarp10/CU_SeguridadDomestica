@@ -192,7 +192,7 @@ void hacer_foto(){
    //if (foto){ //me falta una variable para que solo se haga una vez
       camera->oneFrame();    
       displayRGB565(camera->frame, camera->xres, camera->yres);  
-      client.publish("SistSeg1/Hab1/Camara5", "http://192.168.1.103/camera?1641839833782"); //SistSeg1/Hab1/Camara1
+      client.publish("SistSeg1/Hab1/Camara5", "http://192.168.1.103/camera?1642059409139"); //SistSeg1/Hab1/Camara1
        
    //}
     

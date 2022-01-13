@@ -1175,11 +1175,11 @@ public class Logic
         try
         {
             con = conector.obtainConnection(true);
-            Log.log.debug("Database Connected");
+            //Log.log.debug("Database Connected");
 		
             PreparedStatement ps = ConexionBD.GetIdUltimaAlerta(con);
             ps.setInt(1, cod_sistema);
-            Log.log.info("Query=> {}", ps.toString());
+            //Log.log.info("Query=> {}", ps.toString());
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
                 alerta.setId_alerta(rs.getInt("id_alerta"));
@@ -1312,7 +1312,7 @@ public class Logic
             con = conector.obtainConnection(true);
             Log.log.debug("Database Connected");
             PreparedStatement ps = ConexionBD.InsertarRegistroSensor(con);
-            ps.setDate(1, java.sql.Date.valueOf(LocalDate.now()));
+            ps.setDate(1, java.sql.Date.valueOf(LocalDate.now(ZoneId.of("Europe/Madrid"))));
             ps.setFloat(2, newTopic.getValor());
             ps.setTime(3, java.sql.Time.valueOf(LocalTime.now(ZoneId.of("Europe/Madrid"))));
             ps.setInt(4, newTopic.getId_sensor_actuador());
@@ -1384,7 +1384,7 @@ public class Logic
             Log.log.debug("Database Connected");
             PreparedStatement ps = ConexionBD.InsertarRegistroActuador(con);
             ps.setTime(1, java.sql.Time.valueOf(LocalTime.now(ZoneId.of("Europe/Madrid"))));
-            ps.setDate(2, java.sql.Date.valueOf(LocalDate.now()));
+            ps.setDate(2, java.sql.Date.valueOf(LocalDate.now(ZoneId.of("Europe/Madrid"))));
             ps.setFloat(3, newTopic.getValor()); //Duración en segundos
             ps.setInt(4, newTopic.getId_sensor_actuador());
             Log.log.info("Query=> {}", ps.toString());
@@ -1418,7 +1418,7 @@ public class Logic
             Log.log.debug("Database Connected");
             PreparedStatement ps = ConexionBD.InsertarAlerta(con);
             ps.setInt(1, alerta_nueva.getId_alerta());
-            ps.setDate(2, java.sql.Date.valueOf(LocalDate.now()));
+            ps.setDate(2, java.sql.Date.valueOf(LocalDate.now(ZoneId.of("Europe/Madrid"))));
             ps.setTime(3, java.sql.Time.valueOf(LocalTime.now(ZoneId.of("Europe/Madrid"))));
             ps.setString(4, alerta_nueva.getInfo());
             ps.setInt(5, alerta_nueva.getCod_sistema_sistema_seguridad());
@@ -1621,7 +1621,7 @@ public class Logic
             con = conector.obtainConnection(true);
             Log.log.debug("Database Connected");
             PreparedStatement ps = ConexionBD.InsertarRegistroCamara(con);
-            ps.setDate(1, java.sql.Date.valueOf(LocalDate.now()));
+            ps.setDate(1, java.sql.Date.valueOf(LocalDate.now(ZoneId.of("Europe/Madrid"))));
             ps.setString(2, nuevo_registro.getEnlace_foto());
             ps.setTime(3, java.sql.Time.valueOf(LocalTime.now(ZoneId.of("Europe/Madrid"))));
             ps.setInt(4, nuevo_registro.getId_sensor_sensor());

@@ -73,7 +73,7 @@ public class Registro_camara {
     }
     
     public String descargarFoto(String enlace) throws MalformedURLException, IOException{
-        String ruta="/tmp/imagenes/"+LocalDate.now()+"_"+LocalTime.now(ZoneId.of("Europe/Madrid"))+".jpg";
+        String ruta="/tmp/imagenes/"+LocalDate.now(ZoneId.of("Europe/Madrid"))+"_"+LocalTime.now(ZoneId.of("Europe/Madrid"))+".jpg";
         
         try{
             URL url = new URL(enlace);

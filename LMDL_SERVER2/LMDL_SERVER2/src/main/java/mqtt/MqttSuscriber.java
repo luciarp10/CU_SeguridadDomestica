@@ -100,7 +100,6 @@ public class MqttSuscriber implements MqttCallback {
             Logic.guardarRegistroSensor(newTopic);
             
             
-            
     
             //Simular mismo topic para el resto de las habitaciones (prototipo)
             Topic newTopicHab2 = new Topic();

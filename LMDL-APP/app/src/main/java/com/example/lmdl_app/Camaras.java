@@ -160,7 +160,7 @@ public class Camaras extends AppCompatActivity {
                 public void run() {
                     try {
                         synchronized (this) {
-                            wait(3000);
+                            wait(5000);
                             Intent i = new Intent(Camaras.this, RegistrosCamaras.class);
                             i.putExtra("cod_sistema", cod_sistema);
                             i.putExtra("fecha_introducida", LocalDate.now().toString());

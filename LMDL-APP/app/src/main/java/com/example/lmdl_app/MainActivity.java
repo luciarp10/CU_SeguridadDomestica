@@ -56,7 +56,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void comprobarDatos() {
-        String urlStr = Comun.ruta_servlets+"InicioSesion?usuario=" + usuario.getText().toString() + "&password=" + password.getText().toString();
+        String urlStr = Comun.ruta_servlets+"InicioSesion?usuario=" + usuario.getText().toString() + "&password=" +
+                password.getText().toString();
         ServerConnectionThread thread = new ServerConnectionThread(this, urlStr);
         try {
             thread.join();
