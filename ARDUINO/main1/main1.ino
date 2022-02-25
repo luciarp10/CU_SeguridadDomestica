@@ -8,8 +8,8 @@
 #include <SPI.h>
 
 
-#define WIFI_SSID "TRISKEL64"
-#define WIFI_PASSWORD "VOLVORETAjali2016"
+#define WIFI_SSID "wifi_ssid"
+#define WIFI_PASSWORD "pass"
 const char* mqtt_server = "192.168.1.109";
 const char* namehost="Localhost";
 int contador=0;
