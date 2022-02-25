@@ -39,8 +39,8 @@ boolean foto = true;
 //DIN <- MOSI 23
 //CLK <- SCK 18
 
-#define ssid1        "TRISKEL64"
-#define password1    "VOLVORETAjali2016"
+#define ssid1        "wifissid"
+#define password1    "pass"
 //#define ssid2        ""
 //#define password2    ""
 
