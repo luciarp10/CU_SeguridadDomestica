@@ -1,2 +1,2 @@
 # CU_SeguridadDomestica
-Repositorio creado para el desarrollo del proyecto de la asignatura Computación Ubicua
+Proyecto para un prototipo de seguridad doméstica basado en IoT. Implementa protección ante intrusiones y mecanismos de control de temperatura, humedad, calidad del aire, luminosidad, etc. Para las distintas habitaciones de un domicilio. Todo esto se puede controlar a través de una aplicación Android desde la que el usuario tendrá acceso a la información recogida por los dispositivos instalados. 
